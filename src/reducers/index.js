@@ -22,8 +22,8 @@ const initState = {
   notiChange: null,
 
   //MENU選單
-  inputTextSelect: 0,
-  menuOption: [0, 0, 0, 0]
+  inputTextSelect: -1,
+  menuClassName: ["", "", "", ""]
 };
 
 String.prototype.getStrokes = function () {
@@ -87,6 +87,21 @@ const getCombination = (num, groupChar, filterChrArr) => {
   }
   return result;
 };
+const getMenuClassName = (num, pre) => {
+  let list = ["", "", "", ""];
+  list[num] = "openDiv";
+  // if (pre != -1) {
+  //   list[pre] = "closeDiv";
+  // }
+  return list;
+}
+/*MENU動畫目前只有展開沒有收合
+  要搭配更改div height*/
+// const getCleanMenuClassName = (num) => {
+//   let list = ["", "", "", ""];
+//   list[num] = "openDiv";
+//   return list;
+// }
 
 
 const soReducer = (state = initState, action) => {
@@ -106,8 +121,21 @@ const soReducer = (state = initState, action) => {
       });
     case 'INPUT_TEXT_CHANGE':
       return Object.assign({}, state, {
+        menuClassName: getMenuClassName(action.num, state.inputTextSelect),
         inputTextSelect: action.num
       });
+    case 'CLEAN_ALL_INPUT':
+      return Object.assign({}, state, {
+        searchInput: '',
+        addInput: '',
+        combinationInput: '',
+        removeInput: '',
+        filterCharInput: ''
+      });
+    // case 'CLEAN_CLASS_NAME':
+    //   return Object.assign({}, state, {
+    //     menuClassName: getCleanMenuClassName(action.num)
+    //   });
     case 'HANDLE_INPUT':
       let inputObj = {};
       inputObj[action.inputOption] = action.value

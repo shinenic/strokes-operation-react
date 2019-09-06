@@ -34,3 +34,16 @@ export const inputTextChange = num => {
     }
 }
 
+export const cleanAllInput = () => {
+    return {
+        type: 'CLEAN_ALL_INPUT'
+    }
+}
+
+// export const cleanClassName = num => {
+//     return {
+//         type: 'CLEAN_CLASS_NAME',
+//         num
+//     }
+// }
+

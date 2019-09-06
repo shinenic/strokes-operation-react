@@ -1,9 +1,10 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent } from 'react';
+import Combination from './Combination';
 import styled, { keyframes } from 'styled-components';
 import { connect } from 'react-redux';
 import Pusheen from '../image/Pusheen3.png';
 
-const MenuDiv = styled.div`
+const MainDiv = styled.div`
   position:absolute;
   right:0;
   top:0;
@@ -12,23 +13,31 @@ const MenuDiv = styled.div`
   background-color:white;
 `;
 
+const Info = styled(MainDiv)`
+  height:15vh;
+  background:#AFEAAE;
+`;
+
 
 
 class Content extends PureComponent {
   render() {
     return (
-      <MenuDiv>
-        總單字數:0
+      <MainDiv>
+        <Info>
+          總單字數:0
                 <br />
-        已選擇組合數:0
+          已選擇組合數:0
                 <br />
-        儲存狀態:有變更未儲存
+          儲存狀態:有變更未儲存
                 {/* 0.沒有任何資料 1.有變更未儲存 2.所有變更皆已儲存 3.讀取成功 */}
-        <br />
-        儲存時間:2000/01/01
+          <br />
+          儲存時間:2000/01/01
                 <br />
-                {JSON.stringify(this.props.searchResult)}
-      </MenuDiv>
+          {JSON.stringify(this.props.searchResult)}
+        </Info>
+        <Combination />
+      </MainDiv>
     )
   }
 }

@@ -40,6 +40,13 @@ export const cleanAllInput = () => {
     }
 }
 
+export const pickName = (str) => {
+    return {
+        type: 'PICK_NAME',
+        str
+    }
+}
+
 // export const cleanClassName = num => {
 //     return {
 //         type: 'CLEAN_CLASS_NAME',

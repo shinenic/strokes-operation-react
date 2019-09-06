@@ -3,7 +3,19 @@ import dataStrokes from '../data/dataStrokes';
 
 const initState = {
   character: {},
-  combinationResult: [],
+  combinationResult: [
+    '已更',
+    '加加',
+    '加出',
+    '加未',
+    '出加',
+    '出出',
+    '出未',
+    '未加',
+    '未出',
+    '未未',
+    '更已'
+  ],
   pickedComb: [],
   dataStoreState: 0,
   latestStorageTime: null,
@@ -102,6 +114,16 @@ const getMenuClassName = (num, pre) => {
 //   list[num] = "openDiv";
 //   return list;
 // }
+const getNewPickList = (name, arr) => {
+  if (arr.includes(name)) {
+    let index = arr.indexOf(name);
+    arr.splice(index, 1);
+    return arr;
+  }
+  else {
+    return [...arr, name]
+  }
+}
 
 
 const soReducer = (state = initState, action) => {
@@ -118,6 +140,11 @@ const soReducer = (state = initState, action) => {
     case 'COMBINATION_SEARCH':
       return Object.assign({}, state, {
         combinationResult: getCombination(action.num, state.groupChar, handleInputString(action.str))
+      });
+    case 'PICK_NAME':
+      return Object.assign({}, state, {
+        // pickedComb: [...state.pickedComb, action.str]
+        pickedComb: getNewPickList(action.str, state.pickedComb)
       });
     case 'INPUT_TEXT_CHANGE':
       return Object.assign({}, state, {

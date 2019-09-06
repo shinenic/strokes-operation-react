@@ -3,11 +3,11 @@
 }
 
 .openDiv {
-    animation: expendDiv 1s 1 normal both;
+    animation: expendDiv 0.5s 1 normal both;
 }
 
 .closeDiv {
-    animation: expendDiv 1s 1 reverse both;
+    animation: expendDiv 0.5s 1 reverse both;
 }
   
 @keyframes expendDiv{
@@ -15,7 +15,7 @@
         height:0;
     }
     100%{
-        height:50px;
+        height:100px;
     }
 }
   

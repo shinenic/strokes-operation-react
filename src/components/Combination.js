@@ -46,7 +46,7 @@ class Combination extends PureComponent {
               onClick={() => this.props.pickName(value)}
               key={index}
               picked={this.props.pickedComb.includes(value)} >
-              {value}
+              {value}{this.props.pickedComb.includes(value) ? 'O' : 'X'}
             </Button>
           )
         })

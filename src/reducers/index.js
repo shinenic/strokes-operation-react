@@ -118,7 +118,7 @@ const getNewPickList = (name, arr) => {
   if (arr.includes(name)) {
     let index = arr.indexOf(name);
     arr.splice(index, 1);
-    return arr;
+    return [...arr];
   }
   else {
     return [...arr, name]

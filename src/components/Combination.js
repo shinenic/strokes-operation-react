@@ -45,7 +45,8 @@ class Combination extends PureComponent {
             <Button
               onClick={() => this.props.pickName(value)}
               key={index}
-              picked={Object.keys(this.props.pickedComb).includes(this.props.searchCombinatinoCount) ? this.props.pickedComb[this.props.searchCombinatinoCount].includes(value) : false}>
+              picked={Object.keys(this.props.pickedComb).includes(this.props.searchCombinatinoCount)
+                ? this.props.pickedComb[this.props.searchCombinatinoCount].includes(value) : false}>
               {value}
             </Button>
           )

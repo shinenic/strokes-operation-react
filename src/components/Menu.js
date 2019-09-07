@@ -117,6 +117,7 @@ class Menu extends PureComponent {
             onKeyPress={e => this.handleKeyPress(e, 2)}
             onChange={e => this.props.handleInput(e.target.value, 'combinationInput')} />
           <Input type="text"
+            onKeyPress={e => this.handleKeyPress(e, 2)}
             value={this.props.filterCharInput}
             onChange={e => {
               this.props.handleInput(e.target.value, 'filterCharInput');

@@ -25,8 +25,8 @@ class Content extends PureComponent {
     return (
       <MainDiv>
         <Info>
-          總單字數:0
-                <br />
+          總單字數:{Object.keys(this.props.character).length}
+          <br />
           已選擇組合數:0
                 <br />
           儲存狀態:有變更未儲存
@@ -49,7 +49,8 @@ const mapStatetoProps = state => {
     searchResult: state.searchResult,
     combinationInput: state.combinationInput,
     combinationResult: state.combinationResult,
-    searchCombinatinoCount: state.searchCombinatinoCount
+    searchCombinatinoCount: state.searchCombinatinoCount,
+    character: state.character
   }
 }
 const mapDispatchToProps = dispatch => {

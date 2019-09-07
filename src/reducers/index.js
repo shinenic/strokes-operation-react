@@ -4,7 +4,6 @@ import dataStrokes from '../data/dataStrokes';
 const initState = {
   character: {},
   searchCombinatinoCount: 0,
-  //可能要改成筆畫對應組合比較適合輸出
   combinationResult: [
     '已更',
     '加加',

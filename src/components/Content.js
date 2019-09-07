@@ -14,7 +14,7 @@ const MainDiv = styled.div`
 `;
 
 const Info = styled(MainDiv)`
-  height:15vh;
+  height:20vh;
   background:#AFEAAE;
 `;
 
@@ -35,6 +35,8 @@ class Content extends PureComponent {
           儲存時間:2000/01/01
                 <br />
           {JSON.stringify(this.props.searchResult)}
+          <br />
+          查詢筆畫數為"{this.props.searchCombinatinoCount}" 總計 {this.props.combinationResult.length} 筆資料 輸出
         </Info>
         <Combination />
       </MainDiv>
@@ -44,7 +46,10 @@ class Content extends PureComponent {
 
 const mapStatetoProps = state => {
   return {
-    searchResult: state.searchResult
+    searchResult: state.searchResult,
+    combinationInput: state.combinationInput,
+    combinationResult: state.combinationResult,
+    searchCombinatinoCount: state.searchCombinatinoCount
   }
 }
 const mapDispatchToProps = dispatch => {

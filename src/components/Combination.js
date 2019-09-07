@@ -7,9 +7,9 @@ import { pickName } from '../actions';
 const MainDiv = styled.div`
   position:absolute;
   right:0;
-  top:15vh;
+  top:20vh;
   width:70vw;
-  height:85vh;
+  /* height:85vh; */
   background-color:white;
   padding:10px;
   box-sizing:border-box;
@@ -45,12 +45,11 @@ class Combination extends PureComponent {
             <Button
               onClick={() => this.props.pickName(value)}
               key={index}
-              picked={this.props.pickedComb.includes(value)} >
+              picked={Object.keys(this.props.pickedComb).includes(this.props.searchCombinatinoCount) ? this.props.pickedComb[this.props.searchCombinatinoCount].includes(value) : false}>
               {value}
             </Button>
           )
-        })
-        }
+        })}
         <Button>測試</Button>
         <Button>測試</Button>
         <Button>測試</Button>
@@ -82,7 +81,8 @@ class Combination extends PureComponent {
 const mapStatetoProps = state => {
   return {
     combinationResult: state.combinationResult,
-    pickedComb: state.pickedComb
+    pickedComb: state.pickedComb,
+    searchCombinatinoCount: state.searchCombinatinoCount
   }
 }
 const mapDispatchToProps = dispatch => {

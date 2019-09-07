@@ -3,6 +3,8 @@ import dataStrokes from '../data/dataStrokes';
 
 const initState = {
   character: {},
+  searchCombinatinoCount: 0,
+  //可能要改成筆畫對應組合比較適合輸出
   combinationResult: [
     '已更',
     '加加',
@@ -16,7 +18,7 @@ const initState = {
     '未未',
     '更已'
   ],
-  pickedComb: [],
+  pickedComb: {},
   dataStoreState: 0,
   latestStorageTime: null,
   searchResult: {},//單純搜尋筆劃的結果
@@ -124,6 +126,21 @@ const getNewPickList = (name, arr) => {
     return [...arr, name]
   }
 }
+const handlePickedName = (obj, count, name) => {
+  if (Object.keys(obj).includes(count)) {
+    if (obj[count].includes(name)) {
+      let index = obj[count].indexOf(name);
+      obj[count].splice(index, 1);
+    }
+    else {
+      obj[count] = [...obj[count], name];
+    }
+  }
+  else {
+    obj[count] = [name];
+  }
+  return Object.assign({}, obj);
+}
 
 
 const soReducer = (state = initState, action) => {
@@ -139,12 +156,14 @@ const soReducer = (state = initState, action) => {
       });
     case 'COMBINATION_SEARCH':
       return Object.assign({}, state, {
+        searchCombinatinoCount: state.combinationInput,
         combinationResult: getCombination(action.num, state.groupChar, handleInputString(action.str))
       });
     case 'PICK_NAME':
       return Object.assign({}, state, {
         // pickedComb: [...state.pickedComb, action.str]
-        pickedComb: getNewPickList(action.str, state.pickedComb)
+        // pickedComb: getNewPickList(action.str, state.pickedComb),
+        pickedComb: handlePickedName(state.pickedComb, state.searchCombinatinoCount, action.str)
       });
     case 'INPUT_TEXT_CHANGE':
       return Object.assign({}, state, {
@@ -157,7 +176,7 @@ const soReducer = (state = initState, action) => {
         addInput: '',
         combinationInput: '',
         removeInput: '',
-        filterCharInput: ''
+        filterCharInput: '',
       });
     // case 'CLEAN_CLASS_NAME':
     //   return Object.assign({}, state, {

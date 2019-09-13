@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import styled, { keyframes } from 'styled-components';
-import "../styles/MenuAnimation.css"
+import "../styles/MenuAnimation.css";
+import menuIcon from '../image/menuIcon.png';
 import { connect } from 'react-redux';
 import { searchStrokes, handleInput, addCharacter, combinationSearch, inputTextChange, cleanAllInput } from '../actions';
 
@@ -17,8 +18,9 @@ const MenuDiv = styled.div`
   position:absolute;
   left:0;
   top:0;
-  width:20vw;
   height:100vh;
+  /* width:20vw; */
+  width:250px;
   background-color:rgb(49,54,66);
 `;
 
@@ -30,10 +32,8 @@ const Text = styled.div`
   color:rgb(255,255,255,0.9);
   line-height:50px;
   cursor: pointer;
-  /* background:rgb(49,54,66); */
   background:${props => props.picked ? '#E44C70' : '#313642'};
   &:hover{
-    /* background: rgb(228, 76, 112, 0.4); */
     background:${props => props.picked ? '#E44C70' : '#783E55'};
   }
 `;
@@ -75,7 +75,15 @@ width: 100 %;
 */
 
 const TopPadding = styled.div`
-height: 150px;
+  /* height: 150px; */
+`;
+
+const MenuImg = styled.img`
+  content:url(${menuIcon});
+  height:60px;
+  width:60px;
+  padding:50px 95px 50px 95px;
+  filter:invert(1);
 `;
 
 
@@ -100,10 +108,11 @@ class Menu extends PureComponent {
     }
   }
   render() {
-    const optionList = ["查詢筆劃", "增加單字", "查詢筆劃組合", "移除單字", "查看所有單字", "儲存", "讀取", "匯出"];
+    const optionList = ["查詢筆劃", "增加單字", "查詢筆劃組合", "移除單字", "查看所有單字", "儲存", "讀取", "匯出", "載入範本", "軟體介紹"];
     return (
       <MenuDiv>
         <TopPadding />
+        <MenuImg />
         {optionList.map((value, index) => {
           return (
             <div>

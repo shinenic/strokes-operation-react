@@ -7,12 +7,6 @@ const initState = {
   combinationResult: [
     '已更',
     '加加',
-    '加出',
-    '加未',
-    '出加',
-    '出出',
-    '出未',
-    '未加',
     '未出',
     '未未',
     '更已'
@@ -36,7 +30,10 @@ const initState = {
 
   //MENU選單
   inputTextSelect: -1,
-  menuClassName: ["", "", "", ""]
+  menuClassName: ["", "", "", ""],
+
+  //test
+  test: true
 };
 
 String.prototype.getStrokes = function () {
@@ -185,6 +182,10 @@ const soReducer = (state = initState, action) => {
       let inputObj = {};
       inputObj[action.inputOption] = action.value
       return Object.assign({}, state, inputObj);
+    case 'TEST_TRIGGER':
+      return Object.assign({}, state, {
+        test: action.tf
+      });
     default:
       return state;
   }

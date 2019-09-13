@@ -53,27 +53,6 @@ class Combination extends PureComponent {
         })}
         <Button>測試</Button>
         <Button>測試</Button>
-        <Button>測試</Button>
-        <Button>測試</Button>
-        <Button>測試</Button>
-        <Button>測試</Button>
-        <Button>測試</Button>
-        <Button>測試</Button>
-        <Button>測試</Button>
-        <Button>測試</Button>
-        <Button>測試</Button>
-        <Button>測試</Button>
-        <Button>測試</Button>
-        <Button>測試</Button>
-        <Button>測試</Button>
-        <Button>測試</Button>
-        <Button>測試</Button>
-        <Button>測試</Button>
-        <Button>測試</Button>
-        <Button>測試</Button>
-        <Button>測試</Button>
-        <Button>測試</Button>
-        <Button>測試</Button>
       </MainDiv >
     )
   }

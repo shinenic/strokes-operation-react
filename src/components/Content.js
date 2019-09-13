@@ -3,12 +3,31 @@ import Combination from './Combination';
 import styled, { keyframes } from 'styled-components';
 import { connect } from 'react-redux';
 import Pusheen from '../image/Pusheen3.png';
+import { testTrigger } from '../actions';
+
+const showDiv = keyframes`
+  0%{
+  height:0;
+  }
+  100%{
+  height:20vh;
+  }
+`;
+
+const showDiv2 = keyframes`
+  0%{
+  height:20vh;
+  }
+  100%{
+  height:40vh;
+  }
+`;
 
 const MainDiv = styled.div`
   position:absolute;
   right:0;
   top:0;
-  width:70vw;
+  width:80vw;
   height:100vh;
   background-color:white;
 `;
@@ -16,6 +35,7 @@ const MainDiv = styled.div`
 const Info = styled(MainDiv)`
   height:20vh;
   background:#AFEAAE;
+  animation:${props => props.infoani ? showDiv : showDiv2} 1s 1 both 500ms;
 `;
 
 
@@ -24,7 +44,7 @@ class Content extends PureComponent {
   render() {
     return (
       <MainDiv>
-        <Info>
+        <Info infoani={this.props.test} onClick={() => { this.props.testTrigger(!this.props.test); }}>
           總單字數:{Object.keys(this.props.character).length}
           <br />
           已選擇組合數:0
@@ -50,11 +70,13 @@ const mapStatetoProps = state => {
     combinationInput: state.combinationInput,
     combinationResult: state.combinationResult,
     searchCombinatinoCount: state.searchCombinatinoCount,
-    character: state.character
+    character: state.character,
+    test: state.test
   }
 }
 const mapDispatchToProps = dispatch => {
   return {
+    testTrigger: (tf) => dispatch(testTrigger(tf))
   }
 }
 export default connect(mapStatetoProps, mapDispatchToProps)(Content);

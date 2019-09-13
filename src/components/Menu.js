@@ -17,18 +17,20 @@ const MenuDiv = styled.div`
   position:absolute;
   left:0;
   top:0;
-  width:30vw;
+  width:20vw;
   height:100vh;
-  background-color:gray;
+  background-color:rgb(49,54,66);
 `;
 
 const Text = styled.div`
   width:100%;
   height:50px;
   padding-left:10%;
-  font-size:18px;
+  font-size:16px;
+  color:rgb(255,255,255,0.7);
   line-height:50px;
   cursor: pointer;
+  background:rgb(49,54,66);
 `;
 const TextInput = styled(Text)`
   overflow: hidden;
@@ -90,7 +92,7 @@ class Menu extends PureComponent {
     return (
       <MenuDiv>
         <TopPadding />
-        <Text onClick={() => this.props.inputTextChange(0)}>查詢筆劃</Text>
+        <Text onClick={() => this.props.inputTextChange(0)}>◆  查詢筆劃</Text>
         <TextInput className={this.props.menuClassName[0]}>
           <Input type="text"
             value={this.props.searchInput}
@@ -98,9 +100,9 @@ class Menu extends PureComponent {
             onChange={e => this.props.handleInput(e.target.value, 'searchInput')} />
           <Button onClick={() => { this.props.searchStrokes(this.props.searchInput); this.props.cleanAllInput(); }}>GO</Button>
         </TextInput>
-        <Border><BlackLine /></Border>
+        {/* <Border><BlackLine /></Border> */}
 
-        <Text onClick={() => this.props.inputTextChange(1)}>增加單字</Text>
+        <Text onClick={() => this.props.inputTextChange(1)}>◆  增加單字</Text>
         <TextInput className={this.props.menuClassName[1]}>
           <Input type="text"
             value={this.props.addInput}
@@ -108,9 +110,9 @@ class Menu extends PureComponent {
             onChange={e => this.props.handleInput(e.target.value, 'addInput')} />
           <Button onClick={() => { this.props.addCharacter(this.props.addInput); this.props.cleanAllInput(); }}>GO</Button>
         </TextInput>
-        <Border><BlackLine /></Border>
+        {/* <Border><BlackLine /></Border> */}
 
-        <Text onClick={() => this.props.inputTextChange(2)}>查詢筆劃組合</Text>
+        <Text onClick={() => this.props.inputTextChange(2)}>◆  查詢筆劃組合</Text>
         <TextInput className={this.props.menuClassName[2]}>
           <Input type="text"
             value={this.props.combinationInput}
@@ -124,9 +126,9 @@ class Menu extends PureComponent {
             }} />
           <Button onClick={() => { this.props.combinationSearch(this.props.combinationInput, this.props.filterCharInput); this.props.cleanAllInput(); }}>GO</Button>
         </TextInput>
-        <Border><BlackLine /></Border>
+        {/* <Border><BlackLine /></Border> */}
 
-        <Text onClick={() => this.props.inputTextChange(3)}>移除單字</Text>
+        <Text onClick={() => this.props.inputTextChange(3)}>◆  移除單字</Text>
         <TextInput className={this.props.menuClassName[3]}>
           <Input type="text"
             value={this.props.removeInput}
@@ -134,7 +136,7 @@ class Menu extends PureComponent {
             onChange={e => this.props.handleInput(e.target.value, 'removeInput')} />
           <Button>GO</Button>
         </TextInput>
-        <Border><BlackLine /></Border>
+        {/* <Border><BlackLine /></Border> */}
 
         <Text>查看所有單字</Text>
         <Border><BlackLine /></Border>

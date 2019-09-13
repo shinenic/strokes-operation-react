@@ -30,47 +30,52 @@ const Text = styled.div`
   color:rgb(255,255,255,0.9);
   line-height:50px;
   cursor: pointer;
-  background:rgb(49,54,66);
+  /* background:rgb(49,54,66); */
+  background:${props => props.picked ? '#E44C70' : '#313642'};
   &:hover{
-    background:rgb(228,76,112,0.4);
+    /* background: rgb(228, 76, 112, 0.4); */
+    background:${props => props.picked ? '#E44C70' : '#783E55'};
   }
 `;
 
 const TextInput = styled(Text)`
   overflow: hidden;
-  height:0;
+  height: 0;
+  &:hover{
+    background: rgb(49, 54, 66);
+  }
   /* animation:${showDiv} 1s 1 both; */
 `;
 const Input = styled.input`
-  padding:5px 15px; 
-  background:#ccc; 
-  border:0 none;
-  cursor:pointer;
+  padding: 5px 15px;
+  background: #ccc;
+  border: 0 none;
+  cursor: pointer;
   border-radius: 2px;
-  width:70%;
+  width: 70%;
   box-sizing: border-box;
 `;
 const Button = styled.button`
-  border:1px solid black;
-  background:white;
+  border: 1px solid black;
+  background: white;
 `;
 
 /*MENU分隔線
 const Border = styled(Text)`
-  height:2px;
-  padding-left:10px;
-  padding-right:10px;
-  box-sizing: border-box;
+height: 2px;
+padding - left: 10px;
+padding - right: 10px;
+box - sizing: border - box;
 `;
 const BlackLine = styled.div`
-  background:black;
-  height:100%;
-  width:100%;
+background: black;
+height: 100 %;
+width: 100 %;
 `;
 */
 
 const TopPadding = styled.div`
-  height:150px;
+height: 150px;
 `;
 
 
@@ -102,7 +107,9 @@ class Menu extends PureComponent {
         {optionList.map((value, index) => {
           return (
             <div>
-              <Text onClick={() => this.props.inputTextChange(index)}>◆  {value}</Text>
+              <Text
+                picked={this.props.inputTextSelect === index}
+                onClick={() => this.props.inputTextChange(index)}>◆  {value}</Text>
               {
                 index < 4 &&
                 <TextInput className={this.props.menuClassName[index]}>

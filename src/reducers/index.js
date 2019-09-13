@@ -105,13 +105,7 @@ const getMenuClassName = (num, pre) => {
   // }
   return list;
 }
-/*MENU動畫目前只有展開沒有收合
-  要搭配更改div height*/
-// const getCleanMenuClassName = (num) => {
-//   let list = ["", "", "", ""];
-//   list[num] = "openDiv";
-//   return list;
-// }
+
 const getNewPickList = (name, arr) => {
   if (arr.includes(name)) {
     let index = arr.indexOf(name);

@@ -27,11 +27,15 @@ const Text = styled.div`
   height:50px;
   padding-left:10%;
   font-size:16px;
-  color:rgb(255,255,255,0.7);
+  color:rgb(255,255,255,0.9);
   line-height:50px;
   cursor: pointer;
   background:rgb(49,54,66);
+  &:hover{
+    background:rgb(228,76,112,0.4);
+  }
 `;
+
 const TextInput = styled(Text)`
   overflow: hidden;
   height:0;
@@ -51,6 +55,7 @@ const Button = styled.button`
   background:white;
 `;
 
+/*MENU分隔線
 const Border = styled(Text)`
   height:2px;
   padding-left:10px;
@@ -62,9 +67,10 @@ const BlackLine = styled.div`
   height:100%;
   width:100%;
 `;
+*/
 
 const TopPadding = styled.div`
-  height:70px;
+  height:150px;
 `;
 
 
@@ -89,10 +95,31 @@ class Menu extends PureComponent {
     }
   }
   render() {
+    const optionList = ["查詢筆劃", "增加單字", "查詢筆劃組合", "移除單字", "查看所有單字", "儲存", "讀取", "匯出"];
     return (
       <MenuDiv>
         <TopPadding />
-        <Text onClick={() => this.props.inputTextChange(0)}>◆  查詢筆劃</Text>
+        {optionList.map((value, index) => {
+          return (
+            <div>
+              <Text onClick={() => this.props.inputTextChange(index)}>◆  {value}</Text>
+              {
+                index < 4 &&
+                <TextInput className={this.props.menuClassName[index]}>
+                  <Input type="text"
+                    value={this.props.searchInput}
+                    onKeyPress={e => this.handleKeyPress(e, 0)}
+                    onChange={e => this.props.handleInput(e.target.value, 'searchInput')} />
+                  <Button onClick={() => { this.props.searchStrokes(this.props.searchInput); this.props.cleanAllInput(); }}>GO</Button>
+                </TextInput>
+              }
+            </div>
+          )
+        })}
+
+
+
+        {/* <Text onClick={() => this.props.inputTextChange(0)}>◆  查詢筆劃</Text>
         <TextInput className={this.props.menuClassName[0]}>
           <Input type="text"
             value={this.props.searchInput}
@@ -100,9 +127,8 @@ class Menu extends PureComponent {
             onChange={e => this.props.handleInput(e.target.value, 'searchInput')} />
           <Button onClick={() => { this.props.searchStrokes(this.props.searchInput); this.props.cleanAllInput(); }}>GO</Button>
         </TextInput>
-        {/* <Border><BlackLine /></Border> */}
 
-        <Text onClick={() => this.props.inputTextChange(1)}>◆  增加單字</Text>
+        <TextSel onClick={() => this.props.inputTextChange(1)}>◆  增加單字</TextSel>
         <TextInput className={this.props.menuClassName[1]}>
           <Input type="text"
             value={this.props.addInput}
@@ -110,7 +136,6 @@ class Menu extends PureComponent {
             onChange={e => this.props.handleInput(e.target.value, 'addInput')} />
           <Button onClick={() => { this.props.addCharacter(this.props.addInput); this.props.cleanAllInput(); }}>GO</Button>
         </TextInput>
-        {/* <Border><BlackLine /></Border> */}
 
         <Text onClick={() => this.props.inputTextChange(2)}>◆  查詢筆劃組合</Text>
         <TextInput className={this.props.menuClassName[2]}>
@@ -126,7 +151,6 @@ class Menu extends PureComponent {
             }} />
           <Button onClick={() => { this.props.combinationSearch(this.props.combinationInput, this.props.filterCharInput); this.props.cleanAllInput(); }}>GO</Button>
         </TextInput>
-        {/* <Border><BlackLine /></Border> */}
 
         <Text onClick={() => this.props.inputTextChange(3)}>◆  移除單字</Text>
         <TextInput className={this.props.menuClassName[3]}>
@@ -136,15 +160,11 @@ class Menu extends PureComponent {
             onChange={e => this.props.handleInput(e.target.value, 'removeInput')} />
           <Button>GO</Button>
         </TextInput>
-        {/* <Border><BlackLine /></Border> */}
 
-        <Text>查看所有單字</Text>
-        <Border><BlackLine /></Border>
-        <Text>儲存</Text>
-        <Border><BlackLine /></Border>
-        <Text>讀取</Text>
-        <Border><BlackLine /></Border>
-        <Text>匯出</Text>
+        <Text>◆  查看所有單字</Text>
+        <Text>◆  儲存</Text>
+        <Text>◆  讀取</Text>
+        <Text>◆  匯出</Text> */}
       </MenuDiv >
     )
   }

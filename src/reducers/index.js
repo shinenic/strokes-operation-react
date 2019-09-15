@@ -100,9 +100,9 @@ const getCombination = (num, groupChar, filterChrArr) => {
 const getMenuClassName = (num, pre) => {
   let list = ["", "", "", ""];
   list[num] = "openDiv";
-  // if (pre != -1) {
-  //   list[pre] = "closeDiv";
-  // }
+  if (pre != -1) {
+    list[pre] = "closeDiv";
+  }
   return list;
 }
 

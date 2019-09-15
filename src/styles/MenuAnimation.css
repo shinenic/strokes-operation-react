@@ -7,7 +7,7 @@
 }
 
 .closeDiv {
-    animation: expendDiv 0.5s 1 reverse both;
+    animation: collapseDiv 0.5s 1 normal both;
 }
   
 @keyframes expendDiv{
@@ -16,6 +16,15 @@
     }
     100%{
         height:50px;
+    }
+}
+
+@keyframes collapseDiv{
+    0%{
+        height:50px;
+    }
+    100%{
+        height:0;
     }
 }
   

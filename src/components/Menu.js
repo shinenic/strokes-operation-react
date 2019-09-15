@@ -7,10 +7,10 @@ import { searchStrokes, handleInput, addCharacter, combinationSearch, inputTextC
 
 const showDiv = keyframes`
   0%{
-  height:0;
+    height:0;
   }
   100%{
-  height:50px;
+    height:50px;
   }
 `;
 
@@ -48,7 +48,6 @@ const TextInput = styled.div`
   box-sizing: border-box;
   overflow: hidden;
   color:rgb(255,255,255,0.9);
-  /* animation:${showDiv} 1s 1 both; */
 `;
 
 const Input = styled.input`
@@ -56,7 +55,7 @@ const Input = styled.input`
   background: #EEE;
   border: 0 none;
   border-right:1px solid black;
-  width:70%;
+  width:75%;
   height:30px;
   box-sizing: border-box;
   display:inline-block;
@@ -122,7 +121,19 @@ class Menu extends PureComponent {
   }
   render() {
     const optionList = ["查詢筆劃", "增加單字", "查詢筆劃組合", "移除單字", "查看所有單字", "儲存", "讀取", "匯出", "載入範本", "軟體介紹"];
-    const hintList = ["請輸入", "TEST", "test", "", "", "", "", "", "", "", ""];
+    const hintList = ["請輸入", "請輸入中文字(可多筆)", "test", "", "", "", "", "", "", "", ""];
+    const inputList = [
+      { option: "查詢筆畫", hint: "請輸入中文字(可多筆)", name: "searchInput" },
+      { option: "增加單字", hint: "請輸入中文字(可多筆)", name: "searchInput" },
+      { option: "查詢筆劃組合", hint: "總筆劃數", hintcont: "單字", name: "searchInput" },
+      { option: "移除單字", hint: "欲刪除之文字", name: "searchInput" },
+      { option: "查看所有單字", name: "searchInput" },
+      { option: "儲存", name: "searchInput" },
+      { option: "讀取", name: "searchInput" },
+      { option: "匯出", name: "searchInput" },
+      { option: "載入範本", name: "searchInput" },
+      { option: "軟體介紹", name: "searchInput" },
+    ];
     return (
       <MenuDiv>
         <MenuImg />

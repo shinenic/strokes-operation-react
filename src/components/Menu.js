@@ -74,17 +74,17 @@ const MenuImg = styled.img`
 
 
 class Menu extends PureComponent {
-  handleKeyPress = (e, inputOption) => {
+  handleKeyPress = (e, index) => {
     if (e.key === 'Enter') {
-      switch (inputOption) {
+      switch (index) {
         case 0:
-          this.props.searchStrokes(this.props.searchInput);
+          this.props.searchStrokes(this.props.menuInput[0]);
           break;
         case 1:
-          this.props.addCharacter(this.props.addInput);
+          this.props.addCharacter(this.props.menuInput[1]);
           break;
         case 2:
-          this.props.combinationSearch(this.props.combinationInput, this.props.filterCharInput);
+          this.props.combinationSearch(this.props.menuInput[2], this.props.menuInput[3]);
           break;
         case 3:
           // this.props.searchStrokes(this.props.searchInput);
@@ -123,9 +123,9 @@ class Menu extends PureComponent {
                   <Input type="text"
                     placeholder={inputList[index]['hint']}
                     value={this.props.menuInput[index]}
-                    onKeyPress={e => this.handleKeyPress(e, 0)}
+                    onKeyPress={e => this.handleKeyPress(e, index)}
                     onChange={e => this.props.handleInput(e.target.value, index)} />
-                  <Button onClick={() => { this.props.searchStrokes(this.props.searchInput); this.props.cleanAllInput(); }}>查詢</Button>
+                  <Button onClick={() => { this.props.searchStrokes(this.props.menuInput[index]); this.props.cleanAllInput(); }}>查詢</Button>
                 </TextInput>
               }
             </div>
@@ -186,10 +186,6 @@ class Menu extends PureComponent {
 }
 const mapStatetoProps = state => {
   return {
-    searchInput: state.searchInput,
-    addInput: state.addInput,
-    combinationInput: state.combinationInput,
-    filterCharInput: state.filterCharInput,
     inputTextSelect: state.inputTextSelect,
     menuClassName: state.menuClassName,
     menuInput: state.menuInput

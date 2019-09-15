@@ -17,11 +17,7 @@ const initState = {
   searchResult: {},//單純搜尋筆劃的結果
   groupChar: {},
 
-  searchInput: '',
-  addInput: '',
-  combinationInput: '',
-  removeInput: '',
-  filterCharInput: '',
+  menuInput: ['', '', '', '', ''],
 
   //資料更新
   notification: false,
@@ -162,20 +158,14 @@ const soReducer = (state = initState, action) => {
       });
     case 'CLEAN_ALL_INPUT':
       return Object.assign({}, state, {
-        searchInput: '',
-        addInput: '',
-        combinationInput: '',
-        removeInput: '',
-        filterCharInput: '',
+        menuInput: ['', '', '', '', '']
       });
-    // case 'CLEAN_CLASS_NAME':
-    //   return Object.assign({}, state, {
-    //     menuClassName: getCleanMenuClassName(action.num)
-    //   });
     case 'HANDLE_INPUT':
-      let inputObj = {};
-      inputObj[action.inputOption] = action.value
-      return Object.assign({}, state, inputObj);
+      let inputArrTemp = state.menuInput;
+      inputArrTemp[action.inputOption] = action.value;
+      return Object.assign({}, state, {
+        menuInput: [...inputArrTemp]
+      });
     case 'TEST_TRIGGER':
       return Object.assign({}, state, {
         test: action.tf

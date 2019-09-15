@@ -5,15 +5,6 @@ import menuIcon from '../image/menuIcon.png';
 import { connect } from 'react-redux';
 import { searchStrokes, handleInput, addCharacter, combinationSearch, inputTextChange, cleanAllInput } from '../actions';
 
-const showDiv = keyframes`
-  0%{
-    height:0;
-  }
-  100%{
-    height:50px;
-  }
-`;
-
 const MenuDiv = styled.div`
   position:absolute;
   left:0;
@@ -39,7 +30,6 @@ const Text = styled.div`
     transition:background-color 170ms;
   }
 `;
-
 const TextInput = styled.div`
   height:0;
   width:100%;
@@ -49,7 +39,6 @@ const TextInput = styled.div`
   overflow: hidden;
   color:rgb(255,255,255,0.9);
 `;
-
 const Input = styled.input`
   padding: 5px 15px;
   background: #EEE;
@@ -75,21 +64,6 @@ const Button = styled.div`
   vertical-align: middle;
   display:inline-block;
 `;
-
-/*MENU分隔線
-const Border = styled(Text)`
-height: 2px;
-padding - left: 10px;
-padding - right: 10px;
-box - sizing: border - box;
-`;
-const BlackLine = styled.div`
-background: black;
-height: 100 %;
-width: 100 %;
-`;
-*/
-
 const MenuImg = styled.img`
   content:url(${menuIcon});
   height:60px;
@@ -137,20 +111,20 @@ class Menu extends PureComponent {
     return (
       <MenuDiv>
         <MenuImg />
-        {optionList.map((value, index) => {
+        {inputList.map((value, index) => {
           return (
             <div>
               <Text
                 picked={this.props.inputTextSelect === index}
-                onClick={() => this.props.inputTextChange(index)}>◆  {value}</Text>
+                onClick={() => this.props.inputTextChange(index)}>◆  {inputList[index]['option']}</Text>
               {
                 index < 4 &&
                 <TextInput className={this.props.menuClassName[index]}>
                   <Input type="text"
-                    placeholder={hintList[index]}
-                    value={this.props.searchInput}
+                    placeholder={inputList[index]['hint']}
+                    value={this.props.menuInput[index]}
                     onKeyPress={e => this.handleKeyPress(e, 0)}
-                    onChange={e => this.props.handleInput(e.target.value, 'searchInput')} />
+                    onChange={e => this.props.handleInput(e.target.value, index)} />
                   <Button onClick={() => { this.props.searchStrokes(this.props.searchInput); this.props.cleanAllInput(); }}>查詢</Button>
                 </TextInput>
               }
@@ -217,7 +191,8 @@ const mapStatetoProps = state => {
     combinationInput: state.combinationInput,
     filterCharInput: state.filterCharInput,
     inputTextSelect: state.inputTextSelect,
-    menuClassName: state.menuClassName
+    menuClassName: state.menuClassName,
+    menuInput: state.menuInput
   }
 }
 const mapDispatchToProps = dispatch => {

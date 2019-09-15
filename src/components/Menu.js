@@ -25,6 +25,7 @@ const MenuDiv = styled.div`
 `;
 
 const Text = styled.div`
+  box-sizing: border-box;
   width:100%;
   height:50px;
   padding-left:10%;
@@ -35,29 +36,45 @@ const Text = styled.div`
   background:${props => props.picked ? '#E44C70' : '#313642'};
   &:hover{
     background:${props => props.picked ? '#E44C70' : '#783E55'};
+    transition:background-color 170ms;
   }
 `;
 
-const TextInput = styled(Text)`
+const TextInput = styled.div`
+  height:0;
+  width:100%;
+  line-height:50px;
+  padding-left:10%;
+  box-sizing: border-box;
   overflow: hidden;
-  height: 0;
-  &:hover{
-    background: rgb(49, 54, 66);
-  }
+  color:rgb(255,255,255,0.9);
   /* animation:${showDiv} 1s 1 both; */
 `;
+
 const Input = styled.input`
   padding: 5px 15px;
-  background: #ccc;
+  background: #EEE;
   border: 0 none;
-  cursor: pointer;
-  border-radius: 2px;
-  width: 70%;
+  border-right:1px solid black;
+  width:70%;
+  height:30px;
   box-sizing: border-box;
+  display:inline-block;
+  vertical-align: middle;
 `;
-const Button = styled.button`
-  border: 1px solid black;
-  background: white;
+const Button = styled.div`
+  height:30px;
+  line-height:30px;
+  border: 0 none;
+  background: #EEE;
+  font-size:13px;
+  color:rgb(0,0,0,0.9);
+  padding-left:5px;
+  padding-right:5px;
+  cursor: pointer;
+  box-sizing: border-box;
+  vertical-align: middle;
+  display:inline-block;
 `;
 
 /*MENU分隔線
@@ -74,15 +91,11 @@ width: 100 %;
 `;
 */
 
-const TopPadding = styled.div`
-  /* height: 150px; */
-`;
-
 const MenuImg = styled.img`
   content:url(${menuIcon});
   height:60px;
   width:60px;
-  padding:50px 95px 50px 95px;
+  padding:27px 95px 27px 95px;
   filter:invert(1);
 `;
 
@@ -109,9 +122,9 @@ class Menu extends PureComponent {
   }
   render() {
     const optionList = ["查詢筆劃", "增加單字", "查詢筆劃組合", "移除單字", "查看所有單字", "儲存", "讀取", "匯出", "載入範本", "軟體介紹"];
+    const hintList = ["請輸入", "TEST", "test", "", "", "", "", "", "", "", ""];
     return (
       <MenuDiv>
-        <TopPadding />
         <MenuImg />
         {optionList.map((value, index) => {
           return (
@@ -123,10 +136,11 @@ class Menu extends PureComponent {
                 index < 4 &&
                 <TextInput className={this.props.menuClassName[index]}>
                   <Input type="text"
+                    placeholder={hintList[index]}
                     value={this.props.searchInput}
                     onKeyPress={e => this.handleKeyPress(e, 0)}
                     onChange={e => this.props.handleInput(e.target.value, 'searchInput')} />
-                  <Button onClick={() => { this.props.searchStrokes(this.props.searchInput); this.props.cleanAllInput(); }}>GO</Button>
+                  <Button onClick={() => { this.props.searchStrokes(this.props.searchInput); this.props.cleanAllInput(); }}>查詢</Button>
                 </TextInput>
               }
             </div>

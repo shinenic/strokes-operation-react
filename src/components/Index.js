@@ -29,7 +29,7 @@ class Index extends PureComponent {
             );
           }} /> */}
         <Menu />
-        <Content />
+        {/* <Content /> */}
       </div>
     )
   }

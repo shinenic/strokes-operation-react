@@ -8,8 +8,20 @@ body {
   /* height:1000px; */
   position: relative;
   background: white;
-  
 }
+input {
+  font-family: Arial, "文泉驛正黑", "WenQuanYi Zen Hei", "儷黑 Pro", "LiHei Pro",
+   "微軟正黑體", "Microsoft JhengHei", "標楷體", DFKai-SB, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+button {
+  font-family: Arial, "文泉驛正黑", "WenQuanYi Zen Hei", "儷黑 Pro", "LiHei Pro",
+   "微軟正黑體", "Microsoft JhengHei", "標楷體", DFKai-SB, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+/* ::-webkit-input-placeholder {
+  color: pink;
+} */
 
 @media (min-width: 500px) {
   /* width */

@@ -27,7 +27,8 @@ const MainDiv = styled.div`
   position:absolute;
   right:0;
   top:0;
-  width:80vw;
+  /* width:80vw; */
+  width:calc(100vw - 250px);
   height:100vh;
   background-color:white;
 `;

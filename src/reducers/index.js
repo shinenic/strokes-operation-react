@@ -93,11 +93,14 @@ const getCombination = (num, groupChar, filterChrArr) => {
   }
   return result;
 };
-const getMenuClassName = (num, pre) => {
+const getMenuClassName = (num, pre, curClassName) => {
+  console.log(curClassName)
   let list = ["", "", "", ""];
-  list[num] = "openDiv";
   if (pre != -1) {
     list[pre] = "closeDiv";
+  }
+  if (curClassName === "closeDiv" || curClassName === "") {
+    list[num] = "openDiv";
   }
   return list;
 }
@@ -153,7 +156,7 @@ const soReducer = (state = initState, action) => {
       });
     case 'INPUT_TEXT_CHANGE':
       return Object.assign({}, state, {
-        menuClassName: getMenuClassName(action.num, state.inputTextSelect),
+        menuClassName: getMenuClassName(action.num, state.inputTextSelect, state.menuClassName[action.num]),
         inputTextSelect: action.num
       });
     case 'CLEAN_ALL_INPUT':

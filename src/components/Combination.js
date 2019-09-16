@@ -8,7 +8,7 @@ const MainDiv = styled.div`
   position:absolute;
   right:0;
   top:20vh;
-  width:70vw;
+  width:calc(100vw - 250px);
   /* height:85vh; */
   background-color:white;
   padding:10px;

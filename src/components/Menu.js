@@ -34,7 +34,7 @@ const TextInput = styled.div`
   height:0;
   width:100%;
   line-height:50px;
-  padding-left:10%;
+  padding-left:9%;
   box-sizing: border-box;
   overflow: hidden;
   color:rgb(255,255,255,0.9);
@@ -44,7 +44,7 @@ const Input = styled.input`
   background: #EEE;
   border: 0 none;
   border-right:1px solid black;
-  width:75%;
+  width:${props => props.single ? '75%' : '37.5%'};
   height:30px;
   box-sizing: border-box;
   display:inline-block;
@@ -74,8 +74,14 @@ const MenuImg = styled.img`
 
 
 class Menu extends PureComponent {
+  constructor() {
+    super();
+    this.inputFocus = new Array(4);
+    for (let i = 0; i < 4; i++)
+      this.inputFocus[i] = React.createRef();
+  }
   handleKeyPress = (e, index) => {
-    if (e.key === 'Enter') {
+    if (!e || e.key === 'Enter') {
       switch (index) {
         case 0:
           this.props.searchStrokes(this.props.menuInput[0]);
@@ -93,20 +99,23 @@ class Menu extends PureComponent {
       this.props.cleanAllInput();
     }
   }
+  focus(index) {
+    setTimeout(() => { this.inputFocus[index].focus() }, 500)
+      ;
+  }
+
   render() {
-    const optionList = ["查詢筆劃", "增加單字", "查詢筆劃組合", "移除單字", "查看所有單字", "儲存", "讀取", "匯出", "載入範本", "軟體介紹"];
-    const hintList = ["請輸入", "請輸入中文字(可多筆)", "test", "", "", "", "", "", "", "", ""];
     const inputList = [
-      { option: "查詢筆畫", hint: "請輸入中文字(可多筆)", name: "searchInput" },
-      { option: "增加單字", hint: "請輸入中文字(可多筆)", name: "searchInput" },
-      { option: "查詢筆劃組合", hint: "總筆劃數", hintcont: "單字", name: "searchInput" },
-      { option: "移除單字", hint: "欲刪除之文字", name: "searchInput" },
-      { option: "查看所有單字", name: "searchInput" },
-      { option: "儲存", name: "searchInput" },
-      { option: "讀取", name: "searchInput" },
-      { option: "匯出", name: "searchInput" },
-      { option: "載入範本", name: "searchInput" },
-      { option: "軟體介紹", name: "searchInput" },
+      { option: "查詢筆畫", hint: "請輸入中文字(可多筆)", buttonName: "查詢" },
+      { option: "增加單字", hint: "請輸入中文字(可多筆)", buttonName: "增加" },
+      { option: "查詢筆劃組合", hint: "總筆劃數", hintcont: "單字", buttonName: "查詢" },
+      { option: "移除單字", hint: "欲刪除之文字", buttonName: "移除" },
+      { option: "查看所有單字" },
+      { option: "儲存" },
+      { option: "讀取" },
+      { option: "匯出" },
+      { option: "載入範本" },
+      { option: "軟體介紹" },
     ];
     return (
       <MenuDiv>
@@ -116,16 +125,25 @@ class Menu extends PureComponent {
             <div>
               <Text
                 picked={this.props.inputTextSelect === index}
-                onClick={() => this.props.inputTextChange(index)}>◆  {inputList[index]['option']}</Text>
+                onClick={() => { this.props.inputTextChange(index); this.focus(index); }}>◆  {value['option']}</Text>
               {
                 index < 4 &&
                 <TextInput className={this.props.menuClassName[index]}>
                   <Input type="text"
-                    placeholder={inputList[index]['hint']}
+                    single={index !== 2}
+                    placeholder={value['hint']}
+                    ref={(input) => { this.inputFocus[index] = input }}
                     value={this.props.menuInput[index]}
                     onKeyPress={e => this.handleKeyPress(e, index)}
                     onChange={e => this.props.handleInput(e.target.value, index)} />
-                  <Button onClick={() => { this.props.searchStrokes(this.props.menuInput[index]); this.props.cleanAllInput(); }}>查詢</Button>
+                  {index === 2 &&
+                    <Input type="text"
+                      single={index !== 2}
+                      placeholder={value['hintcont']}
+                      value={this.props.menuInput[index + 1]}
+                      onKeyPress={e => this.handleKeyPress(e, index)}
+                      onChange={e => this.props.handleInput(e.target.value, index + 1)} />}
+                  <Button onClick={() => this.handleKeyPress(null, index)}>{value['buttonName']}</Button>
                 </TextInput>
               }
             </div>

@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import styled, { keyframes } from 'styled-components';
 import "../styles/MenuAnimation.css";
+import demoData from '../data/demoData';
 import menuIcon from '../image/menuIcon.png';
 import { connect } from 'react-redux';
 import { searchStrokes, handleInput, addCharacter, combinationSearch, inputTextChange, cleanAllInput } from '../actions';
@@ -95,6 +96,9 @@ class Menu extends PureComponent {
         case 3:
           // this.props.searchStrokes(this.props.searchInput);
           break;
+        case 8:
+          this.props.addCharacter(demoData);
+          break;
       }
       this.props.cleanAllInput();
     }
@@ -125,9 +129,12 @@ class Menu extends PureComponent {
               <Text
                 key={index}
                 picked={this.props.inputTextSelect === index}
-                onClick={() => { this.props.inputTextChange(index); this.focus(index); }}>◆  {value['option']}</Text>
-              {
-                index < 4 &&
+                onClick={() => {
+                  this.props.inputTextChange(index);
+                  index <= 3 ? this.focus(index) : this.handleKeyPress(null, index);
+                }
+                }>◆  {value['option']}</Text>
+              {index < 4 &&
                 <TextInput className={this.props.menuClassName[index]}>
                   <Input type="text"
                     single={index !== 2}
@@ -144,8 +151,7 @@ class Menu extends PureComponent {
                       onKeyPress={e => this.handleKeyPress(e, index)}
                       onChange={e => this.props.handleInput(e.target.value, index + 1)} />}
                   <Button onClick={() => this.handleKeyPress(null, index)}>{value['buttonName']}</Button>
-                </TextInput>
-              }
+                </TextInput>}
             </div>
           )
         })}

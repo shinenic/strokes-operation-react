@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { connect } from 'react-redux';
-import { pickName } from '../actions';
-import arrowImg from '../image/arrow.png';
-import arrowDisableImg from '../image/arrow-disable.png';
+import { pickName, changePage } from '../actions';
+import arrowImg from '../image/arrow2.png';
+import arrowDisableImg from '../image/arrow-disable2.png';
 
 
 const MainDiv = styled.div`
@@ -17,8 +17,9 @@ const MainDiv = styled.div`
   box-sizing:border-box;
 `;
 
+//14*15?
 const Button = styled.div`
-  width:10%;
+  width:7.13%;
   box-sizing:border-box;
   display:inline-block;
   padding-top:3px;
@@ -44,6 +45,7 @@ const PageCtrlDiv = styled.div`
   height:60px;
   width:240px;
   border:1px solid black;
+  display:inline-block;
   /* background:black; */
 `;
 
@@ -54,8 +56,16 @@ const Arrow = styled.img`
   transform:${props => props.dir ? 'rotate(180deg)' : 'rotate(0)'};
   cursor: pointer;
   &:hover{
-    filter:${props => props.enable ? 'invert(1)' : 'invert(0)'};
+    filter:${props => props.enable ? 'invert(0.2)' : 'invert(0)'};
+    transition:filter 200ms;
   }
+`;
+
+const PageInfo = styled.div`
+  border:1px solid black;
+  display:inline-block;
+  margin-left:10px;
+  margin-right:10px;
 `;
 
 
@@ -67,7 +77,7 @@ class Combination extends PureComponent {
     return (
       <MainDiv>
         <InfoDiv>{infoText}{infoTextCont}</InfoDiv>
-        {this.props.combinationResult.map((value, index) => {
+        {this.props.currentPageResult.map((value, index) => {
           return (
             <Button
               onClick={() => this.props.pickName(value)}
@@ -78,11 +88,18 @@ class Combination extends PureComponent {
             </Button>
           )
         })}
-        <Button>測試</Button>
-        <Button>測試</Button>
         <PageCtrlDiv>
-          <Arrow dir={true} enable={false} />
-          <Arrow dir={false} enable={true} />
+          <Arrow
+            dir={true}
+            enable={this.props.currentPage !== 1}
+            onClick={() => this.props.currentPage !== 1 && this.props.changePage(false)} />
+          <PageInfo>
+            {`Page ${this.props.currentPage} of ${this.props.maxPage}`}
+          </PageInfo>
+          <Arrow
+            dir={false}
+            enable={this.props.currentPage !== this.props.maxPage}
+            onClick={() => this.props.currentPage !== this.props.maxPage && this.props.changePage(true)} />
         </PageCtrlDiv>
       </MainDiv >
     )
@@ -91,14 +108,17 @@ class Combination extends PureComponent {
 
 const mapStatetoProps = state => {
   return {
-    combinationResult: state.combinationResult,
+    currentPageResult: state.currentPageResult,
     pickedComb: state.pickedComb,
-    combinationFilter: state.combinationFilter
+    combinationFilter: state.combinationFilter,
+    maxPage: state.maxPage,
+    currentPage: state.currentPage
   }
 }
 const mapDispatchToProps = dispatch => {
   return {
-    pickName: (str) => dispatch(pickName(str))
+    pickName: (str) => dispatch(pickName(str)),
+    changePage: (next) => dispatch(changePage(next))
   }
 }
 export default connect(mapStatetoProps, mapDispatchToProps)(Combination);

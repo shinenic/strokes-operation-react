@@ -1,15 +1,10 @@
 import matchSorter from 'match-sorter';
 import dataStrokes from '../data/dataStrokes';
+// import demoData from '../data/demoData';
 
 const initState = {
   character: {},
-  combinationResult: [
-    '已更',
-    '加加',
-    '未出',
-    '未未',
-    '更已'
-  ],
+  combinationResult: [],
   pickedComb: {},
   dataStoreState: 0,
   latestStorageTime: null,
@@ -27,6 +22,12 @@ const initState = {
   //MENU選單
   inputTextSelect: -1,
   menuClassName: ["", "", "", ""],
+
+  //頁面控制
+  maxPage: null,
+  currentPage: 1,
+  currentPageResult: [""],
+
 
   //test
   test: true
@@ -129,7 +130,7 @@ const handlePickedName = (obj, count, name) => {
   }
   return Object.assign({}, obj);
 }
-
+const pageDataCount = 210;
 
 const soReducer = (state = initState, action) => {
   switch (action.type) {
@@ -143,9 +144,20 @@ const soReducer = (state = initState, action) => {
         groupChar: groupChar(getAllStrokes(handleInputString(action.str)))
       });
     case 'COMBINATION_SEARCH':
+      const result = getCombination(action.num, state.groupChar, handleInputString(action.str));
+      const partOfResult = result.slice(0, pageDataCount);
       return Object.assign({}, state, {
-        combinationResult: getCombination(action.num, state.groupChar, handleInputString(action.str)),
-        combinationFilter: { count: state.menuInput[2], filter: state.menuInput[3] }
+        combinationResult: result,
+        combinationFilter: { count: state.menuInput[2], filter: state.menuInput[3] },
+        maxPage: Math.floor(result.length / pageDataCount) + 1,
+        currentPage: 1,
+        currentPageResult: partOfResult,
+      });
+    case 'CHANGE_PAGE':
+      const page = action.next ? state.currentPage + 1 : state.currentPage - 1;
+      return Object.assign({}, state, {
+        currentPage: page,
+        currentPageResult: state.combinationResult.slice((page - 1) * pageDataCount, (page) * pageDataCount),
       });
     case 'PICK_NAME':
       return Object.assign({}, state, {

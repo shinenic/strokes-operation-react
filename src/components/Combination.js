@@ -45,8 +45,8 @@ class Combination extends PureComponent {
             <Button
               onClick={() => this.props.pickName(value)}
               key={index}
-              picked={Object.keys(this.props.pickedComb).includes(this.props.searchCombinatinoCount)
-                ? this.props.pickedComb[this.props.searchCombinatinoCount].includes(value) : false}>
+              picked={Object.keys(this.props.pickedComb).includes(this.props.combinationFilter.count)
+                ? this.props.pickedComb[this.props.combinationFilter.count].includes(value) : false}>
               {value}
             </Button>
           )
@@ -62,7 +62,7 @@ const mapStatetoProps = state => {
   return {
     combinationResult: state.combinationResult,
     pickedComb: state.pickedComb,
-    searchCombinatinoCount: state.searchCombinatinoCount
+    combinationFilter: state.combinationFilter
   }
 }
 const mapDispatchToProps = dispatch => {

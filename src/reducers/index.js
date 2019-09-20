@@ -3,7 +3,6 @@ import dataStrokes from '../data/dataStrokes';
 
 const initState = {
   character: {},
-  searchCombinatinoCount: 0,
   combinationResult: [
     '已更',
     '加加',
@@ -18,6 +17,7 @@ const initState = {
   groupChar: {},
 
   menuInput: ['', '', '', '', ''],
+  combinationFilter: { count: null, filter: "" },
 
   //資料更新
   notification: false,
@@ -94,7 +94,6 @@ const getCombination = (num, groupChar, filterChrArr) => {
   return result;
 };
 const getMenuClassName = (num, pre, curClassName) => {
-  console.log(curClassName)
   let list = ["", "", "", ""];
   if (pre != -1) {
     list[pre] = "closeDiv";
@@ -145,14 +144,14 @@ const soReducer = (state = initState, action) => {
       });
     case 'COMBINATION_SEARCH':
       return Object.assign({}, state, {
-        searchCombinatinoCount: state.combinationInput,
-        combinationResult: getCombination(action.num, state.groupChar, handleInputString(action.str))
+        combinationResult: getCombination(action.num, state.groupChar, handleInputString(action.str)),
+        combinationFilter: { count: state.menuInput[2], filter: state.menuInput[3] }
       });
     case 'PICK_NAME':
       return Object.assign({}, state, {
         // pickedComb: [...state.pickedComb, action.str]
         // pickedComb: getNewPickList(action.str, state.pickedComb),
-        pickedComb: handlePickedName(state.pickedComb, state.searchCombinatinoCount, action.str)
+        pickedComb: handlePickedName(state.pickedComb, state.combinationFilter.count, action.str)
       });
     case 'INPUT_TEXT_CHANGE':
       return Object.assign({}, state, {

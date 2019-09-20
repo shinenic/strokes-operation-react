@@ -100,8 +100,7 @@ class Menu extends PureComponent {
     }
   }
   focus(index) {
-    setTimeout(() => { this.inputFocus[index].focus() }, 500)
-      ;
+    setTimeout(() => { this.inputFocus[index].focus() }, 500);
   }
 
   render() {
@@ -124,6 +123,7 @@ class Menu extends PureComponent {
           return (
             <div>
               <Text
+                key={index}
                 picked={this.props.inputTextSelect === index}
                 onClick={() => { this.props.inputTextChange(index); this.focus(index); }}>◆  {value['option']}</Text>
               {
@@ -149,55 +149,6 @@ class Menu extends PureComponent {
             </div>
           )
         })}
-
-
-
-        {/* <Text onClick={() => this.props.inputTextChange(0)}>◆  查詢筆劃</Text>
-        <TextInput className={this.props.menuClassName[0]}>
-          <Input type="text"
-            value={this.props.searchInput}
-            onKeyPress={e => this.handleKeyPress(e, 0)}
-            onChange={e => this.props.handleInput(e.target.value, 'searchInput')} />
-          <Button onClick={() => { this.props.searchStrokes(this.props.searchInput); this.props.cleanAllInput(); }}>GO</Button>
-        </TextInput>
-
-        <TextSel onClick={() => this.props.inputTextChange(1)}>◆  增加單字</TextSel>
-        <TextInput className={this.props.menuClassName[1]}>
-          <Input type="text"
-            value={this.props.addInput}
-            onKeyPress={e => this.handleKeyPress(e, 1)}
-            onChange={e => this.props.handleInput(e.target.value, 'addInput')} />
-          <Button onClick={() => { this.props.addCharacter(this.props.addInput); this.props.cleanAllInput(); }}>GO</Button>
-        </TextInput>
-
-        <Text onClick={() => this.props.inputTextChange(2)}>◆  查詢筆劃組合</Text>
-        <TextInput className={this.props.menuClassName[2]}>
-          <Input type="text"
-            value={this.props.combinationInput}
-            onKeyPress={e => this.handleKeyPress(e, 2)}
-            onChange={e => this.props.handleInput(e.target.value, 'combinationInput')} />
-          <Input type="text"
-            onKeyPress={e => this.handleKeyPress(e, 2)}
-            value={this.props.filterCharInput}
-            onChange={e => {
-              this.props.handleInput(e.target.value, 'filterCharInput');
-            }} />
-          <Button onClick={() => { this.props.combinationSearch(this.props.combinationInput, this.props.filterCharInput); this.props.cleanAllInput(); }}>GO</Button>
-        </TextInput>
-
-        <Text onClick={() => this.props.inputTextChange(3)}>◆  移除單字</Text>
-        <TextInput className={this.props.menuClassName[3]}>
-          <Input type="text"
-            value={this.props.removeInput}
-            onKeyPress={e => this.handleKeyPress(e, 3)}
-            onChange={e => this.props.handleInput(e.target.value, 'removeInput')} />
-          <Button>GO</Button>
-        </TextInput>
-
-        <Text>◆  查看所有單字</Text>
-        <Text>◆  儲存</Text>
-        <Text>◆  讀取</Text>
-        <Text>◆  匯出</Text> */}
       </MenuDiv >
     )
   }

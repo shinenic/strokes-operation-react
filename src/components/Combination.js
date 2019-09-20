@@ -2,6 +2,8 @@ import React, { PureComponent } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { connect } from 'react-redux';
 import { pickName } from '../actions';
+import arrowImg from '../image/arrow.png';
+import arrowDisableImg from '../image/arrow-disable.png';
 
 
 const MainDiv = styled.div`
@@ -34,12 +36,37 @@ const Button = styled.div`
     } */
 `;
 
+const InfoDiv = styled.div`
+
+`;
+
+const PageCtrlDiv = styled.div`
+  height:60px;
+  width:240px;
+  border:1px solid black;
+  /* background:black; */
+`;
+
+const Arrow = styled.img`
+  content:url(${props => props.enable ? arrowImg : arrowDisableImg});
+  height:40px;
+  width:40px;
+  transform:${props => props.dir ? 'rotate(180deg)' : 'rotate(0)'};
+  cursor: pointer;
+  &:hover{
+    filter:${props => props.enable ? 'invert(1)' : 'invert(0)'};
+  }
+`;
+
 
 
 class Combination extends PureComponent {
   render() {
+    const infoText = [`查詢總筆畫: ${this.props.combinationFilter.count}`, `, 包含 '${this.props.combinationFilter.filter}' `]
+    const infoTextCont = this.props.combinationFilter.filter !== "" ? `, 包含 '${this.props.combinationFilter.filter}' ` : `` + `的結果共有`;
     return (
       <MainDiv>
+        <InfoDiv>{infoText}{infoTextCont}</InfoDiv>
         {this.props.combinationResult.map((value, index) => {
           return (
             <Button
@@ -53,6 +80,10 @@ class Combination extends PureComponent {
         })}
         <Button>測試</Button>
         <Button>測試</Button>
+        <PageCtrlDiv>
+          <Arrow dir={true} enable={false} />
+          <Arrow dir={false} enable={true} />
+        </PageCtrlDiv>
       </MainDiv >
     )
   }

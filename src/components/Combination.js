@@ -3,7 +3,7 @@ import styled, { keyframes } from 'styled-components';
 import { connect } from 'react-redux';
 import { pickName, changePage } from '../actions';
 import arrowImg from '../image/arrow2.png';
-import arrowDisableImg from '../image/arrow-disable2.png';
+import doubleArrowImg from '../image/arrow3.png';
 
 
 const MainDiv = styled.div`
@@ -11,9 +11,10 @@ const MainDiv = styled.div`
   right:0;
   top:20vh;
   width:calc(100vw - 250px);
-  /* height:85vh; */
+  height:80vh;
+  border:5px solid black;
   background-color:white;
-  padding:10px;
+  padding:30px;
   box-sizing:border-box;
 `;
 
@@ -43,26 +44,32 @@ const InfoDiv = styled.div`
 
 const PageCtrlDiv = styled.div`
   height:60px;
-  width:240px;
-  border:1px solid black;
+  width:400px;
+  /* border:1px solid black; */
   display:inline-block;
   /* background:black; */
 `;
 
 const Arrow = styled.img`
-  content:url(${props => props.enable ? arrowImg : arrowDisableImg});
+  content:url(${arrowImg});
   height:40px;
   width:40px;
   transform:${props => props.dir ? 'rotate(180deg)' : 'rotate(0)'};
   cursor: pointer;
+  filter:${props => props.enable ? 'invert(0)' : 'invert(0.7)'};
   &:hover{
-    filter:${props => props.enable ? 'invert(0.2)' : 'invert(0)'};
+    filter:${props => props.enable ? 'invert(0.35)' : 'invert(0.7)'};
     transition:filter 200ms;
   }
 `;
+const DoubleArrow = styled(Arrow)`
+  content:url(${doubleArrowImg});
+  margin-left:20px;
+  margin-right:20px;
+`;
 
 const PageInfo = styled.div`
-  border:1px solid black;
+  /* border:1px solid black; */
   display:inline-block;
   margin-left:10px;
   margin-right:10px;
@@ -89,17 +96,25 @@ class Combination extends PureComponent {
           )
         })}
         <PageCtrlDiv>
+          <DoubleArrow
+            dir={true}
+            enable={this.props.currentPage !== 1}
+            onClick={() => this.props.currentPage !== 1 && this.props.changePage(false, true)} />
           <Arrow
             dir={true}
             enable={this.props.currentPage !== 1}
-            onClick={() => this.props.currentPage !== 1 && this.props.changePage(false)} />
+            onClick={() => this.props.currentPage !== 1 && this.props.changePage(false, false)} />
           <PageInfo>
             {`Page ${this.props.currentPage} of ${this.props.maxPage}`}
           </PageInfo>
           <Arrow
             dir={false}
             enable={this.props.currentPage !== this.props.maxPage}
-            onClick={() => this.props.currentPage !== this.props.maxPage && this.props.changePage(true)} />
+            onClick={() => this.props.currentPage !== this.props.maxPage && this.props.changePage(true, false)} />
+          <DoubleArrow
+            dir={false}
+            enable={this.props.currentPage !== this.props.maxPage}
+            onClick={() => this.props.currentPage !== this.props.maxPage && this.props.changePage(true, true)} />
         </PageCtrlDiv>
       </MainDiv >
     )
@@ -118,7 +133,7 @@ const mapStatetoProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     pickName: (str) => dispatch(pickName(str)),
-    changePage: (next) => dispatch(changePage(next))
+    changePage: (next, double) => dispatch(changePage(next, double))
   }
 }
 export default connect(mapStatetoProps, mapDispatchToProps)(Combination);

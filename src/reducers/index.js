@@ -154,7 +154,17 @@ const soReducer = (state = initState, action) => {
         currentPageResult: partOfResult,
       });
     case 'CHANGE_PAGE':
-      const page = action.next ? state.currentPage + 1 : state.currentPage - 1;
+      // const page = action.next ? state.currentPage + 1 : state.currentPage - 1;
+      let page;
+      if (action.double) {
+        if (action.next)
+          page = state.maxPage - state.currentPage < 10 ? state.maxPage : state.currentPage + 10;
+        else
+          page = state.currentPage <= 10 ? 1 : state.currentPage - 10;
+      }
+      else {
+        page = action.next ? state.currentPage + 1 : state.currentPage - 1;
+      }
       return Object.assign({}, state, {
         currentPage: page,
         currentPageResult: state.combinationResult.slice((page - 1) * pageDataCount, (page) * pageDataCount),

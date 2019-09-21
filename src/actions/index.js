@@ -47,10 +47,11 @@ export const pickName = (str) => {
     }
 }
 
-export const changePage = (next) => {
+export const changePage = (next, double) => {
     return {
         type: 'CHANGE_PAGE',
-        next
+        next,
+        double
     }
 }
 

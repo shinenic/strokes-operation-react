@@ -44,6 +44,7 @@ const Input = styled.input`
   padding: 5px 15px;
   background: #EEE;
   border: 0 none;
+  border-radius:0;
   border-right:1px solid black;
   width:${props => props.single ? '75%' : '37.5%'};
   height:30px;
@@ -55,6 +56,7 @@ const Button = styled.div`
   height:30px;
   line-height:30px;
   border: 0 none;
+  border-radius:0;
   background: #EEE;
   font-size:13px;
   color:rgb(0,0,0,0.9);
@@ -91,7 +93,7 @@ class Menu extends PureComponent {
           this.props.addCharacter(this.props.menuInput[1]);
           break;
         case 2:
-          this.props.combinationSearch(this.props.menuInput[2], this.props.menuInput[3]);
+          Number(this.props.menuInput[2]) > 0 && this.props.combinationSearch(this.props.menuInput[2], this.props.menuInput[3]);
           break;
         case 3:
           // this.props.searchStrokes(this.props.searchInput);

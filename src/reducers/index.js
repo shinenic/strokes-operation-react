@@ -105,16 +105,6 @@ const getMenuClassName = (num, pre, curClassName) => {
   return list;
 }
 
-const getNewPickList = (name, arr) => {
-  if (arr.includes(name)) {
-    let index = arr.indexOf(name);
-    arr.splice(index, 1);
-    return [...arr];
-  }
-  else {
-    return [...arr, name]
-  }
-}
 const handlePickedName = (obj, count, name) => {
   if (Object.keys(obj).includes(count)) {
     if (obj[count].includes(name)) {
@@ -139,9 +129,10 @@ const soReducer = (state = initState, action) => {
         searchResult: getAllStrokes(handleInputString(action.str))
       });
     case 'ADD_CHARACTER':
+      const character = getAllStrokes(handleInputString(action.str + Object.keys(state.character).join()));
       return Object.assign({}, state, {
-        character: getAllStrokes(handleInputString(action.str)),
-        groupChar: groupChar(getAllStrokes(handleInputString(action.str)))
+        character: character,
+        groupChar: groupChar(character)
       });
     case 'COMBINATION_SEARCH':
       const result = getCombination(action.num, state.groupChar, handleInputString(action.str));
@@ -154,7 +145,6 @@ const soReducer = (state = initState, action) => {
         currentPageResult: partOfResult,
       });
     case 'CHANGE_PAGE':
-      // const page = action.next ? state.currentPage + 1 : state.currentPage - 1;
       let page;
       if (action.double) {
         if (action.next)

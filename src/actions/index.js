@@ -47,12 +47,22 @@ export const pickName = (str) => {
     }
 }
 
+export const changePage = (next, double) => {
+    return {
+        type: 'CHANGE_PAGE',
+        next,
+        double
+    }
+}
+
 export const testTrigger = (tf) => {
     return {
         type: 'TEST_TRIGGER',
         tf
     }
 }
+
+
 
 // export const cleanClassName = num => {
 //     return {

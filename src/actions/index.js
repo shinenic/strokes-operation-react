@@ -19,6 +19,12 @@ export const addCharacter = str => {
         str
     }
 }
+export const deleteCharacter = str => {
+    return {
+        type: 'DELETE_CHARACTER',
+        str
+    }
+}
 export const combinationSearch = (num, str) => {
     return {
         type: 'COMBINATION_SEARCH',

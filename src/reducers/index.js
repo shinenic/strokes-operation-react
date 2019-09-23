@@ -50,10 +50,32 @@ const handleInputString = str => {
 
 const getAllStrokes = arr => {
   let obj = {};
-  for (let i = 0; i < arr.length; i++) {
-    obj[arr[i]] = arr[i].getStrokes();
-  }
+  arr.map(char => {
+    obj[char] = char.getStrokes();
+  })
   return obj;
+}
+
+const removeChar = (stateCharacter, charArr) => {
+  let result = Object.assign({}, stateCharacter);
+  charArr.map(char => {
+    delete result[char];
+  })
+  return result;
+}
+
+const removeCharFromPickedName = (pickedComb, charArr) => {
+  if (pickedComb === {})
+    return {};
+  let result = Object.assign({}, pickedComb);
+  charArr.map(char => {
+    Object.keys(result).map(stroke => {
+      result[stroke] = result[stroke].filter(name => {
+        return !name.includes(char)
+      })
+    })
+  })
+  return result;
 }
 
 const groupChar = obj => {
@@ -94,12 +116,12 @@ const getCombination = (num, groupChar, filterChrArr) => {
   }
   return result;
 };
-const getMenuClassName = (num, pre, curClassName) => {
+const getMenuClassName = (num, pre, currentClassName) => {
   let list = ["", "", "", ""];
   if (pre != -1) {
     list[pre] = "closeDiv";
   }
-  if (curClassName === "closeDiv" || curClassName === "") {
+  if (currentClassName === "closeDiv" || currentClassName === "") {
     list[num] = "openDiv";
   }
   return list;
@@ -133,6 +155,13 @@ const soReducer = (state = initState, action) => {
       return Object.assign({}, state, {
         character: character,
         groupChar: groupChar(character)
+      });
+    case 'DELETE_CHARACTER':
+      const deletedCharacter = removeChar(state.character, handleInputString(action.str));
+      return Object.assign({}, state, {
+        character: deletedCharacter,
+        groupChar: groupChar(deletedCharacter),
+        pickedComb: removeCharFromPickedName(state.pickedComb, handleInputString(action.str))
       });
     case 'COMBINATION_SEARCH':
       const result = getCombination(action.num, state.groupChar, handleInputString(action.str));

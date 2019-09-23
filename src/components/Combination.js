@@ -14,7 +14,7 @@ const MainDiv = styled.div`
   height:80vh;
   border:5px solid black;
   background-color:white;
-  padding:30px;
+  padding:10px 30px 0 30px;
   box-sizing:border-box;
 `;
 
@@ -23,19 +23,25 @@ const Button = styled.div`
   width:7.13%;
   box-sizing:border-box;
   display:inline-block;
-  padding-top:3px;
-  padding-bottom:3px;
+  padding-top:3.5px;
+  padding-bottom:3.5px;
   text-align:center;
   cursor: pointer;
   color:${props => props.picked ? 'white' : 'black'};
   font-weight:${props => props.picked ? 'bold' : 'normal'};
+  background: ${props => props.picked ? 'black' : 'white'};
+  user-select: none;
+  -webkit-touch-callout: none;
   &:hover{
     background: ${props => props.picked ? '#666' : '#DDD'};
   }
-  background: ${props => props.picked ? 'black' : 'white'};
-  /* @media (max-width: 700px) {
-        background: green;
-    } */
+`;
+
+const CheckBtn = styled.div`
+  display:inline-block;
+  margin:auto 5px auto 5px;
+  cursor:pointer;
+  color:blue;
 `;
 
 const InfoDiv = styled.div`
@@ -57,7 +63,6 @@ const Arrow = styled.img`
   content:url(${arrowImg});
   height:40px;
   width:40px;
-  
   cursor: pointer;
   filter:${props => props.enable ? 'invert(0)' : 'invert(0.7)'};
   position: absolute;
@@ -75,11 +80,7 @@ const DoubleArrow = styled(Arrow)`
 `;
 
 const PageInfo = styled.div`
-  /* border:1px solid black; */
   display:inline-block;
-  /* margin-left:10px;
-  margin-right:10px; */
-  /* vertical-align: middle; */
   position: absolute;
   top:50%;
   left: 50%;
@@ -95,7 +96,9 @@ class Combination extends PureComponent {
         <InfoDiv>
           {`查詢總筆畫: ${this.props.combinationFilter.count}`}
           {this.props.combinationFilter.filter !== "" && `, 包含 '${this.props.combinationFilter.filter}'`}
-          {` 的結果共有 ${this.props.combinationResult.length} 筆結果`}
+          {`, 的結果共有 ${this.props.combinationResult.length} 筆結果`}
+          {this.props.pickedComb[this.props.combinationFilter.count] && `, 目前已選擇 ${this.props.pickedComb[this.props.combinationFilter.count].length} 筆組合`}
+          <CheckBtn>輸出</CheckBtn>
         </InfoDiv>
         {this.props.currentPageResult.map((value, index) => {
           return (

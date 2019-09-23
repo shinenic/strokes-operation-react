@@ -4,7 +4,7 @@ import "../styles/MenuAnimation.css";
 import demoData from '../data/demoData';
 import menuIcon from '../image/menuIcon.png';
 import { connect } from 'react-redux';
-import { searchStrokes, handleInput, addCharacter, combinationSearch, inputTextChange, cleanAllInput } from '../actions';
+import { searchStrokes, handleInput, addCharacter, deleteCharacter, combinationSearch, inputTextChange, cleanAllInput } from '../actions';
 
 const MenuDiv = styled.div`
   position:absolute;
@@ -93,10 +93,11 @@ class Menu extends PureComponent {
           this.props.addCharacter(this.props.menuInput[1]);
           break;
         case 2:
-          Number(this.props.menuInput[2]) > 0 && this.props.combinationSearch(this.props.menuInput[2], this.props.menuInput[3]);
+          Number(this.props.menuInput[2]) > 0 && this.props.combinationSearch(this.props.menuInput[2], this.props.menuInput[4]);
           break;
         case 3:
-          // this.props.searchStrokes(this.props.searchInput);
+          this.props.deleteCharacter(this.props.menuInput[3]);
+          //執行完後畫面應該切回主畫面
           break;
         case 8:
           this.props.addCharacter(demoData);
@@ -149,9 +150,9 @@ class Menu extends PureComponent {
                     <Input type="text"
                       single={index !== 2}
                       placeholder={value['hintcont']}
-                      value={this.props.menuInput[index + 1]}
+                      value={this.props.menuInput[index + 2]}
                       onKeyPress={e => this.handleKeyPress(e, index)}
-                      onChange={e => this.props.handleInput(e.target.value, index + 1)} />}
+                      onChange={e => this.props.handleInput(e.target.value, index + 2)} />}
                   <Button onClick={() => this.handleKeyPress(null, index)}>{value['buttonName']}</Button>
                 </TextInput>}
             </div>
@@ -173,6 +174,7 @@ const mapDispatchToProps = dispatch => {
     searchStrokes: str => dispatch(searchStrokes(str)),
     combinationSearch: (num, str) => dispatch(combinationSearch(num, str)),
     addCharacter: str => dispatch(addCharacter(str)),
+    deleteCharacter: str => dispatch(deleteCharacter(str)),
     handleInput: (value, inputOption) => dispatch(handleInput(value, inputOption)),
     inputTextChange: num => dispatch(inputTextChange(num)),
     cleanAllInput: () => dispatch(cleanAllInput())

@@ -142,7 +142,7 @@ const handlePickedName = (obj, count, name) => {
   }
   return Object.assign({}, obj);
 }
-const pageDataCount = 210;
+const PAGE_DATA_COUNT = 210;
 
 const soReducer = (state = initState, action) => {
   switch (action.type) {
@@ -165,11 +165,11 @@ const soReducer = (state = initState, action) => {
       });
     case 'COMBINATION_SEARCH':
       const result = getCombination(action.num, state.groupChar, handleInputString(action.str));
-      const partOfResult = result.slice(0, pageDataCount);
+      const partOfResult = result.slice(0, PAGE_DATA_COUNT);
       return Object.assign({}, state, {
         combinationResult: result,
         combinationFilter: { count: state.menuInput[2], filter: state.menuInput[3] },
-        maxPage: Math.floor(result.length / pageDataCount) + 1,
+        maxPage: Math.floor(result.length / PAGE_DATA_COUNT) + 1,
         currentPage: 1,
         currentPageResult: partOfResult,
       });
@@ -186,12 +186,10 @@ const soReducer = (state = initState, action) => {
       }
       return Object.assign({}, state, {
         currentPage: page,
-        currentPageResult: state.combinationResult.slice((page - 1) * pageDataCount, (page) * pageDataCount),
+        currentPageResult: state.combinationResult.slice((page - 1) * PAGE_DATA_COUNT, (page) * PAGE_DATA_COUNT),
       });
     case 'PICK_NAME':
       return Object.assign({}, state, {
-        // pickedComb: [...state.pickedComb, action.str]
-        // pickedComb: getNewPickList(action.str, state.pickedComb),
         pickedComb: handlePickedName(state.pickedComb, state.combinationFilter.count, action.str)
       });
     case 'INPUT_TEXT_CHANGE':

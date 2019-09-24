@@ -7,13 +7,11 @@ import { connect } from 'react-redux';
 import { searchStrokes, handleInput, addCharacter, deleteCharacter, combinationSearch, inputTextChange, cleanAllInput } from '../actions';
 
 const MenuDiv = styled.div`
-  position:absolute;
-  left:0;
-  top:0;
-  height:100vh;
-  /* width:20vw; */
-  width:250px;
+  grid-area: menu;
   background-color:rgb(49,54,66);
+  @media (max-width: 500px){
+    display:none;
+  }
 `;
 
 const Text = styled.div`
@@ -22,7 +20,7 @@ const Text = styled.div`
   height:50px;
   padding-left:10%;
   font-size:16px;
-  color:rgb(255,255,255,0.9);
+  color:rgb(230,230,230);
   line-height:50px;
   cursor: pointer;
   background:${props => props.picked ? '#E44C70' : '#313642'};
@@ -38,7 +36,7 @@ const TextInput = styled.div`
   padding-left:9%;
   box-sizing: border-box;
   overflow: hidden;
-  color:rgb(255,255,255,0.9);
+  color:rgb(230,230,230);
 `;
 const Input = styled.input`
   padding: 5px 15px;
@@ -59,7 +57,7 @@ const Button = styled.div`
   border-radius:0;
   background: #EEE;
   font-size:13px;
-  color:rgb(0,0,0,0.9);
+  color:rgb(13,13,13);
   padding-left:5px;
   padding-right:5px;
   cursor: pointer;

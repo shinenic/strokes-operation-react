@@ -28,6 +28,8 @@ const initState = {
   currentPage: 1,
   currentPageResult: [""],
 
+  //畫面控制
+  view: 1,
 
   //test
   test: true
@@ -168,7 +170,7 @@ const soReducer = (state = initState, action) => {
       const partOfResult = result.slice(0, PAGE_DATA_COUNT);
       return Object.assign({}, state, {
         combinationResult: result,
-        combinationFilter: { count: state.menuInput[2], filter: state.menuInput[3] },
+        combinationFilter: { count: state.menuInput[2], filter: state.menuInput[4] },
         maxPage: Math.floor(result.length / PAGE_DATA_COUNT) + 1,
         currentPage: 1,
         currentPageResult: partOfResult,

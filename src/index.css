@@ -1,4 +1,4 @@
-body {
+html, body, #root {
   margin: 0px;
   padding: 0px;
   font-family: Arial, "文泉驛正黑", "WenQuanYi Zen Hei", "儷黑 Pro", "LiHei Pro",
@@ -8,6 +8,11 @@ body {
   /* height:1000px; */
   position: relative;
   background: white;
+  height: 100%;
+  height: -moz-available;          /* WebKit-based browsers will ignore this. */
+  height: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+  /* height: 100vh; */
+  width:100%;
 }
 input {
   font-family: Arial, "文泉驛正黑", "WenQuanYi Zen Hei", "儷黑 Pro", "LiHei Pro",

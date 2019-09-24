@@ -1,12 +1,29 @@
 import React, { PureComponent } from 'react'
 
 import Menu from './Menu';
-import Content from './Content';
+import Header from './Header';
+import MainInfo from './MainInfo';
+import Combination from './Combination';
 import styled, { keyframes } from 'styled-components';
 
 import { connect } from 'react-redux';
 // import { setTopCard, updateWindowSize } from '../actions';
 import { Route } from 'react-router-dom';
+
+const GridContainer = styled.div`
+  height:100%;
+  width:100%;
+  display:grid;
+  box-sizing:border-box;
+  grid-template-columns:250px 1fr;
+  grid-template-rows:80px 60px 1fr;
+  grid-template-areas:"menu header"
+                      "menu mainInfo"
+                      "menu main";
+`;
+const Main = styled.div`
+  grid-area: main;
+`;
 
 
 
@@ -15,22 +32,16 @@ import { Route } from 'react-router-dom';
 class Index extends PureComponent {
   render() {
     return (
-      <div>
-        {/* <Route exact path="/"
-          render={() => {
-            return (
-              <List />
-            );
-          }} />
-        <Route exact path="/search"
-          render={() => {
-            return (
-              <ResultCard />
-            );
-          }} /> */}
+      <GridContainer>
+        <Header />
         <Menu />
-        <Content />
-      </div>
+        <MainInfo />
+        <Main>
+          <Combination />
+        </Main>
+        {/* <Menu />
+        <Content /> */}
+      </GridContainer>
     )
   }
 }

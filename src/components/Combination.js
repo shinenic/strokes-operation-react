@@ -57,12 +57,12 @@ class Combination extends PureComponent {
   }
 }
 
-const mapStatetoProps = state => {
+const mapStateToProps = state => {
   return {
-    currentPageResult: state.currentPageResult,
-    pickedComb: state.pickedComb,
-    combinationResult: state.combinationResult,
-    combinationFilter: state.combinationFilter,
+    currentPageResult: state.defaultReducer.currentPageResult,
+    pickedComb: state.defaultReducer.pickedComb,
+    combinationResult: state.defaultReducer.combinationResult,
+    combinationFilter: state.defaultReducer.combinationFilter,
   }
 }
 const mapDispatchToProps = dispatch => {
@@ -70,4 +70,4 @@ const mapDispatchToProps = dispatch => {
     pickName: (str) => dispatch(pickName(str)),
   }
 }
-export default connect(mapStatetoProps, mapDispatchToProps)(Combination);
+export default connect(mapStateToProps, mapDispatchToProps)(Combination);

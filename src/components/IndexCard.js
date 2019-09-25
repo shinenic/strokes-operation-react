@@ -33,7 +33,8 @@ const Image = styled.img`
   content:url(${props => CardImg[props.cardIndex]});
   height:67%;
   width:67%;
-  filter:invert(1);
+  transition: 0.3s;
+  filter:invert(0.9);
   position:absolute;
   left:50%;
   top:50%;
@@ -90,6 +91,9 @@ const Card = styled.div`
   &:hover ${ImgBorder} {
     height:80px;
     width:80px;
+  }
+  &:hover ${Image} {
+    filter:invert(1);
   }
 `;
 
@@ -159,10 +163,10 @@ class IndexCard extends PureComponent {
     )
   }
 }
-const mapStatetoProps = state => {
+const mapStateToProps = state => {
   return {
-    character: state.character,
-    pickedComb: state.pickedComb
+    character: state.defaultReducer.character,
+    pickedComb: state.defaultReducer.pickedComb
   }
 }
 const mapDispatchToProps = dispatch => {
@@ -170,4 +174,4 @@ const mapDispatchToProps = dispatch => {
     cleanAllInput: () => dispatch(cleanAllInput())
   }
 }
-export default connect(mapStatetoProps, mapDispatchToProps)(IndexCard);
+export default connect(mapStateToProps, mapDispatchToProps)(IndexCard);

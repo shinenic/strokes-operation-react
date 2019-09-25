@@ -69,9 +69,9 @@ class Header extends PureComponent {
     )
   }
 }
-const mapStatetoProps = state => {
+const mapStateToProps = state => {
   return {
-    character: state.character,
+    character: state.defaultReducer.character,
   }
 }
 const mapDispatchToProps = dispatch => {
@@ -79,4 +79,4 @@ const mapDispatchToProps = dispatch => {
     cleanAllInput: () => dispatch(cleanAllInput())
   }
 }
-export default connect(mapStatetoProps, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

@@ -10,7 +10,6 @@ import IndexCard from './IndexCard';
 import styled, { keyframes } from 'styled-components';
 import { connect } from 'react-redux';
 // import { setTopCard, updateWindowSize } from '../actions';
-import { Route } from 'react-router-dom';
 
 const GridContainer = styled.div`
   height:100%;
@@ -34,6 +33,16 @@ const Main = styled.div`
 
 
 class Index extends PureComponent {
+  constructor() {
+    super();
+  }
+  componentDidUpdate = (e) => {
+    if (false) {
+      window.onbeforeunload = () => true
+    } else {
+      window.onbeforeunload = undefined
+    }
+  }
   render() {
     const renderView = (view) => {
       switch (view) {
@@ -57,6 +66,7 @@ class Index extends PureComponent {
         <Main>
           {renderView(this.props.view)}
         </Main>
+        {/* <Prompt message="?_?" when={true} /> */}
         {/* <Menu />
         <Content /> */}
       </GridContainer>

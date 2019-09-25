@@ -96,7 +96,10 @@ class Menu extends PureComponent {
           break;
         case 3:
           this.props.deleteCharacter(this.props.menuInput[3]);
-          //執行完後畫面應該切回主畫面
+          this.props.changeView("INDEX")
+          break;
+        case 4:
+          this.props.changeView("OVERVIEW")
           break;
         case 8:
           this.props.addCharacter(demoData);

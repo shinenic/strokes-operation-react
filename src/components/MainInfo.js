@@ -58,6 +58,12 @@ class MainInfo extends PureComponent {
               {`首頁    >>    `}
             </Text>
           )
+        case "OVERVIEW":
+          return (
+            <Text key={3}>
+              {`單字總覽    >>    `}
+            </Text>
+          )
         default:
           return (
             <Text key={2}>

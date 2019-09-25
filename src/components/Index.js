@@ -3,6 +3,7 @@ import React, { PureComponent } from 'react';
 import Menu from './Menu';
 import Header from './Header';
 import MainInfo from './MainInfo';
+import Overview from './Overview';
 import Combination from './Combination';
 import IndexCard from './IndexCard';
 import styled, { keyframes } from 'styled-components';
@@ -23,6 +24,8 @@ const GridContainer = styled.div`
 `;
 const Main = styled.div`
   grid-area: main;
+  width:100%;
+  height:100%;
 `;
 
 
@@ -37,6 +40,8 @@ class Index extends PureComponent {
           return <IndexCard />;
         case "SEARCH_COMBINATION":
           return <Combination />;
+        case "OVERVIEW":
+          return <Overview />;
         default:
           return <IndexCard />;
       }

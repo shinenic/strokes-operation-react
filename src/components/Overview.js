@@ -68,9 +68,9 @@ class Overview extends PureComponent {
   }
 }
 
-const mapStatetoProps = state => {
+const mapStateToProps = state => {
   return {
-    groupChar: state.groupChar,
+    groupChar: state.defaultReducer.groupChar,
   }
 }
 const mapDispatchToProps = dispatch => {
@@ -78,4 +78,4 @@ const mapDispatchToProps = dispatch => {
     // pickName: (str) => dispatch(pickName(str)),
   }
 }
-export default connect(mapStatetoProps, mapDispatchToProps)(Overview);
+export default connect(mapStateToProps, mapDispatchToProps)(Overview);

@@ -105,11 +105,11 @@ class PageCtrl extends PureComponent {
     )
   }
 }
-const mapStatetoProps = state => {
+const mapStateToProps = state => {
   return {
-    maxPage: state.maxPage,
-    currentPage: state.currentPage,
-    combinationResult: state.combinationResult,
+    maxPage: state.defaultReducer.maxPage,
+    currentPage: state.defaultReducer.currentPage,
+    combinationResult: state.defaultReducer.combinationResult,
   }
 }
 const mapDispatchToProps = dispatch => {
@@ -117,4 +117,4 @@ const mapDispatchToProps = dispatch => {
     changePage: (next, double) => dispatch(changePage(next, double))
   }
 }
-export default connect(mapStatetoProps, mapDispatchToProps)(PageCtrl);
+export default connect(mapStateToProps, mapDispatchToProps)(PageCtrl);

@@ -4,6 +4,7 @@ import "../styles/MenuAnimation.css";
 import demoData from '../data/demoData';
 import menuIcon from '../image/menuIcon.png';
 import { connect } from 'react-redux';
+import { toastr } from 'react-redux-toastr';
 import { searchStrokes, handleInput, addCharacter, deleteCharacter, combinationSearch, inputTextChange, cleanAllInput, changeView } from '../actions';
 
 const MenuDiv = styled.div`
@@ -168,11 +169,11 @@ class Menu extends PureComponent {
     )
   }
 }
-const mapStatetoProps = state => {
+const mapStateToProps = state => {
   return {
-    inputTextSelect: state.inputTextSelect,
-    menuClassName: state.menuClassName,
-    menuInput: state.menuInput
+    inputTextSelect: state.defaultReducer.inputTextSelect,
+    menuClassName: state.defaultReducer.menuClassName,
+    menuInput: state.defaultReducer.menuInput
   }
 }
 const mapDispatchToProps = dispatch => {
@@ -188,4 +189,4 @@ const mapDispatchToProps = dispatch => {
     // cleanClassName: num => dispatch(cleanClassName(num))
   }
 }
-export default connect(mapStatetoProps, mapDispatchToProps)(Menu);
+export default connect(mapStateToProps, mapDispatchToProps)(Menu);

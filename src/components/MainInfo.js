@@ -81,12 +81,12 @@ class MainInfo extends PureComponent {
     )
   }
 }
-const mapStatetoProps = state => {
+const mapStateToProps = state => {
   return {
-    pickedComb: state.pickedComb,
-    combinationResult: state.combinationResult,
-    combinationFilter: state.combinationFilter,
-    view: state.view
+    pickedComb: state.defaultReducer.pickedComb,
+    combinationResult: state.defaultReducer.combinationResult,
+    combinationFilter: state.defaultReducer.combinationFilter,
+    view: state.defaultReducer.view
   }
 }
 const mapDispatchToProps = dispatch => {
@@ -94,4 +94,4 @@ const mapDispatchToProps = dispatch => {
     cleanAllInput: () => dispatch(cleanAllInput())
   }
 }
-export default connect(mapStatetoProps, mapDispatchToProps)(MainInfo);
+export default connect(mapStateToProps, mapDispatchToProps)(MainInfo);

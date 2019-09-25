@@ -1,4 +1,6 @@
 import dataStrokes from '../data/dataStrokes';
+import { combineReducers } from 'redux';
+import { reducer as toastrReducer } from 'react-redux-toastr';
 
 const initState = {
   character: {},
@@ -144,7 +146,7 @@ const handlePickedName = (obj, count, name) => {
 }
 const PAGE_DATA_COUNT = 210;
 
-const soReducer = (state = initState, action) => {
+const defaultReducer = (state = initState, action) => {
   switch (action.type) {
     case 'SEARCH_STROKES':
       return Object.assign({}, state, {
@@ -222,4 +224,10 @@ const soReducer = (state = initState, action) => {
   }
 }
 
-export default soReducer;
+const reducers = {
+  defaultReducer,// ... other reducers ...
+  toastr: toastrReducer // <- Mounted at toastr.
+}
+const reducer = combineReducers(reducers)
+
+export default reducer;

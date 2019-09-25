@@ -61,10 +61,10 @@ class Index extends PureComponent {
   }
 }
 
-const mapStatetoProps = state => {
+const mapStateToProps = state => {
   return {
-    menuState: state.menuState,
-    view: state.view
+    menuState: state.defaultReducer.menuState,
+    view: state.defaultReducer.view
   }
 }
 const mapDispatchToProps = dispatch => {
@@ -72,4 +72,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStatetoProps, mapDispatchToProps)(Index);
+export default connect(mapStateToProps, mapDispatchToProps)(Index);

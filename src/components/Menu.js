@@ -67,11 +67,15 @@ const Button = styled.div`
 `;
 const MenuImg = styled.img`
   content:url(${menuIcon});
+  transition: 0.3s;
   height:60px;
   width:60px;
   padding:27px 95px 27px 95px;
-  filter:invert(1);
+  filter:invert(0.8);
   cursor:pointer;
+  &:hover{
+    filter:invert(1);
+  }
 `;
 
 

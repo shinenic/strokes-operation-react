@@ -2,8 +2,8 @@ import React, { PureComponent } from 'react'
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { changePage } from '../actions';
-import arrowImg from '../image/arrow2.png';
-import doubleArrowImg from '../image/arrow3.png';
+import arrowImg from '../image/pageCtrl/arrow2.png';
+import doubleArrowImg from '../image/pageCtrl/arrow3.png';
 
 
 const PageCtrlDiv = styled.div`

@@ -4,8 +4,8 @@ import Menu from './Menu';
 import Header from './Header';
 import MainInfo from './MainInfo';
 import Combination from './Combination';
+import IndexCard from './IndexCard';
 import styled, { keyframes } from 'styled-components';
-
 import { connect } from 'react-redux';
 // import { setTopCard, updateWindowSize } from '../actions';
 import { Route } from 'react-router-dom';
@@ -34,11 +34,11 @@ class Index extends PureComponent {
     const renderView = (view) => {
       switch (view) {
         case "INDEX":
-          return null;
+          return <IndexCard />;
         case "SEARCH_COMBINATION":
           return <Combination />;
         default:
-          return null;
+          return <IndexCard />;
       }
     }
     return (

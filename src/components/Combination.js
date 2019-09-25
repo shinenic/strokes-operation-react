@@ -10,7 +10,6 @@ const MainDiv = styled.div`
   padding:40px;
   height:100%;
   width:100%;
-  background-color:white;
   box-sizing:border-box;
   position:relative;
   animation: ${ShowDivAni} 0.7s 1 both 0.4s;
@@ -27,7 +26,7 @@ const Button = styled.div`
   cursor: pointer;
   color:${props => props.picked ? 'white' : '#212B35'};
   font-weight:${props => props.picked ? 'bold' : 'normal'};
-  background: ${props => props.picked ? 'black' : 'white'};
+  background: ${props => props.picked ? 'black' : ''};
   user-select: none;
   -webkit-touch-callout: none;
   &:hover{

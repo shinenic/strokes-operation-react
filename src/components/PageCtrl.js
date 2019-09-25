@@ -31,7 +31,7 @@ const Arrow = styled.img`
   width:32px;
   cursor: pointer;
   filter:${props => props.enable ? 'invert(0)' : 'invert(0.7)'};
-  transform:${props => props.dir ? 'scaleX(-1)' : ''};
+  transform:${props => props.dir === "next" ? 'scaleX(-1)' : ''};
   display: grid;
   justify-content: center;
   align-items: center;
@@ -63,28 +63,28 @@ class PageCtrl extends PureComponent {
       <PageCtrlDiv>
         <GridDiv dir={'doubleArrow'}>
           <DoubleArrow
-            dir={true}
+            dir={"next"}
             enable={this.props.currentPage !== 1}
             onClick={() => this.props.currentPage !== 1 && this.props.changePage(false, true)} />
         </GridDiv>
 
         <GridDiv dir={'arrow'}>
           <Arrow
-            dir={true}
+            dir={"next"}
             enable={this.props.currentPage !== 1}
             onClick={() => this.props.currentPage !== 1 && this.props.changePage(false, false)} />
         </GridDiv>
 
         <GridDiv dir={'arrowNext'}>
           <Arrow
-            dir={false}
+            dir={"pre"}
             enable={this.props.currentPage !== this.props.maxPage}
             onClick={() => this.props.currentPage !== this.props.maxPage && this.props.changePage(true, false)} />
         </GridDiv>
 
         <GridDiv dir={'doubleArrowNext'}>
           <DoubleArrow
-            dir={false}
+            dir={"pre"}
             enable={this.props.currentPage !== this.props.maxPage}
             onClick={() => this.props.currentPage !== this.props.maxPage && this.props.changePage(true, true)} />
         </GridDiv>

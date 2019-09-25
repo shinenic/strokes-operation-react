@@ -126,7 +126,7 @@ class Menu extends PureComponent {
         <MenuImg onClick={() => this.props.changeView("")} />
         {inputList.map((value, index) => {
           return (
-            <div>
+            <div key={index}>
               <Text
                 key={index}
                 picked={this.props.inputTextSelect === index}

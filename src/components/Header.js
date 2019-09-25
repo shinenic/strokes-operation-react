@@ -6,7 +6,7 @@ import { cleanAllInput } from '../actions';
 
 const HeaderDiv = styled.div`
   grid-area: header;
-  background-color:rgb(39,45,54);
+  background:rgb(39,45,54);
 `;
 const GridContainer = styled.div`
   height:100%;

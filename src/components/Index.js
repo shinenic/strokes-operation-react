@@ -5,6 +5,7 @@ import Header from './Header';
 import MainInfo from './MainInfo';
 import Overview from './Overview';
 import Combination from './Combination';
+import PickedOutput from './PickedOutput';
 import IndexCard from './IndexCard';
 import styled, { keyframes } from 'styled-components';
 import { connect } from 'react-redux';
@@ -42,6 +43,8 @@ class Index extends PureComponent {
           return <Combination />;
         case "OVERVIEW":
           return <Overview />;
+        case "PICKED_OUTPUT":
+          return <PickedOutput />;
         default:
           return <IndexCard />;
       }

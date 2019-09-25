@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import styled from 'styled-components';
 import { ShowDivAni } from '../styles/AnimationStyled';
 import { connect } from 'react-redux';
-import { cleanAllInput } from '../actions';
+import { changeView } from '../actions';
 
 
 const MainInfoDiv = styled.div`
@@ -42,6 +42,7 @@ class MainInfo extends PureComponent {
       const { combinationResult, pickedComb } = this.props;
 
       switch (view) {
+        case "PICKED_OUTPUT":
         case "SEARCH_COMBINATION":
           return (<Text key={1}>
             {`查詢筆劃組合    >>    `}
@@ -57,7 +58,9 @@ class MainInfo extends PureComponent {
                   ? pickedComb[count].filter(value => value.includes(filter)).length : 0} 筆`}
             </HighLight>
             {pickedComb[count] && `組合`}
-            <CheckBtn>輸出</CheckBtn>
+            <CheckBtn onClick={() => this.props.changeView(view === "SEARCH_COMBINATION" ? "PICKED_OUTPUT" : "SEARCH_COMBINATION")}>
+              {view === "SEARCH_COMBINATION" ? `輸出` : `編輯`}
+            </CheckBtn>
           </Text>)
         case "INDEX":
           return (
@@ -98,7 +101,7 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
   return {
-    cleanAllInput: () => dispatch(cleanAllInput())
+    changeView: str => dispatch(changeView(str))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(MainInfo);

@@ -1,6 +1,4 @@
-import matchSorter from 'match-sorter';
 import dataStrokes from '../data/dataStrokes';
-// import demoData from '../data/demoData';
 
 const initState = {
   character: {},
@@ -29,7 +27,7 @@ const initState = {
   currentPageResult: [""],
 
   //畫面控制
-  view: 1,
+  view: "",
 
   //test
   test: true
@@ -99,7 +97,7 @@ const getCombination = (num, groupChar, filterChrArr) => {
   let result = [];
   for (let i = 1; i < num; i++) {
     if (i.toString() in groupChar && (num - i).toString() in groupChar) {
-      //如果有該兩種筆畫的單字時
+      //如果有該兩種筆劃的單字時
       for (let x = 0; x < groupChar[i.toString()].length; x++) {
         for (let y = 0; y < groupChar[(num - i).toString()].length; y++) {
           let name = groupChar[i.toString()][x] + groupChar[(num - i).toString()][y];
@@ -163,7 +161,8 @@ const soReducer = (state = initState, action) => {
       return Object.assign({}, state, {
         character: deletedCharacter,
         groupChar: groupChar(deletedCharacter),
-        pickedComb: removeCharFromPickedName(state.pickedComb, handleInputString(action.str))
+        pickedComb: removeCharFromPickedName(state.pickedComb, handleInputString(action.str)),
+        view: ""
       });
     case 'COMBINATION_SEARCH':
       const result = getCombination(action.num, state.groupChar, handleInputString(action.str));
@@ -174,6 +173,7 @@ const soReducer = (state = initState, action) => {
         maxPage: Math.floor(result.length / PAGE_DATA_COUNT) + 1,
         currentPage: 1,
         currentPageResult: partOfResult,
+        view: "SEARCH_COMBINATION"
       });
     case 'CHANGE_PAGE':
       let page;
@@ -189,6 +189,10 @@ const soReducer = (state = initState, action) => {
       return Object.assign({}, state, {
         currentPage: page,
         currentPageResult: state.combinationResult.slice((page - 1) * PAGE_DATA_COUNT, (page) * PAGE_DATA_COUNT),
+      });
+    case 'CHANGE_VIEW':
+      return Object.assign({}, state, {
+        view: action.str
       });
     case 'PICK_NAME':
       return Object.assign({}, state, {

@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
+import { ShowDivAni } from '../styles/AnimationStyled';
 import { connect } from 'react-redux';
 import PageCtrl from './PageCtrl';
 import { pickName } from '../actions';
@@ -12,6 +13,7 @@ const MainDiv = styled.div`
   background-color:white;
   box-sizing:border-box;
   position:relative;
+  animation: ${ShowDivAni} 0.7s 1 both 0.4s;
 `;
 
 //目前顯示個數14*15
@@ -37,7 +39,7 @@ const Button = styled.div`
 class Combination extends PureComponent {
   render() {
     return (
-      <MainDiv>
+      <MainDiv key={this.props.combinationFilter.count}>
         {this.props.currentPageResult.map((value, index) => {
           return (
             <Button

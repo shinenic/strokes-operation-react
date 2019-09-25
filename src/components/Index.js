@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent } from 'react';
 
 import Menu from './Menu';
 import Header from './Header';
@@ -31,13 +31,23 @@ const Main = styled.div`
 
 class Index extends PureComponent {
   render() {
+    const renderView = (view) => {
+      switch (view) {
+        case "INDEX":
+          return null;
+        case "SEARCH_COMBINATION":
+          return <Combination />;
+        default:
+          return null;
+      }
+    }
     return (
       <GridContainer>
         <Header />
         <Menu />
         <MainInfo />
         <Main>
-          <Combination />
+          {renderView(this.props.view)}
         </Main>
         {/* <Menu />
         <Content /> */}
@@ -48,11 +58,8 @@ class Index extends PureComponent {
 
 const mapStatetoProps = state => {
   return {
-    windowHeight: state.windowHeight,
-    windowWidth: state.windowWidth,
     menuState: state.menuState,
-    isFetchingNewest: state.isFetchingNewest,
-    listDisplay: state.listDisplay
+    view: state.view
   }
 }
 const mapDispatchToProps = dispatch => {

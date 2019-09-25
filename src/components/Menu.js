@@ -4,7 +4,7 @@ import "../styles/MenuAnimation.css";
 import demoData from '../data/demoData';
 import menuIcon from '../image/menuIcon.png';
 import { connect } from 'react-redux';
-import { searchStrokes, handleInput, addCharacter, deleteCharacter, combinationSearch, inputTextChange, cleanAllInput } from '../actions';
+import { searchStrokes, handleInput, addCharacter, deleteCharacter, combinationSearch, inputTextChange, cleanAllInput, changeView } from '../actions';
 
 const MenuDiv = styled.div`
   grid-area: menu;
@@ -110,7 +110,7 @@ class Menu extends PureComponent {
 
   render() {
     const inputList = [
-      { option: "查詢筆畫", hint: "請輸入中文字(可多筆)", buttonName: "查詢" },
+      { option: "查詢筆劃", hint: "請輸入中文字(可多筆)", buttonName: "查詢" },
       { option: "增加單字", hint: "請輸入中文字(可多筆)", buttonName: "增加" },
       { option: "查詢筆劃組合", hint: "總筆劃數", hintcont: "單字", buttonName: "查詢" },
       { option: "移除單字", hint: "欲刪除之文字", buttonName: "移除" },
@@ -123,7 +123,7 @@ class Menu extends PureComponent {
     ];
     return (
       <MenuDiv>
-        <MenuImg />
+        <MenuImg onClick={() => this.props.changeView("")} />
         {inputList.map((value, index) => {
           return (
             <div>
@@ -175,7 +175,8 @@ const mapDispatchToProps = dispatch => {
     deleteCharacter: str => dispatch(deleteCharacter(str)),
     handleInput: (value, inputOption) => dispatch(handleInput(value, inputOption)),
     inputTextChange: num => dispatch(inputTextChange(num)),
-    cleanAllInput: () => dispatch(cleanAllInput())
+    cleanAllInput: () => dispatch(cleanAllInput()),
+    changeView: str => dispatch(changeView(str))
     // cleanClassName: num => dispatch(cleanClassName(num))
   }
 }

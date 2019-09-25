@@ -60,6 +60,12 @@ export const changePage = (next, double) => {
         double
     }
 }
+export const changeView = (str) => {
+    return {
+        type: 'CHANGE_VIEW',
+        str
+    }
+}
 
 export const testTrigger = (tf) => {
     return {

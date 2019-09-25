@@ -71,6 +71,7 @@ const MenuImg = styled.img`
   width:60px;
   padding:27px 95px 27px 95px;
   filter:invert(1);
+  cursor:pointer;
 `;
 
 

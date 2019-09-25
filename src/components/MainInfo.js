@@ -38,18 +38,25 @@ const CheckBtn = styled.label`
 class MainInfo extends PureComponent {
   render() {
     const TextOutput = (view) => {
+      const { count, filter } = this.props.combinationFilter;
+      const { combinationResult, pickedComb } = this.props;
+
       switch (view) {
         case "SEARCH_COMBINATION":
           return (<Text key={1}>
             {`查詢筆劃組合    >>    `}
-            {`總筆劃: `}<HighLight>{this.props.combinationFilter.count}劃</HighLight>
-            {this.props.combinationFilter.filter !== "" && `, 包含 '`}
-            <HighLight>{this.props.combinationFilter.filter !== "" && this.props.combinationFilter.filter}</HighLight>
-            {this.props.combinationFilter.filter !== "" && `'`}
-            {`, 的結果共有`} <HighLight>{this.props.combinationResult.length} 筆</HighLight>結果
-            {this.props.pickedComb[this.props.combinationFilter.count] && `, 目前已選擇 `}
-            <HighLight>{this.props.pickedComb[this.props.combinationFilter.count] && `${this.props.pickedComb[this.props.combinationFilter.count].length} 筆`}</HighLight>
-            {this.props.pickedComb[this.props.combinationFilter.count] && `組合`}
+            {`總筆劃: `}<HighLight>{count}劃</HighLight>
+            {filter !== "" && `, 包含 '`}
+            <HighLight>{filter !== "" && filter}</HighLight>
+            {filter !== "" && `'`}
+            {`, 的結果共有`} <HighLight>{combinationResult.length} 筆</HighLight>結果
+            {pickedComb[count] && `, 目前已選擇 `}
+            <HighLight>
+              {pickedComb[count]
+                && `${pickedComb[count]
+                  ? pickedComb[count].filter(value => value.includes(filter)).length : 0} 筆`}
+            </HighLight>
+            {pickedComb[count] && `組合`}
             <CheckBtn>輸出</CheckBtn>
           </Text>)
         case "INDEX":

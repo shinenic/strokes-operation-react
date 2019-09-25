@@ -186,7 +186,6 @@ const mapDispatchToProps = dispatch => {
     inputTextChange: num => dispatch(inputTextChange(num)),
     cleanAllInput: () => dispatch(cleanAllInput()),
     changeView: str => dispatch(changeView(str))
-    // cleanClassName: num => dispatch(cleanClassName(num))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Menu);

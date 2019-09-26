@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import { ShowDivAni } from '../styles/AnimationStyled';
 // import { pickName } from '../actions';
 
 const ColumnIndex = styled.div`
@@ -9,15 +10,14 @@ const ColumnIndex = styled.div`
   display: grid;
   justify-content: center;
   align-items: center;
-`;
-const BorderText = styled.span`
-  /* border-radius:5px; */
-  /* border:2px solid black; */
+
+  
   box-sizing:border-box;
   padding:5px;
   font-weight:bold;
   font-size:18px;
 `;
+
 const ColumnChar = styled.div`
   box-sizing:border-box;
   padding:5px;
@@ -30,13 +30,14 @@ const Row = styled.div`
   display:grid;
   grid-template-columns:60px 1fr;
   grid-template-areas:"index character";
+  animation: ${ShowDivAni} 0.4s 1 both ${props => (Number(props.index) * 0.05 + 0.2).toString() + 's'};
 `;
 
 const OverviewDiv = styled.div`
   height:calc(100vh - 140px);
   width:calc(100vw - 250px);
   overflow: scroll;
-  /* ${Row}:nth-child(odd) ${BorderText}{
+  /* ${Row}:nth-child(odd) ${ColumnIndex}{
     border:2px solid black;
   } */
 `;
@@ -48,12 +49,12 @@ class Overview extends PureComponent {
       <OverviewDiv>
         {Object.keys(data).map((value, index) => {
           return (
-            <Row>
-              <ColumnIndex><BorderText>{value}</BorderText></ColumnIndex>
-              <ColumnChar>
+            <Row index={index} key={"Row" + index}>
+              <ColumnIndex key={"Index" + index}>{value}</ColumnIndex>
+              <ColumnChar key={"Char" + index}>
                 {data[value].map((value, index) => {
                   return (
-                    <span>
+                    <span key={"Chars" + index}>
                       {value + ` `}
                     </span>
                   )

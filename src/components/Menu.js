@@ -10,7 +10,7 @@ import { searchStrokes, handleInput, addCharacter, deleteCharacter, combinationS
 const MenuDiv = styled.div`
   grid-area: menu;
   background-color:rgb(49,54,66);
-  @media (max-width: 500px){
+  @media (max-width: 480px){
     display:none;
   }
 `;

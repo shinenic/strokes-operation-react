@@ -9,7 +9,6 @@ import PickedOutput from './PickedOutput';
 import IndexCard from './IndexCard';
 import styled, { keyframes } from 'styled-components';
 import { connect } from 'react-redux';
-// import { setTopCard, updateWindowSize } from '../actions';
 
 const GridContainer = styled.div`
   height:100%;
@@ -21,11 +20,21 @@ const GridContainer = styled.div`
   grid-template-areas:"menu header"
                       "menu mainInfo"
                       "menu main";
+  @media (max-width: 480px) {
+    grid-template-columns:100%;
+    grid-template-rows:60px 30px 1fr;
+    grid-template-areas:"header"
+                      "mainInfo"
+                      "main";
+  }
 `;
 const Main = styled.div`
   grid-area: main;
   width:100%;
   height:100%;
+  @media (max-width: 480px){
+    display:none;
+  }
 `;
 
 
@@ -66,9 +75,6 @@ class Index extends PureComponent {
         <Main>
           {renderView(this.props.view)}
         </Main>
-        {/* <Prompt message="?_?" when={true} /> */}
-        {/* <Menu />
-        <Content /> */}
       </GridContainer>
     )
   }

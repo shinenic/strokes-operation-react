@@ -8,9 +8,13 @@ import { changeView } from '../actions';
 const MainInfoDiv = styled.div`
   grid-area: mainInfo;
   box-sizing:border-box;
-  padding:0 40px 0 40px;
+  padding:0 40px;
+  line-height:60px;
   color:rgb(138,143,153);
   font-size:14px;
+  @media (max-width: 480px) {
+    padding:0 20px;
+  }
 `;
 const TextDiv = styled.div`
   height:100%;
@@ -19,6 +23,9 @@ const TextDiv = styled.div`
   line-height:60px;
   border-bottom:1px solid rgb(209,215,222);
   box-sizing:border-box;
+  @media (max-width: 480px) {
+    line-height:30px;
+  }
 `;
 const Text = styled.div`
   animation: ${ShowDivAni} 0.7s 1 both 0.1s;

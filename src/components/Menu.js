@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components';
-import "../styles/MenuAnimation.css";
 import demoData from '../data/demoData';
 import menuIcon from '../image/menuIcon.png';
 import { connect } from 'react-redux';
@@ -48,7 +47,8 @@ const Text = styled.div`
   }
 `;
 const TextInput = styled.div`
-  height:0;
+  transition:0.5s;
+  height:${props => props.expand === "" || props.expand === "closeDiv" ? '0' : '50px'};
   width:100%;
   line-height:50px;
   padding-left:9%;
@@ -166,7 +166,7 @@ class Menu extends PureComponent {
                 }
                 }>◆  {value['option']}</Text>
               {index < 4 &&
-                <TextInput className={this.props.menuClassName[index]}>
+                <TextInput expand={this.props.menuClassName[index]}>
                   <Input type="text"
                     single={index !== 2}
                     placeholder={value['hint']}

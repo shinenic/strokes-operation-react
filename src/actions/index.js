@@ -72,6 +72,13 @@ export const triggerMenu = (bool) => {
         bool
     }
 }
+export const updateWindowSize = (height, width) => {
+    return {
+        type: 'UPDATE_WINDOW_SIZE',
+        height,
+        width
+    }
+}
 
 export const testTrigger = (tf) => {
     return {

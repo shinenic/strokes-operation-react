@@ -9,6 +9,7 @@ import PickedOutput from './PickedOutput';
 import IndexCard from './IndexCard';
 import styled, { keyframes } from 'styled-components';
 import { connect } from 'react-redux';
+import { updateWindowSize } from '../actions';
 
 const GridContainer = styled.div`
   height:100%;
@@ -46,6 +47,7 @@ class Index extends PureComponent {
     super();
   }
 
+
   // https://tg.pe/i4W 警告提醒
   // componentDidMount() {
   //   window.addEventListener('beforeunload', this.handleWindowClose);
@@ -59,6 +61,14 @@ class Index extends PureComponent {
   //   (ev || window.event).returnValue = confirmationMessage;
   //   return confirmationMessage;
   // }
+
+  componentDidMount() {
+    window.addEventListener('resize',
+      () => this.props.updateWindowSize(window.innerHeight, window.innerWidth));
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize');
+  }
 
   render() {
     const renderView = (view) => {
@@ -96,6 +106,7 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
   return {
+    updateWindowSize: (height, width) => dispatch(updateWindowSize(height, width))
   }
 }
 

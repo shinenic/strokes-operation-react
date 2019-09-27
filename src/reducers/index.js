@@ -10,6 +10,8 @@ const initState = {
   latestStorageTime: null,
   searchResult: {},//單純搜尋筆劃的結果
   groupChar: {},
+  windowHeight: 0,
+  windowWidth: 0,
 
   menuInput: ['', '', '', '', ''],
   combinationFilter: { count: null, filter: "" },
@@ -219,6 +221,11 @@ const defaultReducer = (state = initState, action) => {
       return Object.assign({}, state, {
         menuInput: [...inputArrTemp]
       });
+    case 'UPDATE_WINDOW_SIZE':
+      return Object.assign({}, state, {
+        windowHeight: action.height,
+        windowWidth: action.width
+      })
     case 'TEST_TRIGGER':
       return Object.assign({}, state, {
         test: action.tf

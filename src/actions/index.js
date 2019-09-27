@@ -66,6 +66,12 @@ export const changeView = (str) => {
         str
     }
 }
+export const triggerMenu = (bool) => {
+    return {
+        type: 'TRIGGER_MENU',
+        bool
+    }
+}
 
 export const testTrigger = (tf) => {
     return {

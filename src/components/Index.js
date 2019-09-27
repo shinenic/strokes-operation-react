@@ -45,13 +45,21 @@ class Index extends PureComponent {
   constructor() {
     super();
   }
-  componentDidUpdate = (e) => {
-    if (false) {
-      window.onbeforeunload = () => true
-    } else {
-      window.onbeforeunload = undefined
-    }
-  }
+
+  // https://tg.pe/i4W 警告提醒
+  // componentDidMount() {
+  //   window.addEventListener('beforeunload', this.handleWindowClose);
+  // }
+  // componentWillUnmount(nextLocation) {
+  //   console.log(nextLocation);
+  //   window.removeEventListener('beforeunload', this.handleWindowClose);
+  // }
+  // handleWindowClose = (ev) => {
+  //   const confirmationMessage = '離開網站將不會自動儲存任何變更';
+  //   (ev || window.event).returnValue = confirmationMessage;
+  //   return confirmationMessage;
+  // }
+
   render() {
     const renderView = (view) => {
       switch (view) {

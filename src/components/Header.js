@@ -2,9 +2,10 @@ import React, { PureComponent } from 'react'
 import styled, { keyframes } from 'styled-components';
 import Cat from '../image/cat.png';
 import Hamburger from '../image/hamburger.png';
+import Cross from '../image/cross.png';
 import Icon from '../image/menuIcon.png';
 import { connect } from 'react-redux';
-import { cleanAllInput } from '../actions';
+import { triggerMenu } from '../actions';
 
 const HeaderDiv = styled.div`
   grid-area: header;
@@ -25,8 +26,8 @@ const GridContainer = styled.div`
    }
    
   @media (max-width: 480px) {
-    grid-template-columns:15px 40px 1fr 60px 10px;
-    grid-template-areas:". icon title hamburger .";
+    grid-template-columns:15px 40px 1fr 80px;
+    grid-template-areas:". icon title hamburger";
     }
 `;
 const InfoCount = styled.div`
@@ -88,11 +89,13 @@ const IconImg = styled.img`
 `;
 
 const HamburgerImg = styled.img`
-  content:url(${Hamburger});
+  content:url(${props => props.expand ? Cross : Hamburger});
   height:20px;
   width:20px;
+  margin-right:20px;
   box-sizing:border-box;
   filter:invert(0.8);
+  transition:0.5s;
   &:hover{
     filter:invert(1);
   }
@@ -101,19 +104,19 @@ const HamburgerBorder = styled.div`
   display:none;
   @media (max-width: 480px){
     display: grid;
-
     grid-area:hamburger;
-    height:34px;
-    width:34px;
-    box-sizing:border-box;
-    margin:12px 0;
-    padding:5.5px 8.5px 8.5px 5.5px;
+    justify-content: end;
+    align-items: center;
 
+    /* background:rgb(19,25,34); */
+    background:${props => props.expand ? "#313642" : "#131922"};
+    transition:0.1s;
+    user-select: none;
+    -webkit-touch-callout: none;
+    z-index:101;
     cursor:pointer;
-    border:2px solid rgb(230,230,230);
-    border-radius:5px;
-    &:hover{
-      border:2px solid rgb(255,255,255);
+    &:active{
+      background:rgb(99,105,114);
     }
   }
   
@@ -139,7 +142,9 @@ class Header extends PureComponent {
         <GridContainer>
           <Title>名字筆劃組合</Title>
           <IconImg />
-          <HamburgerBorder><HamburgerImg /></HamburgerBorder>
+          <HamburgerBorder expand={this.props.menuExpand} onClick={() => this.props.triggerMenu()}>
+            <HamburgerImg expand={this.props.menuExpand} />
+          </HamburgerBorder>
           <InfoCount>單字庫總字數: {Object.keys(this.props.character).length}</InfoCount>
           <InfoSave>尚未有任何變更</InfoSave>
           <InfoUser>timwei5566@gmail.com</InfoUser>
@@ -154,11 +159,12 @@ class Header extends PureComponent {
 const mapStateToProps = state => {
   return {
     character: state.defaultReducer.character,
+    menuExpand: state.defaultReducer.menuExpand
   }
 }
 const mapDispatchToProps = dispatch => {
   return {
-    cleanAllInput: () => dispatch(cleanAllInput())
+    triggerMenu: (bool) => dispatch(triggerMenu(bool))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

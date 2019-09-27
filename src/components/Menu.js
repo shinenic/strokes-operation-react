@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import "../styles/MenuAnimation.css";
 import demoData from '../data/demoData';
 import menuIcon from '../image/menuIcon.png';
@@ -11,7 +11,24 @@ const MenuDiv = styled.div`
   grid-area: menu;
   background-color:rgb(49,54,66);
   @media (max-width: 480px){
-    display:none;
+    grid-area: null;
+    position:fixed;
+    z-index:100;
+    right:0;
+    top:0;
+    transition:0.5s;
+    /* opacity:0.95; */
+    width:${props => props.expand ? '300px' : '0'};
+    min-height:100%;
+  }
+`;
+const MobileHeader = styled.div`
+  display:none;
+  @media (max-width: 480px){
+    display:block;
+    width:100%;
+    height:60px;
+    background:rgb(19,25,34);
   }
 `;
 
@@ -58,7 +75,7 @@ const Button = styled.div`
   border-radius:0;
   background: #EEE;
   font-size:13px;
-  color:rgb(13,13,13);
+  color:Black;
   padding-left:5px;
   padding-right:5px;
   cursor: pointer;
@@ -76,6 +93,9 @@ const MenuImg = styled.img`
   cursor:pointer;
   &:hover{
     filter:invert(1);
+  }
+  @media (max-width: 480px){
+    display:none;
   }
 `;
 
@@ -131,7 +151,8 @@ class Menu extends PureComponent {
       { option: "軟體介紹" },
     ];
     return (
-      <MenuDiv>
+      <MenuDiv expand={this.props.menuExpand}>
+        {/* <MobileHeader /> */}
         <MenuImg onClick={() => this.props.changeView("")} />
         {inputList.map((value, index) => {
           return (
@@ -173,7 +194,8 @@ const mapStateToProps = state => {
   return {
     inputTextSelect: state.defaultReducer.inputTextSelect,
     menuClassName: state.defaultReducer.menuClassName,
-    menuInput: state.defaultReducer.menuInput
+    menuInput: state.defaultReducer.menuInput,
+    menuExpand: state.defaultReducer.menuExpand
   }
 }
 const mapDispatchToProps = dispatch => {

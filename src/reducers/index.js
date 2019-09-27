@@ -30,6 +30,7 @@ const initState = {
 
   //畫面控制
   view: "",
+  menuExpand: false,
 
   //test
   test: true
@@ -53,7 +54,7 @@ const handleInputString = str => {
 const getAllStrokes = arr => {
   let obj = {};
   arr.map(char => {
-    obj[char] = char.getStrokes();
+    return obj[char] = char.getStrokes();
   })
   return obj;
 }
@@ -120,7 +121,7 @@ const getCombination = (num, groupChar, filterChrArr) => {
 };
 const getMenuClassName = (num, pre, currentClassName) => {
   let list = ["", "", "", ""];
-  if (pre != -1) {
+  if (pre !== -1) {
     list[pre] = "closeDiv";
   }
   if (currentClassName === "closeDiv" || currentClassName === "") {
@@ -195,6 +196,10 @@ const defaultReducer = (state = initState, action) => {
     case 'CHANGE_VIEW':
       return Object.assign({}, state, {
         view: action.str
+      });
+    case 'TRIGGER_MENU':
+      return Object.assign({}, state, {
+        menuExpand: action.bool || !state.menuExpand
       });
     case 'PICK_NAME':
       return Object.assign({}, state, {

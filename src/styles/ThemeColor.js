@@ -1,8 +1,10 @@
 const Color = {
-  Black: ["#131922", "#272D36"],//rgb(19,25,34) rgb(39,45,54)
-  RedActive: "#E44C70",
-  RedHover: "#783E55",
-  Text: ["#E6E6E6", "#99A4AE"],
-  InputBg: "#EEE",
+  black: ["#313642", "#272D36", "#1D232C"],
+  redActive: "#E44C70",
+  redHover: "#783E55",
+  text: ["#E6E6E6", "#99A4AE"],
+  inputBg: "#EEE",
+  card: ['#DB6623', '#3E5EB3', '#AAC634'],
+  cardBg: "#D9E1E8"
 };
 export default Color;

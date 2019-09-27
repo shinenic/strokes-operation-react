@@ -4,18 +4,18 @@ import BooksImg from '../image/indexCard/books.png';
 import checkImg from '../image/indexCard/check.png';
 import linkImg from '../image/indexCard/link.png';
 import { ShowDivAni } from '../styles/AnimationStyled';
+import Color from '../styles/ThemeColor';
 import CountUp from 'react-countup';
 import { connect } from 'react-redux';
 import { cleanAllInput } from '../actions';
 
-const CardThemeColor = ['#DB6623', '#3E5EB3', '#AAC634'];
 const CardImg = [BooksImg, checkImg, linkImg];
 
 const IndexCardDiv = styled.div`
   height:100%;
   width:100%;
   grid-area: main;
-  color:rgb(49,54,66);
+  color:${Color.black[0]};
 `;
 const GridContainer = styled.div`
   height:100%;
@@ -45,7 +45,7 @@ const ImgBorder = styled.div`
   border-radius:50%; 
   /* border: 3px solid rgb(215,225,235);  */
   transition: 0.3s;
-  background:${props => CardThemeColor[props.cardIndex]};
+  background:${props => Color.card[props.cardIndex]};
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); 
   height:64px;
   width:64px;
@@ -82,10 +82,10 @@ const Card = styled.div`
   padding:5px;
   text-align:center;
   animation: ${ShowDivAni} 0.5s 1 both ${props => (Number(props.cardIndex) * 0.2 + 0.1).toString() + 's'};
-  background:rgb(217,225,232);
+  background:${Color.cardBg};
   &:hover{
     height:100%;
-    border-bottom:10px solid ${props => CardThemeColor[props.cardIndex]};
+    border-bottom:10px solid ${props => Color.card[props.cardIndex]};
     box-shadow: 0 4px 6px 0 rgba(0,0,0,0.2); 
   }
   &:hover ${ImgBorder} {

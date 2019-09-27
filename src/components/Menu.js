@@ -2,13 +2,14 @@ import React, { PureComponent } from 'react'
 import styled from 'styled-components';
 import demoData from '../data/demoData';
 import menuIcon from '../image/menuIcon.png';
+import Color from '../styles/ThemeColor';
 import { connect } from 'react-redux';
 import { toastr } from 'react-redux-toastr';
 import { searchStrokes, handleInput, addCharacter, deleteCharacter, combinationSearch, inputTextChange, cleanAllInput, changeView } from '../actions';
 
 const MenuDiv = styled.div`
   grid-area: menu;
-  background-color:rgb(49,54,66);
+  background:${Color.black[0]};
   @media (max-width: 480px){
     grid-area: null;
     position:fixed;
@@ -27,7 +28,7 @@ const MobileHeader = styled.div`
     display:block;
     width:100%;
     height:60px;
-    background:rgb(19,25,34);
+    background:${Color.black[0]};
   }
 `;
 
@@ -37,13 +38,13 @@ const Text = styled.div`
   height:50px;
   padding-left:10%;
   font-size:16px;
-  color:rgb(230,230,230);
+  color:${Color.text[0]};
   line-height:50px;
   cursor: pointer;
-  background:${props => props.picked ? '#E44C70' : '#313642'};
+  transition: 0.17s;
+  background:${props => props.picked ? Color.redActive : Color.black[0]};
   &:hover{
-    background:${props => props.picked ? '#E44C70' : '#783E55'};
-    transition:background-color 170ms;
+    background:${props => props.picked ? Color.redActive : Color.redHover};
   }
 `;
 const TextInput = styled.div`
@@ -54,11 +55,11 @@ const TextInput = styled.div`
   padding-left:9%;
   box-sizing: border-box;
   overflow: hidden;
-  color:rgb(230,230,230);
+  color:${Color.inputBg};
 `;
 const Input = styled.input`
   padding: 5px 15px;
-  background: #EEE;
+  background: ${Color.inputBg};
   border: 0 none;
   border-radius:0;
   border-right:1px solid black;

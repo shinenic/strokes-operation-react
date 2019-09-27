@@ -38,7 +38,7 @@ const initState = {
 
 String.prototype.getStrokes = function () {
   let unicodeHan = (this[0].charCodeAt(0).toString(16)).toUpperCase();
-  var result = dataStrokes[unicodeHan];
+  let result = dataStrokes[unicodeHan];
   return result;
 };
 
@@ -62,7 +62,7 @@ const getAllStrokes = arr => {
 const removeChar = (stateCharacter, charArr) => {
   let result = Object.assign({}, stateCharacter);
   charArr.map(char => {
-    delete result[char];
+    return delete result[char];
   })
   return result;
 }
@@ -112,7 +112,6 @@ const getCombination = (num, groupChar, filterChrArr) => {
           else {
             result.push(name)
           }
-
         }
       }
     }

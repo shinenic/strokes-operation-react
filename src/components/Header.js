@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import styled, { keyframes } from 'styled-components';
 import Cat from '../image/cat.png';
 import Hamburger from '../image/hamburger.png';
+import Color from '../styles/ThemeColor';
 import Cross from '../image/cross.png';
 import Icon from '../image/menuIcon.png';
 import { connect } from 'react-redux';
@@ -9,9 +10,9 @@ import { triggerMenu } from '../actions';
 
 const HeaderDiv = styled.div`
   grid-area: header;
-  background:rgb(39,45,54);
+  background:${Color.black[1]};
   @media (max-width: 480px) {
-    background:rgb(49,54,66);
+    background:${Color.black[0]};
   }
 `;
 const GridContainer = styled.div`
@@ -35,7 +36,7 @@ const InfoCount = styled.div`
   display: grid;
   justify-content: center;
   align-items: center;
-  color:rgb(153,164,174);
+  color:${Color.text[1]};
   @media (max-width: 480px){
     display:none;
   }
@@ -107,16 +108,14 @@ const HamburgerBorder = styled.div`
     grid-area:hamburger;
     justify-content: end;
     align-items: center;
-
-    /* background:rgb(19,25,34); */
-    background:${props => props.expand ? "#313642" : "#131922"};
+    background:${props => props.expand ? Color.black[0] : Color.black[2]};
     transition:0.1s;
     user-select: none;
     -webkit-touch-callout: none;
     z-index:101;
     cursor:pointer;
     &:active{
-      background:rgb(99,105,114);
+      background:rgb(79,85,94);
     }
   }
   
@@ -128,7 +127,7 @@ const Title = styled.div`
     display: grid;
     justify-content: start;
     align-items: center;
-    color:rgb(230,230,230);
+    color:${Color.text[0]};
   }
 `;
 

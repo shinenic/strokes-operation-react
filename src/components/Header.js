@@ -6,7 +6,7 @@ import Color from '../styles/ThemeColor';
 import Cross from '../image/cross.png';
 import Icon from '../image/menuIcon.png';
 import { connect } from 'react-redux';
-import { triggerMenu } from '../actions';
+import { triggerMenu, changeView } from '../actions';
 
 const HeaderDiv = styled.div`
   grid-area: header;
@@ -140,7 +140,7 @@ class Header extends PureComponent {
       <HeaderDiv>
         <GridContainer>
           <Title>名字筆劃組合</Title>
-          <IconImg />
+          <IconImg onClick={() => this.props.changeView("")} />
           <HamburgerBorder expand={this.props.menuExpand} onClick={() => this.props.triggerMenu()}>
             <HamburgerImg expand={this.props.menuExpand} />
           </HamburgerBorder>
@@ -158,12 +158,13 @@ class Header extends PureComponent {
 const mapStateToProps = state => {
   return {
     character: state.defaultReducer.character,
-    menuExpand: state.defaultReducer.menuExpand
+    menuExpand: state.defaultReducer.menuExpand,
   }
 }
 const mapDispatchToProps = dispatch => {
   return {
-    triggerMenu: (bool) => dispatch(triggerMenu(bool))
+    triggerMenu: (bool) => dispatch(triggerMenu(bool)),
+    changeView: (str) => dispatch(changeView(str))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

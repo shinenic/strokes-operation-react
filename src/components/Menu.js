@@ -5,7 +5,10 @@ import menuIcon from '../image/menuIcon.png';
 import Color from '../styles/ThemeColor';
 import { connect } from 'react-redux';
 import { toastr } from 'react-redux-toastr';
-import { searchStrokes, handleInput, addCharacter, deleteCharacter, combinationSearch, inputTextChange, cleanAllInput, changeView } from '../actions';
+import {
+  searchStrokes, handleInput, addCharacter, deleteCharacter
+  , combinationSearch, inputTextChange, cleanAllInput, changeView, triggerMenu
+} from '../actions';
 
 const MenuDiv = styled.div`
   grid-area: menu;
@@ -14,11 +17,11 @@ const MenuDiv = styled.div`
     grid-area: null;
     position:fixed;
     z-index:100;
-    right:0;
     top:0;
+    right:${props => props.expand ? '0' : '-300px'};
     transition:0.5s;
-    /* opacity:0.95; */
-    width:${props => props.expand ? '300px' : '0'};
+    opacity:0.9;
+    width:300px;
     min-height:100%;
   }
 `;
@@ -28,7 +31,6 @@ const MobileHeader = styled.div`
     display:block;
     width:100%;
     height:60px;
-    background:${Color.black[0]};
   }
 `;
 
@@ -132,6 +134,7 @@ class Menu extends PureComponent {
           break;
       }
       this.props.cleanAllInput();
+      this.props.triggerMenu(false);
     }
   }
   focus(index) {
@@ -153,7 +156,7 @@ class Menu extends PureComponent {
     ];
     return (
       <MenuDiv expand={this.props.menuExpand}>
-        {/* <MobileHeader /> */}
+        <MobileHeader />
         <MenuImg onClick={() => this.props.changeView("")} />
         {inputList.map((value, index) => {
           return (
@@ -208,7 +211,8 @@ const mapDispatchToProps = dispatch => {
     handleInput: (value, inputOption) => dispatch(handleInput(value, inputOption)),
     inputTextChange: num => dispatch(inputTextChange(num)),
     cleanAllInput: () => dispatch(cleanAllInput()),
-    changeView: str => dispatch(changeView(str))
+    changeView: str => dispatch(changeView(str)),
+    triggerMenu: (bool) => dispatch(triggerMenu(bool)),
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Menu);

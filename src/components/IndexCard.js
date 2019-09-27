@@ -21,12 +21,26 @@ const GridContainer = styled.div`
   height:100%;
   width:100%;
   display:grid;
-  grid-template-columns:80px 0.33fr 0.33fr 0.33fr 160px;
+  grid-template-columns:80px 0.33fr 0.33fr 0.33fr 130px;
   grid-template-rows:0.3fr 400px 0.7fr;
   grid-template-areas:
     ". . . . ."
     ". card0 card1 card2 ."
     ". . . . .";
+  
+  @media (max-width: 480px) {
+    grid-template-columns:10px 1fr 10px;
+    grid-template-rows:50px 0.33fr 0.33fr 0.33fr 50px;
+    grid-template-areas:
+    ". . ."
+    ". card0 ."
+    ". card1 ."
+    ". card2 ."
+    ". . .";
+    display: grid;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 const Image = styled.img`
@@ -55,6 +69,13 @@ const ImgBorder = styled.div`
   display: grid;
   justify-content: center;
   align-items: center;
+  @media (max-width: 480px) {
+    height:40px;
+    width:40px;
+    margin:0 auto;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 const CountText = styled.span`
   grid-area:data;
@@ -62,11 +83,19 @@ const CountText = styled.span`
   font-size:26px;
   display: grid;
   align-items: start;
+  @media (max-width: 480px) {
+    justify-content: center;
+    align-items: center;
+  }
 `;
 const TitleText = styled.h2`
   grid-area:title;
   display: grid;
   align-items: start;
+  @media (max-width: 480px) {
+    justify-content: start;
+    align-items: center;
+  }
 `;
 
 const Card = styled.div`
@@ -95,6 +124,26 @@ const Card = styled.div`
   &:hover ${Image} {
     filter:invert(1);
   }
+  @media (max-width: 480px) {
+    width:90%;
+    max-width:none;
+    height:50%;
+
+    &:hover{
+      width:95%;
+    height:50%;
+      border-right:10px solid ${props => Color.card[props.cardIndex]};
+      border-bottom:none;
+      box-shadow: 0 4px 6px 0 rgba(0,0,0,0.2); 
+    }
+    &:hover ${ImgBorder} {
+      height:50px;
+      width:50px;
+    }
+    &:hover ${Image} {
+      filter:invert(1);
+    }
+  }
 `;
 
 const CardGridContent = styled.div`
@@ -106,6 +155,14 @@ const CardGridContent = styled.div`
     "img"
     "title"
     "data";
+  @media (max-width: 480px) {
+    grid-template-columns:0.28fr 0.36fr 0.36fr;
+    grid-template-rows:1fr;
+    grid-template-areas:
+    "img title data";
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 class IndexCard extends PureComponent {

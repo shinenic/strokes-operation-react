@@ -10,8 +10,8 @@ const initState = {
   latestStorageTime: null,
   searchResult: {},//單純搜尋筆劃的結果
   groupChar: {},
-  windowHeight: 0,
-  windowWidth: 0,
+  windowHeight: window.innerHeight,
+  windowWidth: window.innerWidth,
 
   menuInput: ['', '', '', '', ''],
   combinationFilter: { count: null, filter: "" },

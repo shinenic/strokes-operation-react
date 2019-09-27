@@ -9,7 +9,7 @@ import PickedOutput from './PickedOutput';
 import IndexCard from './IndexCard';
 import styled, { keyframes } from 'styled-components';
 import { connect } from 'react-redux';
-import { updateWindowSize } from '../actions';
+import { updateWindowSize, changeView } from '../actions';
 
 const GridContainer = styled.div`
   height:100%;
@@ -62,9 +62,16 @@ class Index extends PureComponent {
   //   return confirmationMessage;
   // }
 
+  updateWindowSize = (height, width) => {
+    this.props.updateWindowSize(height, width);
+    if ((width <= 480 && this.props.windowWidth >= 480) || (width >= 480 && this.props.windowWidth <= 480)) {
+      this.props.changeView('');
+    }
+  }
+
   componentDidMount() {
     window.addEventListener('resize',
-      () => this.props.updateWindowSize(window.innerHeight, window.innerWidth));
+      () => this.updateWindowSize(window.innerHeight, window.innerWidth));
   }
   componentWillUnmount() {
     window.removeEventListener('resize');
@@ -101,12 +108,15 @@ class Index extends PureComponent {
 const mapStateToProps = state => {
   return {
     menuState: state.defaultReducer.menuState,
-    view: state.defaultReducer.view
+    view: state.defaultReducer.view,
+    windowHeight: state.defaultReducer.windowHeight,
+    windowWidth: state.defaultReducer.windowWidth,
   }
 }
 const mapDispatchToProps = dispatch => {
   return {
-    updateWindowSize: (height, width) => dispatch(updateWindowSize(height, width))
+    updateWindowSize: (height, width) => dispatch(updateWindowSize(height, width)),
+    changeView: str => dispatch(changeView(str)),
   }
 }
 

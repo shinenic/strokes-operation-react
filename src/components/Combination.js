@@ -17,7 +17,9 @@ const MainDiv = styled.div`
 
 //目前顯示個數14*15
 const Button = styled.div`
-  width:7.13%;
+  /* width:7.13%; */
+  /* width:13.33%; */
+  width:${props => props.width < 480 ? '13.33%' : '7.13%'};
   box-sizing:border-box;
   display:inline-block;
   padding-top:3.5px;
@@ -42,6 +44,7 @@ class Combination extends PureComponent {
         {this.props.currentPageResult.map((value, index) => {
           return (
             <Button
+              width={this.props.windowWidth}
               onClick={() => this.props.pickName(value)}
               key={index}
               picked={Object.keys(this.props.pickedComb).includes(this.props.combinationFilter.count)
@@ -63,6 +66,8 @@ const mapStateToProps = state => {
     pickedComb: state.defaultReducer.pickedComb,
     combinationResult: state.defaultReducer.combinationResult,
     combinationFilter: state.defaultReducer.combinationFilter,
+    windowHeight: state.defaultReducer.windowHeight,
+    windowWidth: state.defaultReducer.windowWidth,
   }
 }
 const mapDispatchToProps = dispatch => {

@@ -16,10 +16,7 @@ const IndexCardDiv = styled.div`
   width:100%;
   grid-area: main;
   color:${Color.black[0]};
-`;
-const GridContainer = styled.div`
-  height:100%;
-  width:100%;
+
   display:grid;
   grid-template-columns:80px 0.33fr 0.33fr 0.33fr 130px;
   grid-template-rows:0.3fr 400px 0.7fr;
@@ -27,7 +24,10 @@ const GridContainer = styled.div`
     ". . . . ."
     ". card0 card1 card2 ."
     ". . . . .";
-  
+  @media (max-width: 768px) {
+    grid-template-columns:40px 0.33fr 0.33fr 0.33fr 90px;
+    grid-template-rows:0.1fr 400px 0.9fr;
+  }
   @media (max-width: 480px) {
     grid-template-columns:10px 1fr 10px;
     grid-template-rows:50px 0.33fr 0.33fr 0.33fr 50px;
@@ -57,7 +57,6 @@ const Image = styled.img`
 
 const ImgBorder = styled.div`
   border-radius:50%; 
-  /* border: 3px solid rgb(215,225,235);  */
   transition: 0.3s;
   background:${props => Color.card[props.cardIndex]};
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); 
@@ -73,8 +72,6 @@ const ImgBorder = styled.div`
     height:40px;
     width:40px;
     margin:0 auto;
-    justify-content: center;
-    align-items: center;
   }
 `;
 const CountText = styled.span`
@@ -88,9 +85,12 @@ const CountText = styled.span`
     align-items: center;
   }
 `;
-const TitleText = styled.h2`
+const TitleText = styled.div`
   grid-area:title;
   display: grid;
+  font-size:24px;
+  font-weight:bold;
+  justify-content: center;
   align-items: start;
   @media (max-width: 480px) {
     justify-content: start;
@@ -131,8 +131,8 @@ const Card = styled.div`
 
     &:hover{
       width:95%;
-    height:50%;
-      border-right:10px solid ${props => Color.card[props.cardIndex]};
+      height:50%;
+      border-right:7px solid ${props => Color.card[props.cardIndex]};
       border-bottom:none;
       box-shadow: 0 4px 6px 0 rgba(0,0,0,0.2); 
     }
@@ -174,48 +174,44 @@ class IndexCard extends PureComponent {
     }
     return (
       <IndexCardDiv>
-        <GridContainer>
+        <Card cardIndex={0}>
+          <CardGridContent>
+            <ImgBorder cardIndex={0}><Image cardIndex={0} /></ImgBorder>
+            <TitleText>單字庫</TitleText>
+            <CountText>
+              <CountUp
+                separator=","
+                suffix="  字"
+                end={Object.keys(this.props.character).length} />
+            </CountText>
+          </CardGridContent>
+        </Card>
 
-          <Card cardIndex={0}>
-            <CardGridContent>
-              <ImgBorder cardIndex={0}><Image cardIndex={0} /></ImgBorder>
-              <TitleText>單字庫</TitleText>
-              <CountText>
-                <CountUp
-                  separator=","
-                  suffix="  字"
-                  end={Object.keys(this.props.character).length} />
-              </CountText>
-            </CardGridContent>
-          </Card>
+        <Card cardIndex={1}>
+          <CardGridContent>
+            <ImgBorder cardIndex={1}><Image cardIndex={1} /></ImgBorder>
+            <TitleText>已選擇組合</TitleText>
+            <CountText>
+              <CountUp
+                separator=","
+                suffix="  組"
+                end={pickedCount(this.props.pickedComb)} />
+            </CountText>
+          </CardGridContent>
+        </Card>
 
-          <Card cardIndex={1}>
-            <CardGridContent>
-              <ImgBorder cardIndex={1}><Image cardIndex={1} /></ImgBorder>
-              <TitleText>已選擇組合</TitleText>
-              <CountText>
-                <CountUp
-                  separator=","
-                  suffix="  組"
-                  end={pickedCount(this.props.pickedComb)} />
-              </CountText>
-            </CardGridContent>
-          </Card>
-
-          <Card cardIndex={2}>
-            <CardGridContent>
-              <ImgBorder cardIndex={2}><Image cardIndex={2} /></ImgBorder>
-              <TitleText>總組合數</TitleText>
-              <CountText>
-                <CountUp
-                  separator=","
-                  suffix="  組"
-                  end={Object.keys(this.props.character).length * Object.keys(this.props.character).length} />
-              </CountText>
-            </CardGridContent>
-          </Card>
-
-        </GridContainer>
+        <Card cardIndex={2}>
+          <CardGridContent>
+            <ImgBorder cardIndex={2}><Image cardIndex={2} /></ImgBorder>
+            <TitleText>總組合數</TitleText>
+            <CountText>
+              <CountUp
+                separator=","
+                suffix="  組"
+                end={Object.keys(this.props.character).length * Object.keys(this.props.character).length} />
+            </CountText>
+          </CardGridContent>
+        </Card>
       </IndexCardDiv >
     )
   }

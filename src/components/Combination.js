@@ -7,7 +7,8 @@ import { pickName } from '../actions';
 
 
 const MainDiv = styled.div`
-  padding:40px;
+  /* padding:40px; */
+  padding:${props => props.width < 480 ? '10px' : '40px'};
   height:100%;
   width:100%;
   box-sizing:border-box;
@@ -19,7 +20,7 @@ const MainDiv = styled.div`
 const Button = styled.div`
   /* width:7.13%; */
   /* width:13.33%; */
-  width:${props => props.width < 480 ? '13.33%' : '7.13%'};
+  width:${props => props.width < 480 ? '16.66%' : '7.13%'};
   box-sizing:border-box;
   display:inline-block;
   padding-top:3.5px;
@@ -40,7 +41,7 @@ const Button = styled.div`
 class Combination extends PureComponent {
   render() {
     return (
-      <MainDiv key={this.props.combinationFilter.count}>
+      <MainDiv key={this.props.combinationFilter.count} width={this.props.windowWidth}>
         {this.props.currentPageResult.map((value, index) => {
           return (
             <Button

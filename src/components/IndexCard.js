@@ -9,7 +9,7 @@ import CountUp from 'react-countup';
 import { connect } from 'react-redux';
 import { cleanAllInput } from '../actions';
 
-const CardImg = [BooksImg, checkImg, linkImg];
+const CardImg = [BooksImg, linkImg, checkImg];
 
 const IndexCardDiv = styled.div`
   height:100%;
@@ -96,6 +96,9 @@ const TitleText = styled.div`
     justify-content: start;
     align-items: center;
   }
+  @media (max-width: 400px) {
+    justify-content: center;
+  }
 `;
 
 const Card = styled.div`
@@ -163,6 +166,9 @@ const CardGridContent = styled.div`
     justify-content: center;
     align-items: center;
   }
+  @media (max-width: 400px) {
+    grid-template-columns:50px 0.5fr 0.5fr;
+  }
 `;
 
 class IndexCard extends PureComponent {
@@ -190,12 +196,12 @@ class IndexCard extends PureComponent {
         <Card cardIndex={1}>
           <CardGridContent>
             <ImgBorder cardIndex={1}><Image cardIndex={1} /></ImgBorder>
-            <TitleText>已選擇組合</TitleText>
+            <TitleText>總組合數</TitleText>
             <CountText>
               <CountUp
                 separator=","
                 suffix="  組"
-                end={pickedCount(this.props.pickedComb)} />
+                end={Object.keys(this.props.character).length * Object.keys(this.props.character).length} />
             </CountText>
           </CardGridContent>
         </Card>
@@ -203,12 +209,12 @@ class IndexCard extends PureComponent {
         <Card cardIndex={2}>
           <CardGridContent>
             <ImgBorder cardIndex={2}><Image cardIndex={2} /></ImgBorder>
-            <TitleText>總組合數</TitleText>
+            <TitleText>已選擇組合</TitleText>
             <CountText>
               <CountUp
                 separator=","
                 suffix="  組"
-                end={Object.keys(this.props.character).length * Object.keys(this.props.character).length} />
+                end={pickedCount(this.props.pickedComb)} />
             </CountText>
           </CardGridContent>
         </Card>

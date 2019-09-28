@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "e49932631c0f3cd48d739b27491ce576",
+    "revision": "4f393d7b2fd726ad6af600455c5551c7",
     "url": "/strokes-operation-react/index.html"
   },
   {
-    "revision": "cb65718e018de2686a3a",
+    "revision": "2acc321b8fc921386315",
     "url": "/strokes-operation-react/static/css/2.19b13f22.chunk.css"
   },
   {
-    "revision": "ecd052c18e0d20715aab",
-    "url": "/strokes-operation-react/static/css/main.89409cee.chunk.css"
+    "revision": "b1406dd053ebc0ba932f",
+    "url": "/strokes-operation-react/static/css/main.0dc4e770.chunk.css"
   },
   {
-    "revision": "cb65718e018de2686a3a",
-    "url": "/strokes-operation-react/static/js/2.3373b23d.chunk.js"
+    "revision": "2acc321b8fc921386315",
+    "url": "/strokes-operation-react/static/js/2.ae376173.chunk.js"
   },
   {
-    "revision": "ecd052c18e0d20715aab",
-    "url": "/strokes-operation-react/static/js/main.8184ea0a.chunk.js"
+    "revision": "b1406dd053ebc0ba932f",
+    "url": "/strokes-operation-react/static/js/main.4e58a38b.chunk.js"
   },
   {
     "revision": "9ac17d03d60e490530b2",

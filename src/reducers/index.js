@@ -29,6 +29,7 @@ const initState = {
   maxPage: null,
   currentPage: 1,
   currentPageResult: [""],
+  pageDataCount: 210,
 
   //畫面控制
   view: "",
@@ -146,7 +147,6 @@ const handlePickedName = (obj, count, name) => {
   }
   return Object.assign({}, obj);
 }
-const PAGE_DATA_COUNT = 210;
 
 const defaultReducer = (state = initState, action) => {
   switch (action.type) {
@@ -170,11 +170,13 @@ const defaultReducer = (state = initState, action) => {
       });
     case 'COMBINATION_SEARCH':
       const result = getCombination(action.num, state.groupChar, handleInputString(action.str));
-      const partOfResult = result.slice(0, PAGE_DATA_COUNT);
+      const pageDataCount = Math.floor((state.windowHeight - (state.windowWidth < 480 ? 180 : 290)) / 30) * (state.windowWidth < 480 ? 6 : 14);
+      const partOfResult = result.slice(0, pageDataCount);
       return Object.assign({}, state, {
         combinationResult: result,
         combinationFilter: { count: state.menuInput[2], filter: state.menuInput[4] },
-        maxPage: Math.floor(result.length / PAGE_DATA_COUNT) + 1,
+        maxPage: Math.floor(result.length / pageDataCount) + 1,
+        pageDataCount,
         currentPage: 1,
         currentPageResult: partOfResult,
         view: "SEARCH_COMBINATION"
@@ -192,7 +194,7 @@ const defaultReducer = (state = initState, action) => {
       }
       return Object.assign({}, state, {
         currentPage: page,
-        currentPageResult: state.combinationResult.slice((page - 1) * PAGE_DATA_COUNT, (page) * PAGE_DATA_COUNT),
+        currentPageResult: state.combinationResult.slice((page - 1) * state.pageDataCount, (page) * state.pageDataCount),
       });
     case 'CHANGE_VIEW':
       return Object.assign({}, state, {

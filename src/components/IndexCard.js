@@ -74,12 +74,13 @@ const ImgBorder = styled.div`
     margin:0 auto;
   }
 `;
-const CountText = styled.span`
+const CountText = styled.div`
   grid-area:data;
   font-weight:bold;
   font-size:26px;
   display: grid;
   align-items: start;
+  justify-content: center;
   @media (max-width: 480px) {
     justify-content: center;
     align-items: center;
@@ -109,16 +110,15 @@ const Card = styled.div`
   width:80%;
   max-width:250px;
   height:95%;
-  box-sizing:border-box;
   margin:0px auto;
   padding:5px;
-  text-align:center;
   animation: ${ShowDivAni} 0.5s 1 both ${props => (Number(props.cardIndex) * 0.2 + 0.1).toString() + 's'};
   background:${Color.cardBg};
   &:hover{
     height:100%;
     border-bottom:10px solid ${props => Color.card[props.cardIndex]};
     box-shadow: 0 4px 6px 0 rgba(0,0,0,0.2); 
+    margin:0px auto;
   }
   &:hover ${ImgBorder} {
     height:80px;
@@ -128,12 +128,12 @@ const Card = styled.div`
     filter:invert(1);
   }
   @media (max-width: 480px) {
-    width:90%;
+    width:92%;
     max-width:none;
     height:50%;
 
     &:hover{
-      width:95%;
+      width:94%;
       height:50%;
       border-right:7px solid ${props => Color.card[props.cardIndex]};
       border-bottom:none;

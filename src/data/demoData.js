@@ -997,7 +997,6 @@ const demoData = `1	怡君	2957
 997	信傑	105
 998	宇婷	105
 999	慧慈	105
-1000	韻竹`;
+1000	韻竹`
 
-
-export default demoData;
+export default demoData

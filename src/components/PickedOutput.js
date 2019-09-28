@@ -1,8 +1,8 @@
-import React, { PureComponent } from 'react';
-import styled from 'styled-components';
-import { connect } from 'react-redux';
-import { changeView } from '../actions';
-import { ShowDivAni } from '../styles/AnimationStyled';
+import React, { PureComponent } from 'react'
+import styled from 'styled-components'
+import { connect } from 'react-redux'
+import { changeView } from '../actions'
+import { ShowDivAni } from '../styles/AnimationStyled'
 
 const PickedOutputDiv = styled.div`
   height:calc(100vh - 150px);
@@ -11,24 +11,24 @@ const PickedOutputDiv = styled.div`
   padding:40px;
   overflow: scroll;
   animation: ${ShowDivAni} 0.7s 1 both 0.4s;
-`;
+`
 const Cell = styled.div`
   box-sizing:border-box;
   display:inline-block;
   padding:10px;
   font-size:18px;
-`;
+`
 
 class PickedOutput extends PureComponent {
   render() {
-    const { count, filter } = this.props.combinationFilter;
+    const { count, filter } = this.props.combinationFilter
     return (
       <PickedOutputDiv>
-        {this.props.pickedComb[count]
-          && this.props.pickedComb[count].map((value, index) => {
-            if (!value.includes(filter))
-              return null;
-            else {
+        {this.props.pickedComb[count] &&
+          this.props.pickedComb[count].map((value, index) => {
+            if (!value.includes(filter)) {
+              return null
+            } else {
               return (
                 <Cell key={index}>
                   {value}
@@ -36,7 +36,7 @@ class PickedOutput extends PureComponent {
               )
             }
           })}
-      </PickedOutputDiv >
+      </PickedOutputDiv>
     )
   }
 }
@@ -44,7 +44,7 @@ class PickedOutput extends PureComponent {
 const mapStateToProps = state => {
   return {
     pickedComb: state.defaultReducer.pickedComb,
-    combinationFilter: state.defaultReducer.combinationFilter,
+    combinationFilter: state.defaultReducer.combinationFilter
   }
 }
 const mapDispatchToProps = dispatch => {
@@ -52,4 +52,4 @@ const mapDispatchToProps = dispatch => {
     changeView: str => dispatch(changeView(str))
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(PickedOutput);
+export default connect(mapStateToProps, mapDispatchToProps)(PickedOutput)

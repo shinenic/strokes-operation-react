@@ -1,15 +1,15 @@
 import React, { PureComponent } from 'react'
-import styled from 'styled-components';
-import BooksImg from '../image/indexCard/books.png';
-import checkImg from '../image/indexCard/check.png';
-import linkImg from '../image/indexCard/link.png';
-import { ShowDivAni } from '../styles/AnimationStyled';
-import Color from '../styles/ThemeColor';
-import CountUp from 'react-countup';
-import { connect } from 'react-redux';
-import { cleanAllInput } from '../actions';
+import styled from 'styled-components'
+import BooksImg from '../image/indexCard/books.png'
+import checkImg from '../image/indexCard/check.png'
+import linkImg from '../image/indexCard/link.png'
+import { ShowDivAni } from '../styles/AnimationStyled'
+import Color from '../styles/ThemeColor'
+import CountUp from 'react-countup'
+import { connect } from 'react-redux'
+import { cleanAllInput } from '../actions'
 
-const CardImg = [BooksImg, linkImg, checkImg];
+const CardImg = [BooksImg, linkImg, checkImg]
 
 const IndexCardDiv = styled.div`
   height:100%;
@@ -41,7 +41,7 @@ const IndexCardDiv = styled.div`
     justify-content: center;
     align-items: center;
   }
-`;
+`
 
 const Image = styled.img`
   content:url(${props => CardImg[props.cardIndex]});
@@ -53,7 +53,7 @@ const Image = styled.img`
   left:50%;
   top:50%;
   transform: translate(-50%,-50%);
-`;
+`
 
 const ImgBorder = styled.div`
   border-radius:50%; 
@@ -73,7 +73,7 @@ const ImgBorder = styled.div`
     width:40px;
     margin:0 auto;
   }
-`;
+`
 const CountText = styled.div`
   grid-area:data;
   font-weight:bold;
@@ -85,7 +85,7 @@ const CountText = styled.div`
     justify-content: center;
     align-items: center;
   }
-`;
+`
 const TitleText = styled.div`
   grid-area:title;
   display: grid;
@@ -100,7 +100,7 @@ const TitleText = styled.div`
   @media (max-width: 400px) {
     justify-content: center;
   }
-`;
+`
 
 const Card = styled.div`
   grid-area:${props => 'card' + props.cardIndex};
@@ -147,7 +147,7 @@ const Card = styled.div`
       filter:invert(1);
     }
   }
-`;
+`
 
 const CardGridContent = styled.div`
   height:100%;
@@ -169,13 +169,13 @@ const CardGridContent = styled.div`
   @media (max-width: 400px) {
     grid-template-columns:50px 0.5fr 0.5fr;
   }
-`;
+`
 
 class IndexCard extends PureComponent {
-  render() {
+  render () {
     const pickedCount = obj => {
       return Object.keys(obj).reduce((acc, index) => {
-        return acc + obj[index].length;
+        return acc + obj[index].length
       }, 0)
     }
     return (
@@ -186,9 +186,10 @@ class IndexCard extends PureComponent {
             <TitleText>單字庫</TitleText>
             <CountText>
               <CountUp
-                separator=","
-                suffix="  字"
-                end={Object.keys(this.props.character).length} />
+                separator=','
+                suffix='  字'
+                end={Object.keys(this.props.character).length}
+              />
             </CountText>
           </CardGridContent>
         </Card>
@@ -199,9 +200,10 @@ class IndexCard extends PureComponent {
             <TitleText>總組合數</TitleText>
             <CountText>
               <CountUp
-                separator=","
-                suffix="  組"
-                end={Object.keys(this.props.character).length * Object.keys(this.props.character).length} />
+                separator=','
+                suffix='  組'
+                end={Object.keys(this.props.character).length * Object.keys(this.props.character).length}
+              />
             </CountText>
           </CardGridContent>
         </Card>
@@ -212,13 +214,14 @@ class IndexCard extends PureComponent {
             <TitleText>已選擇組合</TitleText>
             <CountText>
               <CountUp
-                separator=","
-                suffix="  組"
-                end={pickedCount(this.props.pickedComb)} />
+                separator=','
+                suffix='  組'
+                end={pickedCount(this.props.pickedComb)}
+              />
             </CountText>
           </CardGridContent>
         </Card>
-      </IndexCardDiv >
+      </IndexCardDiv>
     )
   }
 }
@@ -233,4 +236,4 @@ const mapDispatchToProps = dispatch => {
     cleanAllInput: () => dispatch(cleanAllInput())
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(IndexCard);
+export default connect(mapStateToProps, mapDispatchToProps)(IndexCard)

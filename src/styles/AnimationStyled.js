@@ -1,5 +1,4 @@
-import styled, { keyframes } from 'styled-components';
-
+import { keyframes } from 'styled-components'
 
 export const ShowDivAni = keyframes`
   from{
@@ -10,4 +9,4 @@ export const ShowDivAni = keyframes`
     opacity:1;
     transform:translateY(0);
   }
-`;
+`

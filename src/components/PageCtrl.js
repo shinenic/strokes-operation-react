@@ -1,10 +1,9 @@
 import React, { PureComponent } from 'react'
-import styled from 'styled-components';
-import { connect } from 'react-redux';
-import { changePage } from '../actions';
-import arrowImg from '../image/pageCtrl/arrow2.png';
-import doubleArrowImg from '../image/pageCtrl/arrow3.png';
-
+import styled from 'styled-components'
+import { connect } from 'react-redux'
+import { changePage } from '../actions'
+import arrowImg from '../image/pageCtrl/arrow2.png'
+import doubleArrowImg from '../image/pageCtrl/arrow3.png'
 
 const PageCtrlDiv = styled.div`
   height:60px;
@@ -16,22 +15,22 @@ const PageCtrlDiv = styled.div`
   display:grid;
   grid-template-columns:45px 45px 1fr 45px 45px;
   grid-template-rows:0.5fr 0,5fr;
-  grid-template-areas:"doubleArrow arrow pageInfo arrowNext doubleArrowNext"
-                      "doubleArrow arrow dataInfo arrowNext doubleArrowNext";
-`;
+  grid-template-areas:'doubleArrow arrow pageInfo arrowNext doubleArrowNext'
+                      'doubleArrow arrow dataInfo arrowNext doubleArrowNext';
+`
 const GridDiv = styled.div`
   display: grid;
   justify-content: center;
   align-items: center;
   grid-area:${props => props.dir};
-`;
+`
 const Arrow = styled.img`
   content:url(${arrowImg});
   height:32px;
   width:32px;
   cursor: pointer;
   filter:${props => props.enable ? 'invert(0)' : 'invert(0.7)'};
-  transform:${props => props.dir === "next" ? 'scaleX(-1)' : ''};
+  transform:${props => props.dir === 'next' ? 'scaleX(-1)' : ''};
   display: grid;
   justify-content: center;
   align-items: center;
@@ -39,67 +38,65 @@ const Arrow = styled.img`
     filter:${props => props.enable ? 'invert(0.35)' : 'invert(0.7)'};
     transition:filter 200ms;
   }
-`;
+`
 const DoubleArrow = styled(Arrow)`
   content:url(${doubleArrowImg});
-`;
+`
 
 const PageInfo = styled.div`
   display: grid;
   grid-area:pageInfo;
   justify-content: center;
   align-items: center;
-`;
+`
 const DataInfo = styled(PageInfo)`
   grid-area:dataInfo;
-`;
-
-
-
+`
 
 class PageCtrl extends PureComponent {
-  render() {
+  render () {
     return (
       <PageCtrlDiv>
-        <GridDiv dir={'doubleArrow'}>
+        <GridDiv dir='doubleArrow'>
           <DoubleArrow
-            dir={"next"}
+            dir='next'
             enable={this.props.currentPage !== 1}
-            onClick={() => this.props.currentPage !== 1 && this.props.changePage(false, true)} />
+            onClick={() => this.props.currentPage !== 1 && this.props.changePage(false, true)}
+          />
         </GridDiv>
 
-        <GridDiv dir={'arrow'}>
+        <GridDiv dir='arrow'>
           <Arrow
-            dir={"next"}
+            dir='next'
             enable={this.props.currentPage !== 1}
-            onClick={() => this.props.currentPage !== 1 && this.props.changePage(false, false)} />
+            onClick={() => this.props.currentPage !== 1 && this.props.changePage(false, false)}
+          />
         </GridDiv>
 
-        <GridDiv dir={'arrowNext'}>
+        <GridDiv dir='arrowNext'>
           <Arrow
-            dir={"pre"}
+            dir='pre'
             enable={this.props.currentPage !== this.props.maxPage}
-            onClick={() => this.props.currentPage !== this.props.maxPage && this.props.changePage(true, false)} />
+            onClick={() => this.props.currentPage !== this.props.maxPage && this.props.changePage(true, false)}
+          />
         </GridDiv>
 
-        <GridDiv dir={'doubleArrowNext'}>
+        <GridDiv dir='doubleArrowNext'>
           <DoubleArrow
-            dir={"pre"}
+            dir='pre'
             enable={this.props.currentPage !== this.props.maxPage}
-            onClick={() => this.props.currentPage !== this.props.maxPage && this.props.changePage(true, true)} />
+            onClick={() => this.props.currentPage !== this.props.maxPage && this.props.changePage(true, true)}
+          />
         </GridDiv>
-
 
         <PageInfo>
           {`Page ${this.props.currentPage} of ${this.props.maxPage}`}
         </PageInfo>
         <DataInfo>
           {`Result ${(this.props.currentPage - 1) * 14 * 15 + 1} - 
-          ${this.props.maxPage === this.props.currentPage ?
-              this.props.combinationResult.length : this.props.currentPage * 14 * 15}`}
+          ${this.props.maxPage === this.props.currentPage
+              ? this.props.combinationResult.length : this.props.currentPage * 14 * 15}`}
         </DataInfo>
-
-
 
       </PageCtrlDiv>
     )
@@ -109,7 +106,7 @@ const mapStateToProps = state => {
   return {
     maxPage: state.defaultReducer.maxPage,
     currentPage: state.defaultReducer.currentPage,
-    combinationResult: state.defaultReducer.combinationResult,
+    combinationResult: state.defaultReducer.combinationResult
   }
 }
 const mapDispatchToProps = dispatch => {
@@ -117,4 +114,4 @@ const mapDispatchToProps = dispatch => {
     changePage: (next, double) => dispatch(changePage(next, double))
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(PageCtrl);
+export default connect(mapStateToProps, mapDispatchToProps)(PageCtrl)

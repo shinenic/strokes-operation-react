@@ -51,7 +51,7 @@ const Text = styled.div`
 `;
 const TextInput = styled.div`
   transition:0.5s;
-  height:${props => props.expand === "" || props.expand === "closeDiv" ? '0' : '50px'};
+  height:${props => props.expand === '' || props.expand === 'closeDiv' ? '0' : '50px'};
   width:100%;
   line-height:50px;
   padding-left:9%;
@@ -124,10 +124,10 @@ class Menu extends PureComponent {
           break;
         case 3:
           this.props.deleteCharacter(this.props.menuInput[3]);
-          this.props.changeView("INDEX")
+          this.props.changeView('INDEX')
           break;
         case 4:
-          this.props.changeView("OVERVIEW")
+          this.props.changeView('OVERVIEW')
           break;
         case 8:
           this.props.addCharacter(demoData);
@@ -143,21 +143,21 @@ class Menu extends PureComponent {
 
   render() {
     const inputList = [
-      { option: "查詢筆劃", hint: "請輸入中文字(可多筆)", buttonName: "查詢" },
-      { option: "增加單字", hint: "請輸入中文字(可多筆)", buttonName: "增加" },
-      { option: "查詢筆劃組合", hint: "總筆劃數", hintcont: "單字", buttonName: "查詢" },
-      { option: "移除單字", hint: "欲刪除之文字", buttonName: "移除" },
-      { option: "查看所有單字" },
-      { option: "儲存" },
-      { option: "讀取" },
-      { option: "匯出" },
-      { option: "載入範本" },
-      { option: "軟體介紹" },
+      { option: '查詢筆劃', hint: '請輸入中文字(可多筆)', buttonName: '查詢' },
+      { option: '增加單字', hint: '請輸入中文字(可多筆)', buttonName: '增加' },
+      { option: '查詢筆劃組合', hint: '總筆劃數', hintcont: '單字', buttonName: '查詢' },
+      { option: '移除單字', hint: '欲刪除之文字', buttonName: '移除' },
+      { option: '查看所有單字' },
+      { option: '儲存' },
+      { option: '讀取' },
+      { option: '匯出' },
+      { option: '載入範本' },
+      { option: '軟體介紹' },
     ];
     return (
       <MenuDiv expand={this.props.menuExpand}>
         <MobileHeader />
-        <MenuImg onClick={() => this.props.changeView("")} />
+        <MenuImg onClick={() => this.props.changeView('')} />
         {inputList.map((value, index) => {
           return (
             <div key={index}>
@@ -171,7 +171,7 @@ class Menu extends PureComponent {
                 }>◆  {value['option']}</Text>
               {index < 4 &&
                 <TextInput expand={this.props.menuClassName[index]}>
-                  <Input type="text"
+                  <Input type='text'
                     single={index !== 2}
                     placeholder={value['hint']}
                     ref={(input) => { this.inputFocus[index] = input }}
@@ -179,7 +179,7 @@ class Menu extends PureComponent {
                     onKeyPress={e => this.handleKeyPress(e, index)}
                     onChange={e => this.props.handleInput(e.target.value, index)} />
                   {index === 2 &&
-                    <Input type="text"
+                    <Input type='text'
                       single={index !== 2}
                       placeholder={value['hintcont']}
                       value={this.props.menuInput[index + 2]}
@@ -212,7 +212,7 @@ const mapDispatchToProps = dispatch => {
     inputTextChange: num => dispatch(inputTextChange(num)),
     cleanAllInput: () => dispatch(cleanAllInput()),
     changeView: str => dispatch(changeView(str)),
-    triggerMenu: (bool) => dispatch(triggerMenu(bool)),
+    triggerMenu: (bool) => dispatch(triggerMenu(bool))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Menu);

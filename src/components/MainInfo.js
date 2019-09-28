@@ -1,9 +1,8 @@
 import React, { PureComponent } from 'react'
-import styled from 'styled-components';
-import { ShowDivAni } from '../styles/AnimationStyled';
-import { connect } from 'react-redux';
-import { changeView } from '../actions';
-
+import styled from 'styled-components'
+import { ShowDivAni } from '../styles/AnimationStyled'
+import { connect } from 'react-redux'
+import { changeView } from '../actions'
 
 const MainInfoDiv = styled.div`
   grid-area: mainInfo;
@@ -15,7 +14,7 @@ const MainInfoDiv = styled.div`
   @media (max-width: 480px) {
     padding:0 20px;
   }
-`;
+`
 const TextDiv = styled.div`
   height:100%;
   width:100%;
@@ -26,65 +25,63 @@ const TextDiv = styled.div`
   @media (max-width: 480px) {
     line-height:30px;
   }
-`;
+`
 const Text = styled.div`
   animation: ${ShowDivAni} 0.7s 1 both 0.1s;
-`;
+`
 const HighLight = styled.span`
   color:rgb(63,73,83);
   font-size:16px;
-`;
+`
 const CheckBtn = styled.label`
   margin:auto 5px auto 5px;
   cursor:pointer;
   color:rgb(45,95,255);
-`;
-
-
+`
 
 class MainInfo extends PureComponent {
   render() {
     const TextOutput = (view) => {
-      const { count, filter } = this.props.combinationFilter;
-      const { combinationResult, pickedComb } = this.props;
+      const { count, filter } = this.props.combinationFilter
+      const { combinationResult, pickedComb } = this.props
 
       switch (view) {
-        case "PICKED_OUTPUT":
-        case "SEARCH_COMBINATION":
+        case 'PICKED_OUTPUT':
+        case 'SEARCH_COMBINATION':
           return (<Text key={1}>
-            {`查詢筆劃組合    >>    `}
-            {`總筆劃: `}<HighLight>{count}劃</HighLight>
-            {filter !== "" && `, 包含 '`}
-            <HighLight>{filter !== "" && filter}</HighLight>
-            {filter !== "" && `'`}
-            {`, 的結果共有`} <HighLight>{combinationResult.length} 筆</HighLight>結果
-            {pickedComb[count] && `, 目前已選擇 `}
+            {'查詢筆劃組合    >>    '}
+            {'總筆劃: '}<HighLight>{count}劃</HighLight>
+            {filter !== '' && ', 包含 \''}
+            <HighLight>{filter !== '' && filter}</HighLight>
+            {filter !== '' && '\''}
+            {', 的結果共有'} <HighLight>{combinationResult.length} 筆</HighLight>結果
+            {pickedComb[count] && ', 目前已選擇 '}
             <HighLight>
-              {pickedComb[count]
-                && `${pickedComb[count]
+              {pickedComb[count] &&
+                `${pickedComb[count]
                   ? pickedComb[count].filter(value => value.includes(filter)).length : 0} 筆`}
             </HighLight>
-            {pickedComb[count] && `組合`}
-            <CheckBtn onClick={() => this.props.changeView(view === "SEARCH_COMBINATION" ? "PICKED_OUTPUT" : "SEARCH_COMBINATION")}>
-              {view === "SEARCH_COMBINATION" ? `輸出` : `編輯`}
+            {pickedComb[count] && '組合'}
+            <CheckBtn onClick={() => this.props.changeView(view === 'SEARCH_COMBINATION' ? 'PICKED_OUTPUT' : 'SEARCH_COMBINATION')}>
+              {view === 'SEARCH_COMBINATION' ? '輸出' : '編輯'}
             </CheckBtn>
           </Text>)
-        case "INDEX":
+        case 'INDEX':
           return (
             <Text key={2}>
-              {`首頁    >>    `}
+              {'首頁    >>    '}
             </Text>
           )
-        case "OVERVIEW":
+        case 'OVERVIEW':
           return (
             <Text key={3}>
-              {`單字總覽    >>    `}
+              {'單字總覽    >>    '}
             </Text>
           )
         default:
           return (
             <Text key={2}>
-              {`首頁    >>    `}
+              {'首頁    >>    '}
             </Text>
           )
       }
@@ -94,7 +91,7 @@ class MainInfo extends PureComponent {
         <TextDiv>
           {TextOutput(this.props.view)}
         </TextDiv>
-      </MainInfoDiv >
+      </MainInfoDiv>
     )
   }
 }
@@ -111,4 +108,4 @@ const mapDispatchToProps = dispatch => {
     changeView: str => dispatch(changeView(str))
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(MainInfo);
+export default connect(mapStateToProps, mapDispatchToProps)(MainInfo)

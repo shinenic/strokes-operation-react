@@ -1,10 +1,9 @@
-import React, { PureComponent } from 'react';
-import styled from 'styled-components';
-import { ShowDivAni } from '../styles/AnimationStyled';
-import { connect } from 'react-redux';
-import PageCtrl from './PageCtrl';
-import { pickName } from '../actions';
-
+import React, { PureComponent } from 'react'
+import styled from 'styled-components'
+import { ShowDivAni } from '../styles/AnimationStyled'
+import { connect } from 'react-redux'
+import PageCtrl from './PageCtrl'
+import { pickName } from '../actions'
 
 const MainDiv = styled.div`
   /* padding:40px; */
@@ -14,9 +13,8 @@ const MainDiv = styled.div`
   box-sizing:border-box;
   position:relative;
   animation: ${ShowDivAni} 0.7s 1 both 0.4s;
-`;
-
-//目前顯示個數14*15
+`
+// 目前顯示個數14*15
 const Button = styled.div`
   /* width:7.13%; */
   /* width:13.33%; */
@@ -35,11 +33,10 @@ const Button = styled.div`
   &:hover{
     background: ${props => props.picked ? '#666' : '#DDD'};
   }
-`;
-
+`
 
 class Combination extends PureComponent {
-  render() {
+  render () {
     return (
       <MainDiv key={this.props.combinationFilter.count} width={this.props.windowWidth}>
         {this.props.currentPageResult.map((value, index) => {
@@ -49,14 +46,15 @@ class Combination extends PureComponent {
               onClick={() => this.props.pickName(value)}
               key={index}
               picked={Object.keys(this.props.pickedComb).includes(this.props.combinationFilter.count)
-                ? this.props.pickedComb[this.props.combinationFilter.count].includes(value) : false}>
+                ? this.props.pickedComb[this.props.combinationFilter.count].includes(value) : false}
+            >
               {value}
             </Button>
           )
         })}
         <PageCtrl />
 
-      </MainDiv >
+      </MainDiv>
     )
   }
 }
@@ -68,12 +66,12 @@ const mapStateToProps = state => {
     combinationResult: state.defaultReducer.combinationResult,
     combinationFilter: state.defaultReducer.combinationFilter,
     windowHeight: state.defaultReducer.windowHeight,
-    windowWidth: state.defaultReducer.windowWidth,
+    windowWidth: state.defaultReducer.windowWidth
   }
 }
 const mapDispatchToProps = dispatch => {
   return {
-    pickName: (str) => dispatch(pickName(str)),
+    pickName: (str) => dispatch(pickName(str))
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Combination);
+export default connect(mapStateToProps, mapDispatchToProps)(Combination)

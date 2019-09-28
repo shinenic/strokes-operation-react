@@ -18,15 +18,15 @@ const GridContainer = styled.div`
   box-sizing:border-box;
   grid-template-columns:250px 1fr;
   grid-template-rows:80px 60px 1fr;
-  grid-template-areas:"menu header"
-                      "menu mainInfo"
-                      "menu main";
+  grid-template-areas:'menu header'
+                      'menu mainInfo'
+                      'menu main';
   @media (max-width: 480px) {
     grid-template-columns:100%;
     grid-template-rows:60px 30px 1fr;
-    grid-template-areas:"header"
-                      "mainInfo"
-                      "main";
+    grid-template-areas:'header'
+                      'mainInfo'
+                      'main';
   }
 `;
 const Main = styled.div`
@@ -38,16 +38,10 @@ const Main = styled.div`
   }
 `;
 
-
-
-
-
 class Index extends PureComponent {
   constructor() {
     super();
   }
-
-
   // https://tg.pe/i4W 警告提醒
   // componentDidMount() {
   //   window.addEventListener('beforeunload', this.handleWindowClose);
@@ -80,13 +74,13 @@ class Index extends PureComponent {
   render() {
     const renderView = (view) => {
       switch (view) {
-        case "INDEX":
+        case 'INDEX':
           return <IndexCard />;
-        case "SEARCH_COMBINATION":
+        case 'SEARCH_COMBINATION':
           return <Combination />;
-        case "OVERVIEW":
+        case 'OVERVIEW':
           return <Overview />;
-        case "PICKED_OUTPUT":
+        case 'PICKED_OUTPUT':
           return <PickedOutput />;
         default:
           return <IndexCard />;

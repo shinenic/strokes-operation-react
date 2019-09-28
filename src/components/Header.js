@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react'
-import styled, { keyframes } from 'styled-components';
-import Cat from '../image/cat.png';
-import Hamburger from '../image/hamburger.png';
-import Color from '../styles/ThemeColor';
-import Cross from '../image/cross.png';
-import Icon from '../image/menuIcon.png';
-import { connect } from 'react-redux';
-import { triggerMenu, changeView } from '../actions';
+import styled from 'styled-components'
+import Cat from '../image/cat.png'
+import Hamburger from '../image/hamburger.png'
+import Color from '../styles/ThemeColor'
+import Cross from '../image/cross.png'
+import Icon from '../image/menuIcon.png'
+import { connect } from 'react-redux'
+import { triggerMenu, changeView } from '../actions'
 
 const HeaderDiv = styled.div`
   grid-area: header;
@@ -14,7 +14,7 @@ const HeaderDiv = styled.div`
   @media (max-width: 480px) {
     background:${Color.black[0]};
   }
-`;
+`
 const GridContainer = styled.div`
   height:100%;
   width:100%;
@@ -30,7 +30,7 @@ const GridContainer = styled.div`
     grid-template-columns:15px 40px 1fr 80px;
     grid-template-areas:". icon title hamburger";
     }
-`;
+`
 const InfoCount = styled.div`
   grid-area:infoCount;
   display: grid;
@@ -40,23 +40,23 @@ const InfoCount = styled.div`
   @media (max-width: 480px){
     display:none;
   }
-`;
+`
 const InfoSave = styled(InfoCount)`
   grid-area:infoSave;
   @media (max-width: 1200px){
     justify-content: start;
   }
-`;
+`
 const InfoUser = styled(InfoCount)`
   grid-area:infoUser;
   @media (max-width: 1200px){
     justify-content: end;
     margin-right:10px;
   }
-`;
+`
 const InfoUserPic = styled(InfoCount)`
   grid-area:infoUserPic;
-`;
+`
 const UserImg = styled.img`
   content:url(${Cat});
   height:45px;
@@ -67,7 +67,7 @@ const UserImg = styled.img`
   @media (max-width: 480px){
     display:none;
   }
-`;
+`
 
 const IconImg = styled.img`
   display:none;
@@ -87,7 +87,7 @@ const IconImg = styled.img`
       filter:invert(1);
     } 
   }
-`;
+`
 
 const HamburgerImg = styled.img`
   content:url(${props => props.expand ? Cross : Hamburger});
@@ -100,7 +100,7 @@ const HamburgerImg = styled.img`
   &:hover{
     filter:invert(1);
   }
-`;
+`
 const HamburgerBorder = styled.div`
   display:none;
   @media (max-width: 480px){
@@ -119,7 +119,7 @@ const HamburgerBorder = styled.div`
     }
   }
   
-`;
+`
 const Title = styled.div`
   display:none;
   @media (max-width: 480px){
@@ -129,18 +129,15 @@ const Title = styled.div`
     align-items: center;
     color:${Color.text[0]};
   }
-`;
-
-
-
+`
 
 class Header extends PureComponent {
-  render() {
+  render () {
     return (
       <HeaderDiv>
         <GridContainer>
           <Title>名字筆劃組合</Title>
-          <IconImg onClick={() => this.props.changeView("")} />
+          <IconImg onClick={() => this.props.changeView('')} />
           <HamburgerBorder expand={this.props.menuExpand} onClick={() => this.props.triggerMenu()}>
             <HamburgerImg expand={this.props.menuExpand} />
           </HamburgerBorder>
@@ -151,14 +148,14 @@ class Header extends PureComponent {
           {/* <InfoUser>關於網站</InfoUser>
           <InfoUserPic>聯絡我</InfoUserPic> */}
         </GridContainer>
-      </HeaderDiv >
+      </HeaderDiv>
     )
   }
 }
 const mapStateToProps = state => {
   return {
     character: state.defaultReducer.character,
-    menuExpand: state.defaultReducer.menuExpand,
+    menuExpand: state.defaultReducer.menuExpand
   }
 }
 const mapDispatchToProps = dispatch => {
@@ -167,4 +164,4 @@ const mapDispatchToProps = dispatch => {
     changeView: (str) => dispatch(changeView(str))
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header)

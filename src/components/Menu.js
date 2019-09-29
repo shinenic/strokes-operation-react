@@ -171,7 +171,7 @@ class Menu extends PureComponent {
                 }>◆  {value['option']}</Text>
               {index < 4 &&
                 <TextInput expand={this.props.menuClassName[index]}>
-                  <Input type='text'
+                  <Input type="text"
                     single={index !== 2}
                     placeholder={value['hint']}
                     ref={(input) => { this.inputFocus[index] = input }}
@@ -179,7 +179,7 @@ class Menu extends PureComponent {
                     onKeyPress={e => this.handleKeyPress(e, index)}
                     onChange={e => this.props.handleInput(e.target.value, index)} />
                   {index === 2 &&
-                    <Input type='text'
+                    <Input type="text"
                       single={index !== 2}
                       placeholder={value['hintcont']}
                       value={this.props.menuInput[index + 2]}

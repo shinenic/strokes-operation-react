@@ -40,7 +40,7 @@ const CheckBtn = styled.label`
 `
 
 class MainInfo extends PureComponent {
-  render() {
+  render () {
     const TextOutput = (view) => {
       const { count, filter } = this.props.combinationFilter
       const { combinationResult, pickedComb } = this.props

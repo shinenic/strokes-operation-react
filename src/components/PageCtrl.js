@@ -57,33 +57,33 @@ class PageCtrl extends PureComponent {
   render () {
     return (
       <PageCtrlDiv>
-        <GridDiv dir='doubleArrow'>
+        <GridDiv dir="doubleArrow">
           <DoubleArrow
-            dir='next'
+            dir="next"
             enable={this.props.currentPage !== 1}
             onClick={() => this.props.currentPage !== 1 && this.props.changePage(false, true)}
           />
         </GridDiv>
 
-        <GridDiv dir='arrow'>
+        <GridDiv dir="arrow">
           <Arrow
-            dir='next'
+            dir="next"
             enable={this.props.currentPage !== 1}
             onClick={() => this.props.currentPage !== 1 && this.props.changePage(false, false)}
           />
         </GridDiv>
 
-        <GridDiv dir='arrowNext'>
+        <GridDiv dir="arrowNext">
           <Arrow
-            dir='pre'
+            dir="pre"
             enable={this.props.currentPage !== this.props.maxPage}
             onClick={() => this.props.currentPage !== this.props.maxPage && this.props.changePage(true, false)}
           />
         </GridDiv>
 
-        <GridDiv dir='doubleArrowNext'>
+        <GridDiv dir="doubleArrowNext">
           <DoubleArrow
-            dir='pre'
+            dir="pre"
             enable={this.props.currentPage !== this.props.maxPage}
             onClick={() => this.props.currentPage !== this.props.maxPage && this.props.changePage(true, true)}
           />

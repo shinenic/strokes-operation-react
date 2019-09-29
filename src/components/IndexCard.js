@@ -186,8 +186,8 @@ class IndexCard extends PureComponent {
             <TitleText>單字庫</TitleText>
             <CountText>
               <CountUp
-                separator=','
-                suffix='  字'
+                separator=","
+                suffix="  字"
                 end={Object.keys(this.props.character).length}
               />
             </CountText>
@@ -200,8 +200,8 @@ class IndexCard extends PureComponent {
             <TitleText>總組合數</TitleText>
             <CountText>
               <CountUp
-                separator=','
-                suffix='  組'
+                separator=","
+                suffix="  組"
                 end={Object.keys(this.props.character).length * Object.keys(this.props.character).length}
               />
             </CountText>
@@ -214,8 +214,8 @@ class IndexCard extends PureComponent {
             <TitleText>已選擇組合</TitleText>
             <CountText>
               <CountUp
-                separator=','
-                suffix='  組'
+                separator=","
+                suffix="  組"
                 end={pickedCount(this.props.pickedComb)}
               />
             </CountText>

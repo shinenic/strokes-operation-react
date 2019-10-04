@@ -56,7 +56,7 @@ const handleInputString = str => {
 const getAllStrokes = arr => {
   const obj = {}
   arr.map(char => {
-    return (obj[char] = getStrokes(chr))
+    return (obj[char] = getStrokes(char))
   })
   return obj
 }

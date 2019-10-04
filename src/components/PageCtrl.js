@@ -13,6 +13,8 @@ const PageCtrlDiv = styled.div`
   left:50%;
   transform: translateX(-50%);
   display:grid;
+  user-select: none;
+  -webkit-touch-callout: none;
   grid-template-columns:45px 45px 1fr 45px 45px;
   grid-template-rows:0.5fr 0,5fr;
   grid-template-areas:'doubleArrow arrow pageInfo arrowNext doubleArrowNext'

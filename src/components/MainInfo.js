@@ -40,7 +40,7 @@ const CheckBtn = styled.label`
 `
 
 class MainInfo extends PureComponent {
-  render () {
+  render() {
     const TextOutput = (view) => {
       const { count, filter } = this.props.combinationFilter
       const { combinationResult, pickedComb } = this.props
@@ -48,24 +48,44 @@ class MainInfo extends PureComponent {
       switch (view) {
         case 'PICKED_OUTPUT':
         case 'SEARCH_COMBINATION':
-          return (<Text key={1}>
-            {'查詢筆劃組合    >>    '}
-            {'總筆劃: '}<HighLight>{count}劃</HighLight>
-            {filter !== '' && ', 包含 \''}
-            <HighLight>{filter !== '' && filter}</HighLight>
-            {filter !== '' && '\''}
-            {', 的結果共有'} <HighLight>{combinationResult.length} 筆</HighLight>結果
+          if (this.props.windowWidth > 480) {
+            return (<Text key={1}>
+              {'查詢筆劃組合    >>    '}
+              {'總筆劃: '}<HighLight>{count}劃</HighLight>
+              {filter !== '' && ', 包含 \''}
+              <HighLight>{filter !== '' && filter}</HighLight>
+              {filter !== '' && '\''}
+              {', 的結果共有'} <HighLight>{combinationResult.length} 筆</HighLight>結果
             {pickedComb[count] && ', 目前已選擇 '}
-            <HighLight>
-              {pickedComb[count] &&
-                `${pickedComb[count]
-                  ? pickedComb[count].filter(value => value.includes(filter)).length : 0} 筆`}
-            </HighLight>
-            {pickedComb[count] && '組合'}
-            <CheckBtn onClick={() => this.props.changeView(view === 'SEARCH_COMBINATION' ? 'PICKED_OUTPUT' : 'SEARCH_COMBINATION')}>
-              {view === 'SEARCH_COMBINATION' ? '輸出' : '編輯'}
-            </CheckBtn>
-          </Text>)
+              <HighLight>
+                {pickedComb[count] &&
+                  `${pickedComb[count]
+                    ? pickedComb[count].filter(value => value.includes(filter)).length : 0} 筆`}
+              </HighLight>
+              {pickedComb[count] && '組合'}
+              <CheckBtn onClick={() => this.props.changeView(view === 'SEARCH_COMBINATION' ? 'PICKED_OUTPUT' : 'SEARCH_COMBINATION')}>
+                {view === 'SEARCH_COMBINATION' ? '輸出' : '編輯'}
+              </CheckBtn>
+            </Text>)
+          } else {
+            return (<Text key={1}>
+              {'總筆劃: '}<HighLight>{count}</HighLight>
+              {filter !== '' && ', 包含 "'}
+              <HighLight>{filter !== '' && filter}</HighLight>
+              {filter !== '' && '"'}
+              {', 共'} <HighLight>{combinationResult.length} 組</HighLight>
+              {pickedComb[count] && ', 已選擇 '}
+              <HighLight>
+                {pickedComb[count] &&
+                  `${pickedComb[count]
+                    ? pickedComb[count].filter(value => value.includes(filter)).length : 0} 組`}
+              </HighLight>
+              <CheckBtn onClick={() => this.props.changeView(view === 'SEARCH_COMBINATION' ? 'PICKED_OUTPUT' : 'SEARCH_COMBINATION')}>
+                {view === 'SEARCH_COMBINATION' ? '輸出' : '編輯'}
+              </CheckBtn>
+            </Text>)
+          }
+
         case 'INDEX':
           return (
             <Text key={2}>
@@ -100,7 +120,9 @@ const mapStateToProps = state => {
     pickedComb: state.defaultReducer.pickedComb,
     combinationResult: state.defaultReducer.combinationResult,
     combinationFilter: state.defaultReducer.combinationFilter,
-    view: state.defaultReducer.view
+    view: state.defaultReducer.view,
+    windowHeight: state.defaultReducer.windowHeight,
+    windowWidth: state.defaultReducer.windowWidth
   }
 }
 const mapDispatchToProps = dispatch => {

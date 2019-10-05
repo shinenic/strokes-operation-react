@@ -143,24 +143,27 @@ class Menu extends PureComponent {
 
   render() {
     const inputList = [
-      { option: '查詢筆劃', hint: '請輸入中文字(可多筆)', buttonName: '查詢' },
-      { option: '增加單字', hint: '請輸入中文字(可多筆)', buttonName: '增加' },
-      { option: '查詢筆劃組合', hint: '總筆劃數', hintcont: '單字', buttonName: '查詢' },
-      { option: '移除單字', hint: '欲刪除之文字', buttonName: '移除' },
-      { option: '查看所有單字' },
-      { option: '儲存' },
-      { option: '讀取' },
-      { option: '匯出' },
-      { option: '載入範本' },
-      { option: '軟體介紹' },
+      { option: '查詢筆劃', hint: '請輸入中文字(可多筆)', buttonName: '查詢', isRender: false },
+      { option: '增加單字', hint: '請輸入中文字(可多筆)', buttonName: '增加', isRender: true },
+      { option: '查詢筆劃組合', hint: '總筆劃數', hintcont: '單字', buttonName: '查詢', isRender: true },
+      { option: '移除單字', hint: '欲刪除之文字', buttonName: '移除', isRender: true },
+      { option: '查看所有單字', isRender: true },
+      { option: '儲存', isRender: false },
+      { option: '讀取', isRender: false },
+      { option: '匯出', isRender: false },
+      { option: '載入範本', isRender: true },
+      { option: '軟體介紹', isRender: false },
     ];
     return (
       <MenuDiv expand={this.props.menuExpand}>
         <MobileHeader />
         <MenuImg onClick={() => this.props.changeView('')} />
         {inputList.map((value, index) => {
-          return (
-            <div key={index}>
+          return ( 
+            <div 
+            key={index}
+            style={value['isRender']?{}:{display: 'none'}}
+            >
               <Text
                 key={index}
                 picked={this.props.inputTextSelect === index}

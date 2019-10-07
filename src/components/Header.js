@@ -6,7 +6,7 @@ import Color from '../styles/ThemeColor'
 import Cross from '../image/cross.png'
 import Icon from '../image/menuIcon.png'
 import { connect } from 'react-redux'
-import { triggerMenu, changeView } from '../actions'
+import { triggerMenu, changeView, inputTextChange } from '../actions'
 
 const HeaderDiv = styled.div`
   grid-area: header;
@@ -136,12 +136,12 @@ const Title = styled.div`
 `
 
 class Header extends PureComponent {
-  render () {
+  render() {
     return (
       <HeaderDiv>
         <GridContainer>
-          <Title onClick={() => this.props.changeView('')}>姓名筆劃工具</Title>
-          <IconImg onClick={() => this.props.changeView('')} />
+          <Title onClick={() => { this.props.changeView(''); this.props.inputTextChange(-1); }}>姓名筆劃工具</Title>
+          <IconImg onClick={() => { this.props.changeView(''); this.props.inputTextChange(-1); }} />
           <HamburgerBorder expand={this.props.menuExpand} onClick={() => this.props.triggerMenu()}>
             <HamburgerImg expand={this.props.menuExpand} />
           </HamburgerBorder>
@@ -156,6 +156,7 @@ class Header extends PureComponent {
     )
   }
 }
+// this.props.inputTextChange(index);
 const mapStateToProps = state => {
   return {
     character: state.defaultReducer.character,
@@ -165,7 +166,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     triggerMenu: (bool) => dispatch(triggerMenu(bool)),
-    changeView: (str) => dispatch(changeView(str))
+    changeView: (str) => dispatch(changeView(str)),
+    inputTextChange: num => dispatch(inputTextChange(num))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Header)

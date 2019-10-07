@@ -222,8 +222,8 @@ const defaultReducer = (state = initState, action) => {
       })
     case 'INPUT_TEXT_CHANGE':
       return Object.assign({}, state, {
-        menuClassName: getMenuClassName(action.num, state.inputTextSelect, state.menuClassName[action.num]),
-        inputTextSelect: state.inputTextSelect === action.num ? -1 : action.num
+        menuClassName: action.num === -1 ? ['', '', '', ''] : getMenuClassName(action.num, state.inputTextSelect, state.menuClassName[action.num]),
+        inputTextSelect: action.num === -1 ? -1 : (state.inputTextSelect === action.num ? -1 : action.num)
       })
     case 'CLEAN_ALL_INPUT':
       return Object.assign({}, state, {

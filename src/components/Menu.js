@@ -22,7 +22,7 @@ const MenuDiv = styled.div`
     z-index:100;
     top:0;
     right:${props => props.expand ? '0' : '-300px'};
-    transition:0.5s;
+    transition:0.4s;
     opacity:0.9;
     width:300px;
     min-height:100%;
@@ -46,14 +46,14 @@ const Text = styled.div`
   color:${Color.text[0]};
   line-height:50px;
   cursor: pointer;
-  transition: 0.17s;
+  transition: 0.3s;
   background:${props => props.picked ? Color.redActive : Color.black[0]};
   &:hover{
     background:${props => props.picked ? Color.redActive : Color.redHover};
   }
 `;
 const TextInput = styled.div`
-  transition:0.5s;
+  transition:0.4s;
   height:${props => props.expand === '' || props.expand === 'closeDiv' ? '0' : '50px'};
   width:100%;
   line-height:50px;
@@ -112,7 +112,7 @@ const IconDiv = styled.div`
   margin-right:20px;
   position: relative;
   top:1px;
-  background-image: url(${props=>props.icon});
+  background-image: url(${props => props.icon});
   background-size: cover;  
   filter: invert(1);
 `;
@@ -165,7 +165,7 @@ class Menu extends PureComponent {
           this.props.deleteCharacter(this.props.menuInput[3]);
           this.props.changeView('INDEX')
           const deleteCharCount = arrayUnique(handleInputString(this.props.menuInput[3])).reduce((acc, value) => {
-            return Object.keys(this.props.character).includes(value) ? ++acc :acc
+            return Object.keys(this.props.character).includes(value) ? ++acc : acc
           }, 0)
           deleteCharCount !== 0
             ? toastr.success('刪除成功', `成功刪除了 ${deleteCharCount} 個中文單字及其所有組合`)
@@ -180,30 +180,36 @@ class Menu extends PureComponent {
           const demoCharCount = arrayUnique(handleInputString(demoData.characters)).reduce((acc, value) => {
             return Object.keys(this.props.character).includes(value) ? acc : ++acc
           }, 0)
-          demoCharCount !== 0 && toastr.success('新增成功', `成功新增了 ${demoCharCount} 個中文單字`)
+          demoCharCount !== 0 && setTimeout(() => {
+            toastr.success('新增成功', `成功新增了 ${demoCharCount} 個中文單字`)
+          }, 650)
           toastr.success('載入成功', '成功載入範本')
           break;
       }
-      this.props.cleanAllInput();
-      this.props.triggerMenu(false);
+      (this.props.menuInput[index] !== '' && e !== null) && this.blur(index)
+      this.props.cleanAllInput()
+      this.props.triggerMenu(false)
     }
   }
   focus(index) {
-    setTimeout(() => { this.inputFocus[index].focus() }, 500);
+    setTimeout(() => { this.inputFocus[index].focus() }, 400);
+  }
+  blur(index) {
+    this.inputFocus[index].blur()
   }
 
   render() {
     const inputList = [
-      { option: '查詢筆劃', hint: '請輸入中文字(可多筆)', buttonName: '查詢', icon:'search', isRender: false },
-      { option: '增加單字', hint: '請輸入中文字(可多筆)', buttonName: '增加', icon:'add', isRender: true },
-      { option: '查詢筆劃組合', hint: '總筆劃數', hintcont: '單字(選填)', buttonName: '查詢', icon:'search', isRender: true },
-      { option: '移除單字', hint: '欲刪除之文字', buttonName: '移除', icon:'delete', isRender: true },
-      { option: '查看所有單字', icon:'overview', isRender: true },
-      { option: '儲存', icon:'download', isRender: false },
-      { option: '讀取', icon:'import', isRender: false },
-      { option: '匯出', icon:'excel', isRender: false },
-      { option: '載入範本', icon:'demo', isRender: true },
-      { option: '軟體介紹', icon:'search', isRender: false },
+      { option: '查詢筆劃', hint: '請輸入中文字(可多筆)', buttonName: '查詢', icon: 'search', isRender: false },
+      { option: '增加單字', hint: '請輸入中文字(可多筆)', buttonName: '增加', icon: 'add', isRender: true },
+      { option: '查詢筆劃組合', hint: '總筆劃數', hintcont: '單字(選填)', buttonName: '查詢', icon: 'search', isRender: true },
+      { option: '移除單字', hint: '欲刪除之文字', buttonName: '移除', icon: 'delete', isRender: true },
+      { option: '查看所有單字', icon: 'overview', isRender: true },
+      { option: '儲存', icon: 'download', isRender: false },
+      { option: '讀取', icon: 'import', isRender: false },
+      { option: '匯出', icon: 'excel', isRender: false },
+      { option: '載入範本', icon: 'demo', isRender: true },
+      { option: '軟體介紹', icon: 'search', isRender: false },
     ];
     return (
       <MenuDiv expand={this.props.menuExpand}>
@@ -216,13 +222,12 @@ class Menu extends PureComponent {
               style={value['isRender'] ? {} : { display: 'none' }}
             >
               <Text
-                key={index}
                 picked={this.props.inputTextSelect === index}
                 onClick={() => {
                   this.props.inputTextChange(index);
                   index <= 3 ? this.focus(index) : this.handleKeyPress(null, index);
                 }
-                }><IconDiv icon={getImgSrc(value['icon'])}/>{value['option']}</Text>
+                }><IconDiv icon={getImgSrc(value['icon'])} />{value['option']}</Text>
               {index < 4 &&
                 <TextInput expand={this.props.menuClassName[index]}>
                   <Input type="text"

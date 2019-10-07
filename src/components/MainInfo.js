@@ -13,6 +13,7 @@ const MainInfoDiv = styled.div`
   font-size:14px;
   @media (max-width: 480px) {
     padding:0 20px;
+    display:${props=>props.view==='SEARCH_COMBINATION'||props.view==='PICKED_OUTPUT'?'static':'none'};
   }
 `
 const TextDiv = styled.div`
@@ -107,7 +108,7 @@ class MainInfo extends PureComponent {
       }
     }
     return (
-      <MainInfoDiv>
+      <MainInfoDiv view={this.props.view}>
         <TextDiv>
           {TextOutput(this.props.view)}
         </TextDiv>

@@ -104,7 +104,8 @@ const TitleText = styled.div`
 
 const Card = styled.div`
   grid-area:${props => 'card' + props.cardIndex};
-  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1); 
+  /* box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1);  */
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
   border-radius:5px;
   transition: 0.3s;
   width:80%;

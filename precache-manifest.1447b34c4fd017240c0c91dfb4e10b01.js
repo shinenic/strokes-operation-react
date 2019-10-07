@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "3242e72db21e6991db78cb3fa5025ea8",
+    "revision": "78f45181d173be162a72951895482130",
     "url": "/strokes-operation-react/index.html"
   },
   {
-    "revision": "2ebe0eb462470ec407d5",
+    "revision": "d15623883566c045e07d",
     "url": "/strokes-operation-react/static/css/main.13b390d7.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/strokes-operation-react/static/js/2.d68401c8.chunk.js"
   },
   {
-    "revision": "2ebe0eb462470ec407d5",
-    "url": "/strokes-operation-react/static/js/main.65cd9e7f.chunk.js"
+    "revision": "d15623883566c045e07d",
+    "url": "/strokes-operation-react/static/js/main.170c2c76.chunk.js"
   },
   {
     "revision": "9ac17d03d60e490530b2",

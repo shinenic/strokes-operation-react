@@ -41,6 +41,9 @@ const OverviewDiv = styled.div`
   /* ${Row}:nth-child(odd) ${ColumnIndex}{
     border:2px solid black;
   } */
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
   @media (max-width: 480px) {
     height:auto;
     width:100%;

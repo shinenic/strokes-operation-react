@@ -127,7 +127,11 @@ const Title = styled.div`
     display: grid;
     justify-content: start;
     align-items: center;
-    color:${Color.text[0]};
+    cursor: pointer;
+    margin-left:10px;
+    color:${Color.text[0]};  
+    user-select: none;
+    -webkit-touch-callout: none;
   }
 `
 
@@ -136,14 +140,14 @@ class Header extends PureComponent {
     return (
       <HeaderDiv>
         <GridContainer>
-          <Title>姓名筆劃工具</Title>
+          <Title onClick={() => this.props.changeView('')}>姓名筆劃工具</Title>
           <IconImg onClick={() => this.props.changeView('')} />
           <HamburgerBorder expand={this.props.menuExpand} onClick={() => this.props.triggerMenu()}>
             <HamburgerImg expand={this.props.menuExpand} />
           </HamburgerBorder>
           <InfoCount>單字庫總字數: {Object.keys(this.props.character).length}</InfoCount>
-          <InfoSave>尚未有任何變更</InfoSave>
-          <InfoUser>timwei5566@gmail.com</InfoUser>
+          {/* <InfoSave>尚未有任何變更</InfoSave> */}
+          <InfoUser>galadiya41@gmail.com</InfoUser>
           <InfoUserPic><UserImg /></InfoUserPic>
           {/* <InfoUser>關於網站</InfoUser>
           <InfoUserPic>聯絡我</InfoUserPic> */}

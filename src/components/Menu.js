@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react'
 import styled from 'styled-components';
 import demoData from '../data/demoData';
 import menuIcon from '../image/menuIcon.png';
-import importIcon from '../image/menu/import.png';
 import Color from '../styles/ThemeColor';
 import { connect } from 'react-redux';
 import { toastr } from 'react-redux-toastr';
@@ -96,6 +95,7 @@ const MenuImg = styled.img`
   height:60px;
   width:60px;
   padding:27px 95px 27px 95px;
+  margin-bottom:15px;
   filter:invert(0.8);
   cursor:pointer;
   &:hover{
@@ -223,7 +223,6 @@ class Menu extends PureComponent {
                   index <= 3 ? this.focus(index) : this.handleKeyPress(null, index);
                 }
                 }><IconDiv icon={getImgSrc(value['icon'])}/>{value['option']}</Text>
-                  {/* ◆  {value['option']}</Text> */}
               {index < 4 &&
                 <TextInput expand={this.props.menuClassName[index]}>
                   <Input type="text"

@@ -5,7 +5,7 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import Reducer from './reducers/index';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
-import ReduxToastr from 'react-redux-toastr';
+// import ReduxToastr from 'react-redux-toastr';
 import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 // import { logger, crashReporter } from './middlewares';
 
@@ -22,7 +22,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         <Index />
-        <ReduxToastr
+        {/* <ReduxToastr
           timeOut={4000}
           newestOnTop={false}
           // preventDuplicates
@@ -31,7 +31,7 @@ class App extends Component {
           transitionOut="fadeOut"
           style={{fontweight:'bold'}}
           progressBar
-          closeOnToastrClick />
+          closeOnToastrClick /> */}
       </Provider>
     );
   }

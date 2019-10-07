@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-
 import Menu from './Menu';
 import Header from './Header';
 import MainInfo from './MainInfo';
@@ -10,8 +9,7 @@ import IndexCard from './IndexCard';
 import styled, { keyframes } from 'styled-components';
 import { connect } from 'react-redux';
 import { updateWindowSize, changeView } from '../actions';
-
-// const gridAreas="'menu header''menu mainInfo''menu main'"
+import ReduxToastr from 'react-redux-toastr';
 
 const GridContainer = styled.div`
   height:100%;
@@ -94,6 +92,15 @@ class Index extends PureComponent {
         <Main>
           {renderView(this.props.view)}
         </Main>
+        <ReduxToastr
+          timeOut={4000}
+          newestOnTop={false}
+          position={this.props.windowWidth<500?"bottom-center":"bottom-right"}
+          transitionIn="fadeIn"
+          transitionOut="fadeOut"
+          style={{fontweight:'bold'}}
+          progressBar
+          closeOnToastrClick />
       </GridContainer>
     )
   }

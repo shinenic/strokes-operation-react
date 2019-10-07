@@ -140,6 +140,28 @@ const handlePickedName = (obj, count, name) => {
   }
   return Object.assign({}, obj)
 }
+const arrayUnique = (a) => {
+  for (var i = 0; i < a.length; i++) {
+    for (var j = i + 1; j < a.length; j++) {
+      a[i] === a[j] && a.splice(j--, 1)
+    }
+  }
+  return a
+}
+const mergePickedName = (loadObj, stateObj) => {
+  let result = {}
+  let repeatCount = []
+  Object.keys(loadObj).map(value => {
+    Object.keys(stateObj).includes(value) ? repeatCount.push(value) : result[value] = loadObj[value]
+  })
+  Object.keys(stateObj).map(value => {
+    if(!repeatCount.includes(value))  result[value] = stateObj[value] 
+  })
+  repeatCount.map(value => {
+    result[value] = arrayUnique([...loadObj[value], ...stateObj[value]])
+  })
+  return result
+}
 
 const defaultReducer = (state = initState, action) => {
   switch (action.type) {
@@ -205,6 +227,13 @@ const defaultReducer = (state = initState, action) => {
     case 'CLEAN_ALL_INPUT':
       return Object.assign({}, state, {
         menuInput: ['', '', '', '', '']
+      })
+    case 'LOAD_DATA':
+      const loadCharacter = getAllStrokes(handleInputString(action.character + Object.keys(state.character).join()))
+      return Object.assign({}, state, {
+        character: loadCharacter,
+        groupChar: groupChar(loadCharacter),
+        pickedComb: mergePickedName(state.pickedComb, action.pickedComb)
       })
     case 'HANDLE_INPUT':
       const inputArrTemp = state.menuInput

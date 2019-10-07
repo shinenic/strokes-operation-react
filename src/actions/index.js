@@ -79,6 +79,13 @@ export const updateWindowSize = (height, width) => {
     width
   }
 }
+export const loadData = (character, pickedComb) => {
+  return {
+    type: 'LOAD_DATA',
+    character,
+    pickedComb
+  }
+}
 
 export const testTrigger = (tf) => {
   return {

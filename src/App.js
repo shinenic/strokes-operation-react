@@ -29,6 +29,7 @@ class App extends Component {
           position="bottom-right"
           transitionIn="fadeIn"
           transitionOut="fadeOut"
+          style={{fontweight:'bold'}}
           progressBar
           closeOnToastrClick />
       </Provider>

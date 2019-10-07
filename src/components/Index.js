@@ -11,6 +11,8 @@ import styled, { keyframes } from 'styled-components';
 import { connect } from 'react-redux';
 import { updateWindowSize, changeView } from '../actions';
 
+// const gridAreas="'menu header''menu mainInfo''menu main'"
+
 const GridContainer = styled.div`
   height:100%;
   width:100%;
@@ -18,9 +20,7 @@ const GridContainer = styled.div`
   box-sizing:border-box;
   grid-template-columns:250px 1fr;
   grid-template-rows:80px 60px 1fr;
-  grid-template-areas:'menu header'
-                      'menu mainInfo'
-                      'menu main';
+  grid-template-areas:'menu header''menu mainInfo''menu main';
   @media (max-width: 480px) {
     grid-template-columns:100%;
     grid-template-rows:60px 30px 1fr;

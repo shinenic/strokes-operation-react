@@ -40,35 +40,27 @@ const MobileHeader = styled.div`
 const Text = styled.div`
   box-sizing: border-box;
   width:100%;
-  height:50px;
+  height:65px;
+  line-height:65px;
   padding-left:10%;
   font-size:17px;
   color:${Color.text[0]};
-  line-height:50px;
   cursor: pointer;
   transition: 0.3s;
   background:${props => props.picked ? Color.redActive : Color.black[0]};
   &:hover{
     background:${props => props.picked ? Color.redActive : Color.redHover};
   }
-  @media (max-width: 480px){
-    height:65px;
-    line-height:65px;
-  }
 `;
 const TextInput = styled.div`
   transition:0.4s;
-  height:${props => props.expand === '' || props.expand === 'closeDiv' ? '0' : '50px'};
+  height:${props => props.expand === '' || props.expand === 'closeDiv' ? '0' : '65px'};
   width:100%;
-  line-height:50px;
+  line-height:65px;
   padding-left:9%;
   box-sizing: border-box;
   overflow: hidden;
   color:${Color.inputBg};
-  @media (max-width: 480px){
-    height:${props => props.expand === '' || props.expand === 'closeDiv' ? '0' : '65px'};
-    line-height:65px;
-  }
 `;
 const Input = styled.input`
   padding: 5px 7px;
@@ -77,17 +69,14 @@ const Input = styled.input`
   border-radius:0;
   border-right:1px solid black;
   width:${props => props.single ? '75%' : '37.5%'};
-  height:30px;
+  height:35px;
   box-sizing: border-box;
   display:inline-block;
   vertical-align: middle;
-  @media (max-width: 480px){
-    height:37px;
-  }
 `;
 const Button = styled.div`
-  height:30px;
-  line-height:30px;
+  height:35px;
+  line-height:35px;
   border: 0 none;
   border-radius:0;
   background: #EEE;
@@ -99,10 +88,6 @@ const Button = styled.div`
   box-sizing: border-box;
   vertical-align: middle;
   display:inline-block;
-  @media (max-width: 480px){
-    height:37px;
-    line-height:37px;
-  }
 `;
 const MenuImg = styled.img`
   content:url(${menuIcon});

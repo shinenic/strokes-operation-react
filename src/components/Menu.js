@@ -51,6 +51,10 @@ const Text = styled.div`
   &:hover{
     background:${props => props.picked ? Color.redActive : Color.redHover};
   }
+  @media (max-width: 480px){
+    height:65px;
+    line-height:65px;
+  }
 `;
 const TextInput = styled.div`
   transition:0.4s;
@@ -61,6 +65,10 @@ const TextInput = styled.div`
   box-sizing: border-box;
   overflow: hidden;
   color:${Color.inputBg};
+  @media (max-width: 480px){
+    height:${props => props.expand === '' || props.expand === 'closeDiv' ? '0' : '65px'};
+    line-height:65px;
+  }
 `;
 const Input = styled.input`
   padding: 5px 7px;
@@ -73,6 +81,9 @@ const Input = styled.input`
   box-sizing: border-box;
   display:inline-block;
   vertical-align: middle;
+  @media (max-width: 480px){
+    height:37px;
+  }
 `;
 const Button = styled.div`
   height:30px;
@@ -88,6 +99,10 @@ const Button = styled.div`
   box-sizing: border-box;
   vertical-align: middle;
   display:inline-block;
+  @media (max-width: 480px){
+    height:37px;
+    line-height:37px;
+  }
 `;
 const MenuImg = styled.img`
   content:url(${menuIcon});

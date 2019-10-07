@@ -36,10 +36,16 @@ const Row = styled.div`
 const OverviewDiv = styled.div`
   height:calc(100vh - 140px);
   width:calc(100vw - 250px);
+  box-sizing:border-box;
   overflow: scroll;
   /* ${Row}:nth-child(odd) ${ColumnIndex}{
     border:2px solid black;
   } */
+  @media (max-width: 480px) {
+    height:auto;
+    width:100%;
+    overflow:hidden;
+  }
 `
 
 class Overview extends PureComponent {

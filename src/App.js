@@ -6,7 +6,7 @@ import Reducer from './reducers/index';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 // import ReduxToastr from 'react-redux-toastr';
-import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
+// import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 // import { logger, crashReporter } from './middlewares';
 
 import { HashRouter as Router, Switch } from 'react-router-dom'

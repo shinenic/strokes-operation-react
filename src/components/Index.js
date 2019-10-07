@@ -10,6 +10,7 @@ import styled, { keyframes } from 'styled-components';
 import { connect } from 'react-redux';
 import { updateWindowSize, changeView } from '../actions';
 import ReduxToastr from 'react-redux-toastr';
+import '../styles/react-redux-toastr-edit.min.css';
 
 const GridContainer = styled.div`
   height:100%;
@@ -93,12 +94,12 @@ class Index extends PureComponent {
           {renderView(this.props.view)}
         </Main>
         <ReduxToastr
-          timeOut={4000}
+          timeOut={2800}
           newestOnTop={false}
-          position={this.props.windowWidth<500?"bottom-center":"bottom-right"}
+          position={this.props.windowWidth < 500 ? "bottom-center" : "bottom-right"}
           transitionIn="fadeIn"
           transitionOut="fadeOut"
-          style={{fontweight:'bold'}}
+          style={{ fontweight: 'bold' }}
           progressBar
           closeOnToastrClick />
       </GridContainer>

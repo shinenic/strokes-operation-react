@@ -29,8 +29,9 @@ const IndexCardDiv = styled.div`
     grid-template-rows:0.1fr 400px 0.9fr;
   }
   @media (max-width: 480px) {
+    height:500px;
     grid-template-columns:10px 1fr 10px;
-    grid-template-rows:50px 0.33fr 0.33fr 0.33fr 50px;
+    grid-template-rows:20px 0.33fr 0.33fr 0.33fr 50px;
     grid-template-areas:
     ". . ."
     ". card0 ."

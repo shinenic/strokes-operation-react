@@ -155,7 +155,7 @@ const mergePickedName = (loadObj, stateObj) => {
     Object.keys(stateObj).includes(value) ? repeatCount.push(value) : result[value] = loadObj[value]
   })
   Object.keys(stateObj).map(value => {
-    if(!repeatCount.includes(value))  result[value] = stateObj[value] 
+    if (!repeatCount.includes(value)) result[value] = stateObj[value]
   })
   repeatCount.map(value => {
     result[value] = arrayUnique([...loadObj[value], ...stateObj[value]])
@@ -185,7 +185,8 @@ const defaultReducer = (state = initState, action) => {
       })
     case 'COMBINATION_SEARCH':
       const result = getCombination(action.num, state.groupChar, handleInputString(action.str))
-      const pageDataCount = Math.floor((state.windowHeight - (state.windowWidth < 480 ? 180 : 290)) / 30) * (state.windowWidth < 480 ? 6 : 14)
+      // const pageDataCount = Math.floor((state.windowHeight - (state.windowWidth < 480 ? 180 : 290)) / 36) * (state.windowWidth < 480 ? 6 : 14)
+      const pageDataCount = state.windowWidth < 480 ? 11 * 5 : Math.floor((state.windowHeight - 290) / 36) * 14
       const partOfResult = result.slice(0, pageDataCount)
       return Object.assign({}, state, {
         combinationResult: result,

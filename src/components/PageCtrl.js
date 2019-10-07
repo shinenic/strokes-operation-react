@@ -19,6 +19,11 @@ const PageCtrlDiv = styled.div`
   grid-template-rows:0.5fr 0,5fr;
   grid-template-areas:'doubleArrow arrow pageInfo arrowNext doubleArrowNext'
                       'doubleArrow arrow dataInfo arrowNext doubleArrowNext';
+  @media (max-width: 480px){
+    width:90%;
+    min-width:300px;
+    bottom:15px;
+  }                      
 `
 const GridDiv = styled.div`
   display: grid;
@@ -56,7 +61,7 @@ const DataInfo = styled(PageInfo)`
 `
 
 class PageCtrl extends PureComponent {
-  render () {
+  render() {
     return (
       <PageCtrlDiv>
         <GridDiv dir="doubleArrow">

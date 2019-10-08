@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import styled from 'styled-components';
 import demoData from '../data/demoData';
 import menuIcon from '../image/menuIcon.png';
+import GithubLogo from '../image/github-logo.png'
 import Color from '../styles/ThemeColor';
 import { connect } from 'react-redux';
 import { toastr } from 'react-redux-toastr';
@@ -28,12 +29,21 @@ const MenuDiv = styled.div`
     min-height:100%;
   }
 `;
+const UserImg = styled.img`
+  content:url(${GithubLogo});
+  height:34px;
+  width:34px;
+  margin:13px auto auto 36px;
+  cursor: pointer;
+  filter: invert(1);
+`
 const MobileHeader = styled.div`
   display:none;
   @media (max-width: 480px){
     display:block;
     width:100%;
     height:60px;
+    position:relative;
   }
 `;
 
@@ -217,14 +227,16 @@ class Menu extends PureComponent {
     ];
     return (
       <MenuDiv expand={this.props.menuExpand}>
-        <MobileHeader />
+        <MobileHeader>
+          <a target="_blank" rel="noopener noreferrer" href="https://github.com/shinenic/strokes-operation-react">
+            <UserImg />
+          </a>
+        </MobileHeader>
         <MenuImg onClick={() => this.props.changeView('')} />
         {inputList.map((value, index) => {
           return (
-            <div
-              key={index}
-              style={value['isRender'] ? {} : { display: 'none' }}
-            >
+            <div key={index}
+              style={value['isRender'] ? {} : { display: 'none' }} >
               <Text
                 picked={this.props.inputTextSelect === index}
                 onClick={() => {

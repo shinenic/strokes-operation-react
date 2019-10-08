@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
-import Cat from '../image/cat.png'
+import GithubLogo from '../image/github-logo.png'
 import Hamburger from '../image/hamburger.png'
 import Color from '../styles/ThemeColor'
 import Cross from '../image/cross.png'
@@ -19,7 +19,7 @@ const GridContainer = styled.div`
   height:100%;
   width:100%;
   display:grid;
-  grid-template-columns:0.18fr 0.18fr 0.37fr 0.2fr 55px 0.07fr;
+  grid-template-columns:0.18fr 0.18fr 0.41fr 0.2fr 55px 0.03fr;
   grid-template-areas:"infoCount infoSave . infoUser infoUserPic .";
   @media (max-width: 1200px){
     grid-template-columns:0.33fr 0.33fr 0.33fr 55px;
@@ -58,12 +58,13 @@ const InfoUserPic = styled(InfoCount)`
   grid-area:infoUserPic;
 `
 const UserImg = styled.img`
-  content:url(${Cat});
-  height:45px;
-  width:45px;
-  border-radius:50%; 
-  border: 2px solid rgb(153,164,174); 
+  content:url(${GithubLogo});
+  height:40px;
+  width:40px;
+  /* border-radius:50%;  */
+  /* border: 2px solid rgb(153,164,174);  */
   cursor: pointer;
+  filter: invert(1);
   @media (max-width: 480px){
     display:none;
   }
@@ -146,9 +147,18 @@ class Header extends PureComponent {
             <HamburgerImg expand={this.props.menuExpand} />
           </HamburgerBorder>
           <InfoCount>單字庫總字數: {Object.keys(this.props.character).length}</InfoCount>
+          <InfoSave>
+            單字庫總字數: {Object.keys(this.props.pickedComb).reduce((acc, index) => {
+              return acc + this.props.pickedComb[index].length
+            }, 0)}
+          </InfoSave>
           {/* <InfoSave>尚未有任何變更</InfoSave> */}
-          <InfoUser>galadiya41@gmail.com</InfoUser>
-          <InfoUserPic><UserImg /></InfoUserPic>
+          {/* <InfoUser>galadiya41@gmail.com</InfoUser> */}
+          <InfoUserPic>
+            <a target="_blank" rel="noopener noreferrer" href="https://github.com/shinenic/strokes-operation-react">
+              <UserImg />
+            </a>
+          </InfoUserPic>
           {/* <InfoUser>關於網站</InfoUser>
           <InfoUserPic>聯絡我</InfoUserPic> */}
         </GridContainer>
@@ -160,7 +170,8 @@ class Header extends PureComponent {
 const mapStateToProps = state => {
   return {
     character: state.defaultReducer.character,
-    menuExpand: state.defaultReducer.menuExpand
+    menuExpand: state.defaultReducer.menuExpand,
+    pickedComb: state.defaultReducer.pickedComb
   }
 }
 const mapDispatchToProps = dispatch => {

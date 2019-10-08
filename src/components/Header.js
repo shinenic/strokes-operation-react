@@ -112,7 +112,7 @@ const HamburgerBorder = styled.div`
     transition:0.1s;
     user-select: none;
     -webkit-touch-callout: none;
-    z-index:101;
+    z-index:102;
     cursor:pointer;
     &:active{
       background:rgb(79,85,94);

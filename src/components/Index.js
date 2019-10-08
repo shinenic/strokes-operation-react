@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import Menu from './Menu';
+import MenuMask from './MenuMask';
 import Header from './Header';
 import MainInfo from './MainInfo';
 import Overview from './Overview';
@@ -93,6 +94,7 @@ class Index extends PureComponent {
         <Main>
           {renderView(this.props.view)}
         </Main>
+        {this.props.menuExpand && <MenuMask />}
         <ReduxToastr
           timeOut={2800}
           newestOnTop={false}
@@ -113,6 +115,7 @@ const mapStateToProps = state => {
     view: state.defaultReducer.view,
     windowHeight: state.defaultReducer.windowHeight,
     windowWidth: state.defaultReducer.windowWidth,
+    menuExpand: state.defaultReducer.menuExpand
   }
 }
 const mapDispatchToProps = dispatch => {

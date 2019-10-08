@@ -19,7 +19,7 @@ const MenuDiv = styled.div`
   @media (max-width: 480px){
     grid-area: null;
     position:fixed;
-    z-index:100;
+    z-index:101;
     top:0;
     right:${props => props.expand ? '0' : '-300px'};
     transition:0.4s;

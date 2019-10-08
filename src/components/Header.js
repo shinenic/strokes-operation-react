@@ -27,7 +27,7 @@ const GridContainer = styled.div`
    }
    
   @media (max-width: 480px) {
-    grid-template-columns:15px 40px 1fr 80px;
+    grid-template-columns:20px 50px 1fr 80px;
     grid-template-areas:". icon title hamburger";
     }
 `
@@ -75,7 +75,6 @@ const IconImg = styled.img`
   @media (max-width: 480px){
     grid-area:title;
     display: grid;
-
     content:url(${Icon});
     grid-area:icon;
     height:34px;
@@ -125,6 +124,7 @@ const Title = styled.div`
   display:none;
   @media (max-width: 480px){
     grid-area:title;
+    font-size:18px;
     display: grid;
     justify-content: start;
     align-items: center;

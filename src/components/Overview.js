@@ -22,6 +22,7 @@ const ColumnChar = styled.div`
   padding:5px;
   grid-area:character;
   border-bottom:1px solid rgb(209,215,222);
+  font-size:18px;
 `
 const Row = styled.div`
   box-sizing:border-box;
@@ -32,7 +33,7 @@ const Row = styled.div`
   animation: ${ShowDivAni} 0.4s 1 both ${props => (Number(props.index) * 0.05 + 0.2).toString() + 's'};
   @media (max-width: 480px) {
     grid-template-columns:50px 1fr;
-    margin:20px 20px 20px 0;
+    margin:20px 20px 20px 10px;
   }
 `
 
@@ -53,7 +54,7 @@ const OverviewDiv = styled.div`
 const NameDiv = styled.div`
   display:inline-block;
   margin:6px;
-  width:32px;
+  width:40px;
 `;
 
 class Overview extends PureComponent {

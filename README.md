@@ -8,7 +8,7 @@
 
 <img src="demo2.gif" alt="demo2" /> 
 
-![alt-text-1](demo1.gif "title-1") ![alt-text-2](demo3.gif "title-2")
+![alt-text-1](demo1.gif "title-1"=525x)![alt-text-2](demo3.gif "title-2"=525x)
 
 
 

@@ -22,8 +22,10 @@ Demo gifs
   * 按下搜尋畫面的輸出可顯示目前已選擇的組合
 * 移除單字
   * 能過濾非中文字元及已存在之單字，一次從單字庫刪除多個中文單字，成功刪除後回傳通知
+* 查看所有單字
+  * 查看單字庫之所有單字以及其筆劃數
 * 載入範本
-  * 以台灣內政部提供之國內常用名字1000個組合做為範例，載入單字庫以及 1000 個組合
+  * 以台灣內政部提供之國內常用名字1000個組合做為範例，載入不重複單字 271 個以及 1000 個組合
 
 
 
@@ -32,11 +34,9 @@ Demo gifs
 ## 使用技術
 
 * React
-* 長列表效能優化
 * Redux
-* MiddleWare
-* React-Router
 * Styled-Component
+* RWD
 
 
 
@@ -44,7 +44,7 @@ Demo gifs
 
 #### 關於
 
-> 所有資料來源: [卓著音樂資訊網](http://www.musicbook.com.tw/searchSong/index.asp)
+> 資料來源: [Unihan Database](http://www.unicode.org/cgi-bin/UnihanRadicalIndex.pl?strokes=6)
 
 
 

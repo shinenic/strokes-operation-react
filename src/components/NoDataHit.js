@@ -21,14 +21,16 @@ const NoDataDiv = styled.div`
 class NoDataHit extends PureComponent {
   render() {
     const text = (view) => {
-      switch(view){
+      switch (view) {
         case 'OVERVIEW':
           return '資料庫尚無任何中文單字，請先新增單字'
+        case 'OVERVIEW_PICKED':
+          return '目前尚無已選擇名字組合，請搜尋後增加'
         case 'SEARCH_COMBINATION':
           return '您所輸入的查詢條件沒有任何搜尋結果'
         case 'PICKED_OUTPUT':
           return '目前該搜尋條件下沒有任何被選中的組合'
-        default :
+        default:
           return ''
       }
     }

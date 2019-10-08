@@ -174,7 +174,10 @@ class Menu extends PureComponent {
         case 4:
           this.props.changeView('OVERVIEW')
           break;
-        case 8:
+        case 5:
+          this.props.changeView('OVERVIEW_PICKED')
+          break;
+        case 9:
           this.props.loadData(demoData.characters, demoData.pickedComb)
           this.props.changeView('INDEX')
           const demoCharCount = arrayUnique(handleInputString(demoData.characters)).reduce((acc, value) => {
@@ -205,6 +208,7 @@ class Menu extends PureComponent {
       { option: '查詢筆劃組合', hint: '總筆劃數', hintcont: '單字(選填)', buttonName: '查詢', icon: 'search', isRender: true },
       { option: '移除單字', hint: '欲刪除之文字', buttonName: '移除', icon: 'delete', isRender: true },
       { option: '查看所有單字', icon: 'overview', isRender: true },
+      { option: '查看已選組合', icon: 'checklist', isRender: true },
       { option: '儲存', icon: 'download', isRender: false },
       { option: '讀取', icon: 'import', isRender: false },
       { option: '匯出', icon: 'excel', isRender: false },

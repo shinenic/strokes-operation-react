@@ -37,9 +37,6 @@ const OverviewDiv = styled.div`
   width:calc(100vw - 250px);
   box-sizing:border-box;
   overflow: scroll;
-  /* ${Row}:nth-child(odd) ${ColumnIndex}{
-    border:2px solid black;
-  } */
   &::-webkit-scrollbar {
     width: 10px;
   }
@@ -49,13 +46,18 @@ const OverviewDiv = styled.div`
     overflow:hidden;
   }
 `
+const NameDiv = styled.div`
+  display:inline-block;
+  margin:6px;
+  width:32px;
+`;
 
 class Overview extends PureComponent {
   render() {
-    const data = this.props.groupChar
+    const data = this.props.view === 'OVERVIEW' ? this.props.groupChar : this.props.pickedComb
     return (
       <OverviewDiv>
-        {Object.keys(data).length===0 && <NoDataHit/>}
+        {Object.keys(data).length === 0 && <NoDataHit />}
         {Object.keys(data).map((value, index) => {
           return (
             <Row index={index} key={'Row' + index}>
@@ -63,9 +65,13 @@ class Overview extends PureComponent {
               <ColumnChar key={'Char' + index}>
                 {data[value].map((value, index) => {
                   return (
-                    <span key={'Chars' + index}>
-                      {value + ' '}
-                    </span>
+                    this.props.view === 'OVERVIEW'
+                      ? <span key={'Chars' + index}>
+                        {value + ' '}
+                      </span>
+                      : <NameDiv key={'Names' + index} >
+                        {value}
+                      </NameDiv>
                   )
                 })}
               </ColumnChar>
@@ -80,7 +86,9 @@ class Overview extends PureComponent {
 
 const mapStateToProps = state => {
   return {
-    groupChar: state.defaultReducer.groupChar
+    pickedComb: state.defaultReducer.pickedComb,
+    groupChar: state.defaultReducer.groupChar,
+    view: state.defaultReducer.view,
   }
 }
 export default connect(mapStateToProps, null)(Overview)

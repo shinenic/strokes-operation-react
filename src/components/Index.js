@@ -79,6 +79,7 @@ class Index extends PureComponent {
         case 'SEARCH_COMBINATION':
           return <Combination />;
         case 'OVERVIEW':
+        case 'OVERVIEW_PICKED':
           return <Overview />;
         case 'PICKED_OUTPUT':
           return <PickedOutput />;

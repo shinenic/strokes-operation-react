@@ -15,13 +15,10 @@ const MainDiv = styled.div`
   position:relative;
   animation: ${ShowDivAni} 0.7s 1 both 0.4s;
   @media (max-width: 480px) {
-    padding:10px;
     display:flex;
     justify-content:center;
     align-items:center;
-  }
-  @media (max-height: 750px) {
-    align-items:start;
+    padding:10px 10px 70px 10px;
   }
 `
 // 目前顯示個數14*15

@@ -13,7 +13,7 @@ const MainInfoDiv = styled.div`
   font-size:14px;
   @media (max-width: 480px) {
     padding:0 20px;
-    display:${props=>props.view==='SEARCH_COMBINATION'||props.view==='PICKED_OUTPUT'?'static':'none'};
+    display:${props => props.view === 'SEARCH_COMBINATION' || props.view === 'PICKED_OUTPUT' ? 'static' : 'none'};
   }
 `
 const TextDiv = styled.div`
@@ -97,6 +97,12 @@ class MainInfo extends PureComponent {
           return (
             <Text key={3}>
               {'單字總覽    >>    '}
+            </Text>
+          )
+        case 'OVERVIEW_PICKED':
+          return (
+            <Text key={4}>
+              {'已選組合總覽    >>    '}
             </Text>
           )
         default:

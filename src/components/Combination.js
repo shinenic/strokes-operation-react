@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
+import NoDataHit from './NoDataHit'
 import { ShowDivAni } from '../styles/AnimationStyled'
 import { connect } from 'react-redux'
 import PageCtrl from './PageCtrl'
@@ -52,6 +53,7 @@ class Combination extends PureComponent {
   render() {
     return (
       <MainDiv key={this.props.combinationFilter.count} width={this.props.windowWidth}>
+        {this.props.currentPageResult.length === 0 && <NoDataHit />}
         <div>
           {this.props.currentPageResult.map((value, index) => {
             return (
@@ -66,7 +68,7 @@ class Combination extends PureComponent {
               </Button>
             )
           })}
-          <PageCtrl />
+          {this.props.currentPageResult.length !== 0 && <PageCtrl />}
         </div>
       </MainDiv>
     )

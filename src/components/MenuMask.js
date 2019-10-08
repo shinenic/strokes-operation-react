@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { ShowDivAni } from '../styles/AnimationStyled'
 import { triggerMenu } from '../actions';
 
-export const FadeInDiv = keyframes`
+const FadeInDiv = keyframes`
   from{
     opacity:0;
     }
@@ -13,6 +13,9 @@ export const FadeInDiv = keyframes`
   }
 `;
 const MenuMaskDiv = styled.div`
+  position:fixed;
+  top:0;
+  left:0;
   width:100vw;
   height:100vh;
   background:black;
@@ -29,14 +32,10 @@ class MenuMask extends PureComponent {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    groupChar: state.defaultReducer.groupChar
-  }
-}
+
 const mapDispatchToProps = dispatch => {
   return {
     triggerMenu: (bool) => dispatch(triggerMenu(bool))
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(MenuMask)
+export default connect(null, mapDispatchToProps)(MenuMask)

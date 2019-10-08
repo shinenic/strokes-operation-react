@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
+import NoDataHit from './NoDataHit'
 import { connect } from 'react-redux'
 import { ShowDivAni } from '../styles/AnimationStyled'
-// import { pickName } from '../actions';
 
 const ColumnIndex = styled.div`
   grid-area:index;
@@ -10,7 +10,6 @@ const ColumnIndex = styled.div`
   display: grid;
   justify-content: center;
   align-items: center;
-
   
   box-sizing:border-box;
   padding:5px;
@@ -56,6 +55,7 @@ class Overview extends PureComponent {
     const data = this.props.groupChar
     return (
       <OverviewDiv>
+        {Object.keys(data).length===0 && <NoDataHit/>}
         {Object.keys(data).map((value, index) => {
           return (
             <Row index={index} key={'Row' + index}>
@@ -83,9 +83,4 @@ const mapStateToProps = state => {
     groupChar: state.defaultReducer.groupChar
   }
 }
-const mapDispatchToProps = dispatch => {
-  return {
-    // pickName: (str) => dispatch(pickName(str)),
-  }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(Overview)
+export default connect(mapStateToProps, null)(Overview)

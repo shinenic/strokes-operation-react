@@ -1,12 +1,13 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
+import NoDataHit from './NoDataHit'
 import { connect } from 'react-redux'
 import { changeView } from '../actions'
 import { ShowDivAni } from '../styles/AnimationStyled'
 
 const PickedOutputDiv = styled.div`
-  height:${props=>'calc('+props.height+'px - 150px)'};
-  width:${props=>'calc('+props.width+'px - 260px)'};
+  height:${props => 'calc(' + props.height + 'px - 150px)'};
+  width:${props => 'calc(' + props.width + 'px - 260px)'};
   box-sizing:border-box;
   padding:40px;
   overflow: auto;
@@ -32,10 +33,11 @@ class PickedOutput extends PureComponent {
     const { count, filter } = this.props.combinationFilter
     return (
       <PickedOutputDiv width={this.props.width} height={this.props.windowHeight}>
+        {!Object.keys(this.props.pickedComb).includes(count) && <NoDataHit />}
         {this.props.pickedComb[count] &&
           this.props.pickedComb[count].map((value, index) => {
             if (!value.includes(filter)) {
-              return null
+              return <NoDataHit />
             } else {
               return (
                 <Cell key={index}>

@@ -31,13 +31,20 @@ const Cell = styled.div`
 class PickedOutput extends PureComponent {
   render() {
     const { count, filter } = this.props.combinationFilter
+    const hasData = (obj) => {
+      if (!Object.keys(obj).includes(count)) return false
+      if (filter === '' && obj[count].length !== 0) return true
+      let result = false
+      obj[count].map(value => { if (value.includes(filter)) { return result = true } else { return null } })
+      return result
+    }
     return (
       <PickedOutputDiv width={this.props.width} height={this.props.windowHeight}>
-        {!Object.keys(this.props.pickedComb).includes(count) && <NoDataHit />}
+        {!hasData(this.props.pickedComb) && <NoDataHit />}
         {this.props.pickedComb[count] &&
           this.props.pickedComb[count].map((value, index) => {
             if (!value.includes(filter)) {
-              return <NoDataHit />
+              return null
             } else {
               return (
                 <Cell key={index}>

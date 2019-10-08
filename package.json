@@ -5,6 +5,7 @@
   "homepage": "http://gitname.github.io/strokes-operation-react",
   "dependencies": {
     "match-sorter": "^3.1.1",
+    "msgpack-lite": "^0.1.26",
     "react": "^16.8.6",
     "react-countup": "^4.2.2",
     "react-dom": "^16.8.6",

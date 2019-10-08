@@ -8,7 +8,7 @@
 
 <img src="demo2.gif" alt="demo2" /> 
 
-![demo1](demo1.gif "demo1" =525x)![demo3](demo3.gif "demo3" =525x)
+<img src="demo1.gif" alt="demogif" width="300" style="display:inline-block" />    <img src="demo3.gif" alt="demogif" width="300" style="display:inline-block" /> 
 
 
 

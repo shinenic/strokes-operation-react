@@ -30,6 +30,10 @@ const Row = styled.div`
   grid-template-columns:60px 1fr;
   grid-template-areas:'index character';
   animation: ${ShowDivAni} 0.4s 1 both ${props => (Number(props.index) * 0.05 + 0.2).toString() + 's'};
+  @media (max-width: 480px) {
+    grid-template-columns:50px 1fr;
+    margin:20px 20px 20px 0;
+  }
 `
 
 const OverviewDiv = styled.div`

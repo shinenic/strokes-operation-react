@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react'
 import styled, { keyframes } from 'styled-components'
 import { connect } from 'react-redux'
-import { ShowDivAni } from '../styles/AnimationStyled'
 import { triggerMenu } from '../actions';
 
 const FadeInDiv = keyframes`

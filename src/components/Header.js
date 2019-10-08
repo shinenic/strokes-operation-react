@@ -47,13 +47,13 @@ const InfoSave = styled(InfoCount)`
     justify-content: start;
   }
 `
-const InfoUser = styled(InfoCount)`
-  grid-area:infoUser;
-  @media (max-width: 1200px){
-    justify-content: end;
-    margin-right:10px;
-  }
-`
+// const InfoUser = styled(InfoCount)`
+//   grid-area:infoUser;
+//   @media (max-width: 1200px){
+//     justify-content: end;
+//     margin-right:10px;
+//   }
+// `
 const InfoUserPic = styled(InfoCount)`
   grid-area:infoUserPic;
 `

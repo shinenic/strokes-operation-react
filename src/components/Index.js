@@ -7,7 +7,7 @@ import Overview from './Overview';
 import Combination from './Combination';
 import PickedOutput from './PickedOutput';
 import IndexCard from './IndexCard';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { updateWindowSize, changeView } from '../actions';
 import ReduxToastr from 'react-redux-toastr';
@@ -39,9 +39,9 @@ const Main = styled.div`
 `;
 
 class Index extends PureComponent {
-  constructor() {
-    super();
-  }
+  // constructor() {
+  //   super();
+  // }
   // https://tg.pe/i4W 警告提醒
   // componentDidMount() {
   //   window.addEventListener('beforeunload', this.handleWindowClose);

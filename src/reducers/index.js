@@ -73,8 +73,8 @@ const removeCharFromPickedName = (pickedComb, charArr) => {
   if (pickedComb === {}) { return {} }
   const result = Object.assign({}, pickedComb)
   charArr.map(char => {
-    Object.keys(result).map(stroke => {
-      result[stroke] = result[stroke].filter(name => {
+    return Object.keys(result).map(stroke => {
+      return result[stroke] = result[stroke].filter(name => {
         return !name.includes(char)
       })
     })
@@ -152,13 +152,13 @@ const mergePickedName = (loadObj, stateObj) => {
   let result = {}
   let repeatCount = []
   Object.keys(loadObj).map(value => {
-    Object.keys(stateObj).includes(value) ? repeatCount.push(value) : result[value] = loadObj[value]
+    return Object.keys(stateObj).includes(value) ? repeatCount.push(value) : result[value] = loadObj[value]
   })
   Object.keys(stateObj).map(value => {
-    if (!repeatCount.includes(value)) result[value] = stateObj[value]
+    return !repeatCount.includes(value) ? result[value] = stateObj[value] : null
   })
   repeatCount.map(value => {
-    result[value] = arrayUnique([...loadObj[value], ...stateObj[value]])
+    return result[value] = arrayUnique([...loadObj[value], ...stateObj[value]])
   })
   return result
 }

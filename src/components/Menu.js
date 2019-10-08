@@ -198,6 +198,8 @@ class Menu extends PureComponent {
           }, 650)
           toastr.success('載入成功', '成功載入範本')
           break;
+        default:
+          break;
       }
       (this.props.menuInput[index] !== '' && e !== null) && this.blur(index)
       this.props.cleanAllInput()

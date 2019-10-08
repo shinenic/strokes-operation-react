@@ -22,6 +22,9 @@ const MenuMaskDiv = styled.div`
   opacity:0.3;
   z-index:100;
   animation: ${FadeInDiv} 0.4s 1 both ;
+  @media(min-width:480px){
+    display:none;
+  }
 `;
 
 class MenuMask extends PureComponent {

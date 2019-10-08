@@ -140,7 +140,7 @@ class Header extends PureComponent {
     return (
       <HeaderDiv>
         <GridContainer>
-          <Title>姓名筆劃工具</Title>
+          <Title>名字筆劃工具</Title>
           <IconImg onClick={() => { this.props.changeView(''); this.props.inputTextChange(-1); }} />
           <HamburgerBorder expand={this.props.menuExpand} onClick={() => this.props.triggerMenu()}>
             <HamburgerImg expand={this.props.menuExpand} />

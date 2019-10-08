@@ -1,68 +1,58 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 名字筆劃工具
 
-## Available Scripts
+主要針對電腦使用者設計
 
-In the project directory, you can run:
+幫助中文使用者來快速篩選出符合筆劃規則之名字的網頁應用程式
 
-### `npm start`
+[Demo](https://shinenic.github.io/strokes-operation-react/)
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Demo gifs
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## 功能
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* 增加單字
+  * 能過濾非中文字元及已存在之單字，一次新增多個中文單字到單字庫，成功新增後回傳通知
+* 查詢筆畫組合
+  * 透過輸入總筆劃列出所有兩單字筆劃加總為該數字的名字組合
+  * 可篩選特定單字作為搜尋條件
+  * 搜尋畫面可透過點擊選擇適合的名字做為紀錄
+  * 按下搜尋畫面的輸出可顯示目前已選擇的組合
+* 移除單字
+  * 能過濾非中文字元及已存在之單字，一次從單字庫刪除多個中文單字，成功刪除後回傳通知
+* 載入範本
+  * 以台灣內政部提供之國內常用名字1000個組合做為範例，載入單字庫以及 1000 個組合
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 使用技術
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+* React
+* 長列表效能優化
+* Redux
+* MiddleWare
+* React-Router
+* Styled-Component
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+#### 關於
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+> 所有資料來源: [卓著音樂資訊網](http://www.musicbook.com.tw/searchSong/index.asp)
 
-### Analyzing the Bundle Size
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
 
-### Making a Progressive Web App
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
 
-### Advanced Configuration
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
 
-### Deployment
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
 
-### `npm run build` fails to minify
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+

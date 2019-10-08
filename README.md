@@ -7,7 +7,8 @@
 [Demo](https://shinenic.github.io/strokes-operation-react/)
 
 <img src="demo2.gif" alt="demo2" /> 
-<img src="demo1.gif" alt="demo1" width="280"/><img src="demo3.gif" alt="demo1" width="280"/>
+
+![alt-text-1](demo1.gif "title-1") ![alt-text-2](demo3.gif "title-2")
 
 
 

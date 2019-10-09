@@ -55,30 +55,23 @@ const handleInputString = str => {
 
 const getAllStrokes = arr => {
   const obj = {}
-  arr.map(char => {
-    return (obj[char] = getStrokes(char))
-  })
+  arr.map(char => (obj[char] = getStrokes(char)))
   return obj
 }
-
 const removeChar = (stateCharacter, charArr) => {
   const result = Object.assign({}, stateCharacter)
-  charArr.map(char => {
-    return delete result[char]
-  })
+  charArr.map(char => delete result[char])
   return result
 }
 
 const removeCharFromPickedName = (pickedComb, charArr) => {
-  if (pickedComb === {}) { return {} }
+  if (Object.keys(pickedComb).length === 0) return {}
   const result = Object.assign({}, pickedComb)
-  charArr.map(char => {
-    return Object.keys(result).map(stroke => {
-      return result[stroke] = result[stroke].filter(name => {
-        return !name.includes(char)
-      })
-    })
-  })
+  charArr.map(char =>
+    Object.keys(result).map(stroke =>
+      result[stroke] = result[stroke].filter(name => !name.includes(char))
+    )
+  )
   return result
 }
 
@@ -151,15 +144,12 @@ const arrayUnique = (a) => {
 const mergePickedName = (loadObj, stateObj) => {
   let result = {}
   let repeatCount = []
-  Object.keys(loadObj).map(value => {
-    return Object.keys(stateObj).includes(value) ? repeatCount.push(value) : result[value] = loadObj[value]
-  })
-  Object.keys(stateObj).map(value => {
-    return !repeatCount.includes(value) ? result[value] = stateObj[value] : null
-  })
-  repeatCount.map(value => {
-    return result[value] = arrayUnique([...loadObj[value], ...stateObj[value]])
-  })
+  Object.keys(loadObj)
+    .map(value => Object.keys(stateObj).includes(value) ? repeatCount.push(value) : result[value] = loadObj[value])
+  Object.keys(stateObj)
+    .map(value => !repeatCount.includes(value) ? result[value] = stateObj[value] : null)
+  repeatCount
+    .map(value => result[value] = arrayUnique([...loadObj[value], ...stateObj[value]]))
   return result
 }
 

@@ -173,11 +173,9 @@ const CardGridContent = styled.div`
 `
 
 class IndexCard extends PureComponent {
-  render () {
+  render() {
     const pickedCount = obj => {
-      return Object.keys(obj).reduce((acc, index) => {
-        return acc + obj[index].length
-      }, 0)
+      return Object.keys(obj).reduce((acc, index) => acc + obj[index].length, 0)
     }
     return (
       <IndexCardDiv>

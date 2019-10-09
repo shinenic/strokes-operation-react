@@ -148,9 +148,8 @@ class Header extends PureComponent {
           </HamburgerBorder>
           <InfoCount>單字庫總字數: {Object.keys(this.props.character).length}</InfoCount>
           <InfoSave>
-            單字庫總字數: {Object.keys(this.props.pickedComb).reduce((acc, index) => {
-              return acc + this.props.pickedComb[index].length
-            }, 0)}
+            單字庫總字數: {Object.keys(this.props.pickedComb).reduce(
+              (acc, index) => acc + this.props.pickedComb[index].length, 0)}
           </InfoSave>
           {/* <InfoSave>尚未有任何變更</InfoSave> */}
           {/* <InfoUser>galadiya41@gmail.com</InfoUser> */}

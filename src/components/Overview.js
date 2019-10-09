@@ -65,6 +65,8 @@ class Overview extends PureComponent {
         {Object.keys(data).length === 0 && <NoDataHit />}
         {Object.keys(data).map((value, index) => {
           return (
+            // 已選擇組合畫面中, 若有 key(筆劃總和)之 value(組合)為空的則不顯示該 row
+            !(this.props.view === 'OVERVIEW_PICKED' && data[value].length === 0) &&
             <Row index={index} key={'Row' + index}>
               <ColumnIndex key={'Index' + index}>{value}</ColumnIndex>
               <ColumnChar key={'Char' + index}>

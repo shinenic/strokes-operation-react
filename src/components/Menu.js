@@ -12,7 +12,7 @@ import {
   searchStrokes, handleInput, addCharacter, deleteCharacter, loadData
   , combinationSearch, inputTextChange, cleanAllInput, changeView, triggerMenu
 } from '../actions';
-
+// todos: 打包 funciton
 const getImgSrc = name => {
   return require(`../image/menu/${name}.png`);
 }
@@ -220,9 +220,8 @@ class Menu extends PureComponent {
         case 1:
           this.props.addCharacter(this.props.menuInput[1]);
           this.props.changeView('INDEX')
-          const newCharCount = arrayUnique(handleInputString(this.props.menuInput[1])).reduce((acc, value) => {
-            return Object.keys(this.props.character).includes(value) ? acc : ++acc
-          }, 0)
+          const newCharCount = arrayUnique(handleInputString(this.props.menuInput[1])).reduce((acc, value) =>
+            Object.keys(this.props.character).includes(value) ? acc : ++acc, 0)
           newCharCount !== 0
             ? toastr.success('新增成功', `成功新增了 ${newCharCount} 個中文單字`)
             : toastr.info('沒有新增任何單字', `請查詢是否單字已存在或者輸入為中文`)
@@ -233,9 +232,8 @@ class Menu extends PureComponent {
         case 3:
           this.props.deleteCharacter(this.props.menuInput[3]);
           this.props.changeView('INDEX')
-          const deleteCharCount = arrayUnique(handleInputString(this.props.menuInput[3])).reduce((acc, value) => {
-            return Object.keys(this.props.character).includes(value) ? ++acc : acc
-          }, 0)
+          const deleteCharCount = arrayUnique(handleInputString(this.props.menuInput[3])).reduce((acc, value) =>
+            Object.keys(this.props.character).includes(value) ? ++acc : acc, 0)
           deleteCharCount !== 0
             ? toastr.success('刪除成功', `成功刪除了 ${deleteCharCount} 個中文單字及其所有組合`)
             : toastr.info('沒有刪除任何單字', `請查詢是否單字不存在或者輸入為中文`)
@@ -259,9 +257,8 @@ class Menu extends PureComponent {
         case 9:
           this.props.loadData(demoData.character, demoData.pickedComb)
           this.props.changeView('INDEX')
-          const demoCharCount = arrayUnique(handleInputString(demoData.character)).reduce((acc, value) => {
-            return Object.keys(this.props.character).includes(value) ? acc : ++acc
-          }, 0)
+          const demoCharCount = arrayUnique(handleInputString(demoData.character)).reduce((acc, value) =>
+            Object.keys(this.props.character).includes(value) ? acc : ++acc, 0)
           demoCharCount !== 0 && setTimeout(() => {
             toastr.success('新增成功', `成功新增了 ${demoCharCount} 個中文單字`)
           }, 650)

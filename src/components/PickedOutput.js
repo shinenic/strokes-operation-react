@@ -35,7 +35,7 @@ class PickedOutput extends PureComponent {
       if (!Object.keys(obj).includes(count)) return false
       if (filter === '' && obj[count].length !== 0) return true
       let result = false
-      obj[count].map(value => { if (value.includes(filter)) { return result = true } else { return null } })
+      obj[count].map(value => result = value.includes(filter) ? true : false)
       return result
     }
     return (

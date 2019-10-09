@@ -68,7 +68,8 @@ class Index extends PureComponent {
       () => this.updateWindowSize(window.innerHeight, window.innerWidth));
   }
   componentWillUnmount() {
-    window.removeEventListener('resize');
+    window.removeEventListener('resize',
+    () => this.updateWindowSize(window.innerHeight, window.innerWidth));
   }
 
   render() {

@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/strokes-operation-react/static/css/main.0fbd2f70.chunk.css",
-    "main.js": "/strokes-operation-react/static/js/main.6490aa7a.chunk.js",
-    "main.js.map": "/strokes-operation-react/static/js/main.6490aa7a.chunk.js.map",
+    "main.js": "/strokes-operation-react/static/js/main.66bf7c90.chunk.js",
+    "main.js.map": "/strokes-operation-react/static/js/main.66bf7c90.chunk.js.map",
     "runtime~main.js": "/strokes-operation-react/static/js/runtime~main.d942dcce.js",
     "runtime~main.js.map": "/strokes-operation-react/static/js/runtime~main.d942dcce.js.map",
     "static/js/2.94c08874.chunk.js": "/strokes-operation-react/static/js/2.94c08874.chunk.js",
     "static/js/2.94c08874.chunk.js.map": "/strokes-operation-react/static/js/2.94c08874.chunk.js.map",
     "index.html": "/strokes-operation-react/index.html",
-    "precache-manifest.325818e3c858c92a30d6127756fc4f25.js": "/strokes-operation-react/precache-manifest.325818e3c858c92a30d6127756fc4f25.js",
+    "precache-manifest.3a6d4651dab555523f318834e121119b.js": "/strokes-operation-react/precache-manifest.3a6d4651dab555523f318834e121119b.js",
     "service-worker.js": "/strokes-operation-react/service-worker.js",
     "static/css/main.0fbd2f70.chunk.css.map": "/strokes-operation-react/static/css/main.0fbd2f70.chunk.css.map"
   }

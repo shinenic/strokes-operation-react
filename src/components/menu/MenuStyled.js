@@ -47,12 +47,13 @@ export const Text = styled.div`
   line-height:65px;
   padding-left:10%;
   font-size:17px;
-  color:${Color.text[0]};
-  cursor: pointer;
+  /* color:${Color.text[0]}; */
+  color:${props => props.disable ? Color.textDisable : Color.text[0]}};
+  cursor:${props => props.disable ? '' : 'pointer'};
   transition: 0.3s;
   background:${props => props.picked ? Color.redActive : Color.black[0]};
   &:hover{
-    background:${props => props.picked ? Color.redActive : Color.redHover};
+    background:${props => props.picked ? Color.redActive : props.disable ? Color.black[0] : Color.redHover};
   }
 `;
 export const TextInput = styled.div`
@@ -117,5 +118,5 @@ export const IconDiv = styled.div`
   top:1px;
   background-image: url(${props => getImgSrc(props.icon)});
   background-size: cover;  
-  filter: invert(1);
+  filter: ${props => props.disable ? 'invert(0.65)' : 'invert(1)'};
 `;

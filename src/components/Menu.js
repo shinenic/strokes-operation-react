@@ -37,14 +37,21 @@ class Menu extends PureComponent {
             <div key={index}
               style={value['isRender'] ? {} : { display: 'none' }} >
               <Text
-                picked={this.props.inputTextSelect === index && index<6}
+                disable={this.props.googleOauth.googleId === 0 && (index === 6 || index === 7)}
+                picked={this.props.inputTextSelect === index && (index === 6 || index === 7)}
                 onClick={() => {
-                  // 切換目前選取的 options
-                  this.props.inputTextChange(index);
-                  // 若 option 有 textBox 則 focus 反之則直接進入動作
-                  index <= 3 ? this.focus(index) : menuActions(null, index, this.props, this.inputRef, this.fileInputRef);
+                  // 儲存及載入功能對於登入的限制
+                  if (!(this.props.googleOauth.googleId === 0 && (index === 6 || index === 7))) {
+                    // 切換目前選取的 options
+                    this.props.inputTextChange(index);
+                    // 若 option 有 textBox 則 focus 反之則直接進入動作
+                    index <= 3 ? this.focus(index) : menuActions(null, index, this.props, this.inputRef, this.fileInputRef);
+                  }
                 }
-                }><IconDiv icon={value['icon']} />{value['option']}</Text>
+                }>
+                <IconDiv icon={value['icon']} disable={this.props.googleOauth.googleId === 0 && (index === 6 || index === 7)} />
+                {value['option']}
+              </Text>
               {index < 4 &&
                 <TextInput expand={this.props.menuClassName[index]}>
                   <Input type="text"
@@ -67,7 +74,7 @@ class Menu extends PureComponent {
           )
         })}
         {/* 上傳檔案使用之隱藏 input */}
-        <input type="file" style={{ display: 'none' }} onChange={()=>loadFile(this.props)} ref={(fileInput) => this.fileInputRef = fileInput} />
+        <input type="file" style={{ display: 'none' }} onChange={() => loadFile(this.props)} ref={(fileInput) => this.fileInputRef = fileInput} />
       </MenuDiv >
     )
   }
@@ -79,7 +86,8 @@ const mapStateToProps = state => {
     menuInput: state.defaultReducer.menuInput,
     menuExpand: state.defaultReducer.menuExpand,
     character: state.defaultReducer.character,
-    pickedComb: state.defaultReducer.pickedComb
+    pickedComb: state.defaultReducer.pickedComb,
+    googleOauth: state.defaultReducer.googleOauth
   }
 }
 const mapDispatchToProps = dispatch => {

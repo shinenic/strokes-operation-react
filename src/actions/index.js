@@ -86,6 +86,12 @@ export const loadData = (character, pickedComb) => {
     pickedComb
   }
 }
+export const login = (userInfo) => {
+  return {
+    type: 'LOGIN',
+    userInfo
+  }
+}
 
 export const testTrigger = (tf) => {
   return {

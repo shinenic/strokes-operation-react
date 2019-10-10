@@ -1,13 +1,15 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import GithubLogo from '../image/github-logo.png'
+import GoogleLogo from '../image/google-logo.png'
 import Hamburger from '../image/hamburger.png'
 import Color from '../styles/ThemeColor'
 import Cross from '../image/cross.png'
 import Icon from '../image/menuIcon.png'
 import { connect } from 'react-redux'
-import GoogleLogin from 'react-google-login';
-import { triggerMenu, changeView, inputTextChange } from '../actions'
+import { GoogleLogin, GoogleLogout } from 'react-google-login';
+import { toastr } from 'react-redux-toastr';
+import { triggerMenu, changeView, inputTextChange, login } from '../actions'
 
 const HeaderDiv = styled.div`
   grid-area: header;
@@ -60,13 +62,13 @@ const InfoUserPic = styled(InfoCount)`
   grid-area:infoUserPic;
 `
 const UserImg = styled.img`
-  content:url(${GithubLogo});
+  content:url(${props => props.img === '' ? GoogleLogo : props.img});
   height:40px;
   width:40px;
-  /* border-radius:50%;  */
+  border-radius:50%; 
   /* border: 2px solid rgb(153,164,174);  */
-  cursor: pointer;
-  filter: invert(1);
+  /* cursor: pointer; */
+  filter: ${props => props.img === '' ? 'invert(1)' : ''};
   @media (max-width: 480px){
     display:none;
   }
@@ -143,9 +145,12 @@ const responseGoogle = (response) => {
 
 class Header extends PureComponent {
   getGoogleResponse = (response) => {
-    const { googleId, imageUrl: UserPic, email: userEmail, name: userName } = response.profileObj
-    console.log(response)
-    console.log(googleId, UserPic, userEmail, userName);
+    if (response.error) {
+      toastr.error('登入失敗', '請嘗試重新登入')
+    } else {
+      const { googleId, imageUrl: UserPic, email: userEmail, name: userName } = response.profileObj
+      this.props.login({ googleId, UserPic, userEmail, userName })
+    }
   }
   render() {
     return (
@@ -164,24 +169,31 @@ class Header extends PureComponent {
           {/* <InfoSave>尚未有任何變更</InfoSave> */}
           {/* <InfoUser>galadiya41@gmail.com</InfoUser> */}
           <InfoUser>
-            <GoogleLogin
-              // clientId="682853208442-p63ob4um199o0mdm8tr37uregams30f4.apps.googleusercontent.com"
-              clientId="682853208442-tl3uos3lgc3sddc99gj857gartvacbuo.apps.googleusercontent.com"
-              buttonText="G"
-              onSuccess={(response) => this.getGoogleResponse(response)}
-              onFailure={(response) => this.getGoogleResponse(response)}
-              // onSuccess={responseGoogle}
-              // onFailure={responseGoogle}
-              cookiePolicy={'single_host_origin'}
-            />
+            {this.props.googleOauth.googleId
+              ? <GoogleLogin
+                clientId="682853208442-tl3uos3lgc3sddc99gj857gartvacbuo.apps.googleusercontent.com"
+                render={renderProps => (
+                  <p style={{ color: '#E6E6E6', fontSize: '17px', cursor: 'pointer' }} onClick={renderProps.onClick} disabled={renderProps.disabled}>登入</p>
+                )}
+                buttonText="Login"
+                onSuccess={(response) => this.getGoogleResponse(response)}
+                onFailure={(response) => this.getGoogleResponse(response)}
+                cookiePolicy={'single_host_origin'}
+              />
+              : <GoogleLogout
+                clientId="682853208442-tl3uos3lgc3sddc99gj857gartvacbuo.apps.googleusercontent.com"
+                render={renderProps => (
+                  <p style={{ color: '#E6E6E6', fontSize: '17px', cursor: 'pointer' }} onClick={renderProps.onClick} disabled={renderProps.disabled}>登入</p>
+                )}
+                buttonText="Login"
+                onSuccess={(response) => this.getGoogleResponse(response)}
+                onFailure={(response) => this.getGoogleResponse(response)}
+                cookiePolicy={'single_host_origin'}
+              />}
           </InfoUser>
           <InfoUserPic>
-            <a target="_blank" rel="noopener noreferrer" href="https://github.com/shinenic/strokes-operation-react">
-              <UserImg />
-            </a>
+            <UserImg img={this.props.googleOauth.UserPic} />
           </InfoUserPic>
-          {/* <InfoUser>關於網站</InfoUser>
-          <InfoUserPic>聯絡我</InfoUserPic> */}
         </GridContainer>
       </HeaderDiv>
     )
@@ -192,14 +204,16 @@ const mapStateToProps = state => {
   return {
     character: state.defaultReducer.character,
     menuExpand: state.defaultReducer.menuExpand,
-    pickedComb: state.defaultReducer.pickedComb
+    pickedComb: state.defaultReducer.pickedComb,
+    googleOauth: state.defaultReducer.googleOauth
   }
 }
 const mapDispatchToProps = dispatch => {
   return {
-    triggerMenu: (bool) => dispatch(triggerMenu(bool)),
-    changeView: (str) => dispatch(changeView(str)),
-    inputTextChange: num => dispatch(inputTextChange(num))
+    triggerMenu: bool => dispatch(triggerMenu(bool)),
+    changeView: str => dispatch(changeView(str)),
+    inputTextChange: num => dispatch(inputTextChange(num)),
+    login: obj => dispatch(login(obj))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Header)

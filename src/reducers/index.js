@@ -21,7 +21,7 @@ const initState = {
   notiState: 0, // 1新增成功,幾個字 2移除成功,幾個字 3.讀取成功 4.儲存成功 5.? 6.?
   notiChange: null,
 
-  // MENU選單
+  // MENU 選單
   inputTextSelect: -1,
   menuClassName: ['', '', '', ''],
 
@@ -35,6 +35,13 @@ const initState = {
   view: '',
   menuExpand: false,
 
+  // Google 登入資訊
+  googleOauth: {
+    googleId: null,
+    UserPic: '',
+    userEmail: '',
+    userName: '',
+  },
   // test
   test: true
 }
@@ -236,6 +243,10 @@ const defaultReducer = (state = initState, action) => {
       return Object.assign({}, state, {
         windowHeight: action.height,
         windowWidth: action.width
+      })
+    case 'LOGIN':
+      return Object.assign({}, state, {
+        googleOauth: action.userInfo
       })
     case 'TEST_TRIGGER':
       return Object.assign({}, state, {

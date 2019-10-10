@@ -47,7 +47,6 @@ export const Text = styled.div`
   line-height:65px;
   padding-left:10%;
   font-size:17px;
-  /* color:${Color.text[0]}; */
   color:${props => props.disable ? Color.textDisable : Color.text[0]}};
   cursor:${props => props.disable ? '' : 'pointer'};
   transition: 0.3s;

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
-import GithubLogo from '../image/github-logo.png'
+// import GithubLogo from '../image/github-logo.png'
 import GoogleLogo from '../image/google-logo.png'
 import Hamburger from '../image/hamburger.png'
 import Color from '../styles/ThemeColor'
@@ -9,6 +9,7 @@ import Icon from '../image/menuIcon.png'
 import { connect } from 'react-redux'
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import { toastr } from 'react-redux-toastr';
+import { ShowDivAni } from '../styles/AnimationStyled'
 import { triggerMenu, changeView, inputTextChange, setUserGoogleInfo } from '../actions'
 
 const HeaderDiv = styled.div`
@@ -23,10 +24,10 @@ const GridContainer = styled.div`
   width:100%;
   display:grid;
   grid-template-columns:0.18fr 0.18fr 0.41fr 0.2fr 55px 0.03fr;
-  grid-template-areas:"infoCount infoSave . infoUser infoUserPic .";
+  grid-template-areas:"infoCount infoSave . accountInfo infoUserPic .";
   @media (max-width: 1200px){
     grid-template-columns:0.33fr 0.33fr 0.33fr 55px;
-    grid-template-areas:"infoCount infoSave infoUser infoUserPic ";
+    grid-template-areas:"infoCount infoSave accountInfo infoUserPic ";
    }
    
   @media (max-width: 480px) {
@@ -50,8 +51,16 @@ const InfoSave = styled(InfoCount)`
     justify-content: start;
   }
 `
-const InfoUser = styled(InfoCount)`
-  grid-area:infoUser;
+const Login = styled(InfoCount)`
+  grid-area:accountInfo;
+  @media (max-width: 1200px){
+    justify-content: end;
+    margin-right:10px;
+  }
+`
+const Logout = styled(InfoCount)`
+  grid-area:accountInfo;
+  animation: ${ShowDivAni} 0.7s 1 both 0.1s;
   @media (max-width: 1200px){
     justify-content: end;
     margin-right:10px;
@@ -60,6 +69,7 @@ const InfoUser = styled(InfoCount)`
 
 const InfoUserPic = styled(InfoCount)`
   grid-area:infoUserPic;
+  animation: ${ShowDivAni} 0.7s 1 both 0.1s;
 `
 const UserImg = styled.img`
   content:url(${props => props.img === '' ? GoogleLogo : props.img});
@@ -139,10 +149,6 @@ const Title = styled.div`
     -webkit-touch-callout: none;
   }
 `
-const responseGoogle = (response) => {
-  console.log(response);
-}
-
 class Header extends PureComponent {
   getGoogleResponse = (response) => {
     if (response.error) {
@@ -168,10 +174,9 @@ class Header extends PureComponent {
               (acc, index) => acc + this.props.pickedComb[index].length, 0)}
           </InfoSave>
           {/* <InfoSave>尚未有任何變更</InfoSave> */}
-          {/* <InfoUser>galadiya41@gmail.com</InfoUser> */}
-          <InfoUser>
-            {this.props.googleOauth.googleId === 0
-              ? <GoogleLogin
+          {this.props.googleOauth.googleId === 0
+            ? <Login>
+              <GoogleLogin
                 clientId="682853208442-tl3uos3lgc3sddc99gj857gartvacbuo.apps.googleusercontent.com"
                 render={renderProps => (
                   <p style={{ color: '#E6E6E6', fontSize: '17px', cursor: 'pointer' }} onClick={renderProps.onClick} disabled={renderProps.disabled}>登入</p>
@@ -180,7 +185,9 @@ class Header extends PureComponent {
                 onFailure={(response) => this.getGoogleResponse(response)}
                 cookiePolicy={'single_host_origin'}
               />
-              : <GoogleLogout
+            </Login>
+            : <Logout>
+              <GoogleLogout
                 clientId="682853208442-tl3uos3lgc3sddc99gj857gartvacbuo.apps.googleusercontent.com"
                 render={renderProps => (
                   <div>
@@ -193,11 +200,13 @@ class Header extends PureComponent {
                   toastr.success('登出成功')
                 }}
                 cookiePolicy={'single_host_origin'}
-              />}
-          </InfoUser>
-          <InfoUserPic>
-            <UserImg img={this.props.googleOauth.UserPic} />
-          </InfoUserPic>
+              />
+            </Logout>
+          }
+          {this.props.googleOauth.UserPic &&
+            <InfoUserPic>
+              <UserImg img={this.props.googleOauth.UserPic} />
+            </InfoUserPic>}
         </GridContainer>
       </HeaderDiv>
     )

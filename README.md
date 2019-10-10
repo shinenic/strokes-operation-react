@@ -1,10 +1,9 @@
-# 名字筆劃工具
+# 名字筆劃工具   [Demo](https://shinenic.github.io/strokes-operation-react/)
 
 主要針對電腦使用者設計
 
 幫助中文使用者來快速篩選出符合筆劃規則之名字的網頁應用程式
 
-[Demo](https://shinenic.github.io/strokes-operation-react/)
 
 <img src="demo2.gif" alt="demo2" /> 
 

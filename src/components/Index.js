@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 import { updateWindowSize, changeView } from '../actions';
 import ReduxToastr from 'react-redux-toastr';
 import '../styles/react-redux-toastr-edit.min.css';
+import cookie from 'react-cookies'
 
 const GridContainer = styled.div`
   height:100%;
@@ -56,6 +57,30 @@ class Index extends PureComponent {
   //   return confirmationMessage;
   // }
 
+  constructor () {
+    super()
+
+    this.onLogin = this.onLogin.bind(this)
+    this.onLogout = this.onLogout.bind(this)
+    this.cookie = {userId: 'none'}
+  }
+
+  componentWillMount() {
+    this.cookie =  { userId: cookie.load('userId') }
+    console.log(this.cookie)
+  }
+
+  onLogin(userId) {
+    this.cookie = {userId}
+  
+    cookie.save('userId', userId, { path: '/' })
+    console.log('save')
+  }
+
+  onLogout() {
+    // cookie.remove('userId', { path: '/' })
+  }
+
   updateWindowSize = (height, width) => {
     this.props.updateWindowSize(height, width);
     if ((width <= 480 && this.props.windowWidth >= 480) || (width >= 480 && this.props.windowWidth <= 480)) {
@@ -90,9 +115,10 @@ class Index extends PureComponent {
     }
     return (
       <GridContainer>
+        <button onClick={()=>this.onLogin('test123')}>1322</button>
         <Header />
         <Menu />
-        <MainInfo />
+        <MainInfo/>
         <Main>
           {renderView(this.props.view)}
         </Main>

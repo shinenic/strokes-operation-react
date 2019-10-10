@@ -86,9 +86,9 @@ export const loadData = (character, pickedComb) => {
     pickedComb
   }
 }
-export const login = (userInfo) => {
+export const setUserGoogleInfo = (userInfo) => {
   return {
-    type: 'LOGIN',
+    type: 'SET_USER_GOOGLE_INFO',
     userInfo
   }
 }

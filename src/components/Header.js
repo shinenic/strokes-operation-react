@@ -9,7 +9,7 @@ import Icon from '../image/menuIcon.png'
 import { connect } from 'react-redux'
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import { toastr } from 'react-redux-toastr';
-import { triggerMenu, changeView, inputTextChange, login } from '../actions'
+import { triggerMenu, changeView, inputTextChange, setUserGoogleInfo } from '../actions'
 
 const HeaderDiv = styled.div`
   grid-area: header;
@@ -149,7 +149,8 @@ class Header extends PureComponent {
       toastr.error('登入失敗', '請嘗試重新登入')
     } else {
       const { googleId, imageUrl: UserPic, email: userEmail, name: userName } = response.profileObj
-      this.props.login({ googleId, UserPic, userEmail, userName })
+      this.props.setUserGoogleInfo({ googleId, UserPic, userEmail, userName })
+      toastr.success('登入成功')
     }
   }
   render() {
@@ -169,13 +170,12 @@ class Header extends PureComponent {
           {/* <InfoSave>尚未有任何變更</InfoSave> */}
           {/* <InfoUser>galadiya41@gmail.com</InfoUser> */}
           <InfoUser>
-            {this.props.googleOauth.googleId
+            {this.props.googleOauth.googleId === 0
               ? <GoogleLogin
                 clientId="682853208442-tl3uos3lgc3sddc99gj857gartvacbuo.apps.googleusercontent.com"
                 render={renderProps => (
                   <p style={{ color: '#E6E6E6', fontSize: '17px', cursor: 'pointer' }} onClick={renderProps.onClick} disabled={renderProps.disabled}>登入</p>
                 )}
-                buttonText="Login"
                 onSuccess={(response) => this.getGoogleResponse(response)}
                 onFailure={(response) => this.getGoogleResponse(response)}
                 cookiePolicy={'single_host_origin'}
@@ -183,11 +183,15 @@ class Header extends PureComponent {
               : <GoogleLogout
                 clientId="682853208442-tl3uos3lgc3sddc99gj857gartvacbuo.apps.googleusercontent.com"
                 render={renderProps => (
-                  <p style={{ color: '#E6E6E6', fontSize: '17px', cursor: 'pointer' }} onClick={renderProps.onClick} disabled={renderProps.disabled}>登入</p>
+                  <div>
+                    <span>{this.props.googleOauth.userEmail}</span>
+                    <span style={{ color: '#E6E6E6', fontSize: '17px', marginLeft: '10px', cursor: 'pointer' }} onClick={renderProps.onClick} disabled={renderProps.disabled}>登出</span>
+                  </div>
                 )}
-                buttonText="Login"
-                onSuccess={(response) => this.getGoogleResponse(response)}
-                onFailure={(response) => this.getGoogleResponse(response)}
+                onLogoutSuccess={() => {
+                  this.props.setUserGoogleInfo({ googleId: 0, UserPic: '', userEmail: '', userName: '' })
+                  toastr.success('登出成功')
+                }}
                 cookiePolicy={'single_host_origin'}
               />}
           </InfoUser>
@@ -213,7 +217,7 @@ const mapDispatchToProps = dispatch => {
     triggerMenu: bool => dispatch(triggerMenu(bool)),
     changeView: str => dispatch(changeView(str)),
     inputTextChange: num => dispatch(inputTextChange(num)),
-    login: obj => dispatch(login(obj))
+    setUserGoogleInfo: obj => dispatch(setUserGoogleInfo(obj))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Header)

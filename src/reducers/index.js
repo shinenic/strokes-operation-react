@@ -37,7 +37,7 @@ const initState = {
 
   // Google 登入資訊
   googleOauth: {
-    googleId: null,
+    googleId: 0,
     UserPic: '',
     userEmail: '',
     userName: '',
@@ -244,7 +244,7 @@ const defaultReducer = (state = initState, action) => {
         windowHeight: action.height,
         windowWidth: action.width
       })
-    case 'LOGIN':
+    case 'SET_USER_GOOGLE_INFO':
       return Object.assign({}, state, {
         googleOauth: action.userInfo
       })

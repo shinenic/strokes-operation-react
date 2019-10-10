@@ -1,40 +1,37 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux';
 import { MenuDiv, UserImg, MobileHeader, Text, TextInput, Input, Button, MenuImg, IconDiv } from './menu/MenuStyled'
-import MenuActions from './menu/MenuActions';
+import { inputList, menuActions, loadFile } from './menu/MenuActions';
 import {
   searchStrokes, handleInput, addCharacter, deleteCharacter, loadData
   , combinationSearch, inputTextChange, cleanAllInput, changeView, triggerMenu
 } from '../actions';
 
-const inputList = MenuActions.inputList
 
 class Menu extends PureComponent {
   constructor() {
     super();
-    this.fileInput = React.createRef();
-    this.inputFocus = new Array(4);
+    this.fileInputRef = React.createRef();
+    this.inputRef = new Array(4);
     for (let i = 0; i < 4; i++)
-      this.inputFocus[i] = React.createRef();
+      this.inputRef[i] = React.createRef();
   }
-  
+
   focus(index) {
-    setTimeout(() => { this.inputFocus[index].focus() }, 400);
-  }
-  blur(index) {
-    this.inputFocus[index].blur()
+    setTimeout(() => { this.inputRef[index].focus() }, 400);
   }
 
   render() {
     return (
       <MenuDiv expand={this.props.menuExpand}>
+
         <MobileHeader>
           <a target="_blank" rel="noopener noreferrer" href="https://github.com/shinenic/strokes-operation-react">
             <UserImg />
           </a>
         </MobileHeader>
-        <input type="file" style={{ display: 'none' }} onChange={this.loadFile} ref={(fileInput) => this.fileInput = fileInput} />
         <MenuImg onClick={() => this.props.changeView('')} />
+
         {inputList.map((value, index) => {
           return (
             <div key={index}
@@ -42,8 +39,10 @@ class Menu extends PureComponent {
               <Text
                 picked={this.props.inputTextSelect === index}
                 onClick={() => {
+                  // 切換目前選取的 options
                   this.props.inputTextChange(index);
-                  index <= 3 ? this.focus(index) : this.menuActions(null, index);
+                  // 若 option 有 textBox 則 focus 反之則直接進入動作
+                  index <= 3 ? this.focus(index) : menuActions(null, index, this.props, this.inputRef, this.fileInputRef);
                 }
                 }><IconDiv icon={value['icon']} />{value['option']}</Text>
               {index < 4 &&
@@ -51,22 +50,24 @@ class Menu extends PureComponent {
                   <Input type="text"
                     single={index !== 2}
                     placeholder={value['hint']}
-                    ref={(input) => { this.inputFocus[index] = input }}
+                    ref={(input) => { this.inputRef[index] = input }}
                     value={this.props.menuInput[index]}
-                    onKeyPress={e => this.menuActions(e, index)}
+                    onKeyPress={e => menuActions(e, index, this.props, this.inputRef)}
                     onChange={e => this.props.handleInput(e.target.value, index)} />
                   {index === 2 &&
                     <Input type="text"
                       single={index !== 2}
                       placeholder={value['hintcont']}
                       value={this.props.menuInput[index + 2]}
-                      onKeyPress={e => this.menuActions(e, index)}
+                      onKeyPress={e => menuActions(e, index, this.props, this.inputRef)}
                       onChange={e => this.props.handleInput(e.target.value, index + 2)} />}
-                  <Button onClick={() => this.menuActions(null, index)}>{value['buttonName']}</Button>
+                  <Button onClick={() => menuActions(null, index, this.props, this.inputRef)}>{value['buttonName']}</Button>
                 </TextInput>}
             </div>
           )
         })}
+        {/* 上傳檔案使用之隱藏 input */}
+        <input type="file" style={{ display: 'none' }} onChange={()=>loadFile(this.props)} ref={(fileInput) => this.fileInputRef = fileInput} />
       </MenuDiv >
     )
   }

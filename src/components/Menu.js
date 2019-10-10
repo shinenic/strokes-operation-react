@@ -37,7 +37,7 @@ class Menu extends PureComponent {
             <div key={index}
               style={value['isRender'] ? {} : { display: 'none' }} >
               <Text
-                picked={this.props.inputTextSelect === index}
+                picked={this.props.inputTextSelect === index && index < 6}
                 onClick={() => {
                   // 切換目前選取的 options
                   this.props.inputTextChange(index);
@@ -67,7 +67,7 @@ class Menu extends PureComponent {
           )
         })}
         {/* 上傳檔案使用之隱藏 input */}
-        <input type="file" style={{ display: 'none' }} onChange={()=>loadFile(this.props)} ref={(fileInput) => this.fileInputRef = fileInput} />
+        <input type="file" style={{ display: 'none' }} onChange={() => loadFile(this.props)} ref={(fileInput) => this.fileInputRef = fileInput} />
       </MenuDiv >
     )
   }

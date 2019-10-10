@@ -1,171 +1,13 @@
 import React, { PureComponent } from 'react'
-import styled from 'styled-components';
-import demoData from '../data/demoData';
-import menuIcon from '../image/menuIcon.png';
-import GithubLogo from '../image/github-logo.png'
-import Color from '../styles/ThemeColor';
-import msgpack from 'msgpack-lite';
 import { connect } from 'react-redux';
-import { toastr } from 'react-redux-toastr';
-import dateFormat from '../data/date_format';
+import { MenuDiv, UserImg, MobileHeader, Text, TextInput, Input, Button, MenuImg, IconDiv } from './menu/MenuStyled'
+import MenuActions from './menu/MenuActions';
 import {
   searchStrokes, handleInput, addCharacter, deleteCharacter, loadData
   , combinationSearch, inputTextChange, cleanAllInput, changeView, triggerMenu
 } from '../actions';
-// todos: 打包 funciton
-const getImgSrc = name => {
-  return require(`../image/menu/${name}.png`);
-}
-const inputList = [
-  { option: '查詢筆劃', hint: '請輸入中文字(可多筆)', buttonName: '查詢', icon: 'search', isRender: false },
-  { option: '增加單字', hint: '請輸入中文字(可多筆)', buttonName: '增加', icon: 'add', isRender: true },
-  { option: '查詢筆劃組合', hint: '總筆劃數', hintcont: '單字(選填)', buttonName: '查詢', icon: 'search', isRender: true },
-  { option: '移除單字', hint: '欲刪除之文字', buttonName: '移除', icon: 'delete', isRender: true },
-  { option: '查看所有單字', icon: 'overview', isRender: true },
-  { option: '查看已選組合', icon: 'checklist', isRender: true },
-  { option: '儲存', icon: 'download', isRender: true },
-  { option: '讀取', icon: 'import', isRender: true },
-  { option: '匯出', icon: 'excel', isRender: false },
-  { option: '載入範本', icon: 'demo', isRender: true },
-  { option: '軟體介紹', icon: 'search', isRender: false },
-];
-const MenuDiv = styled.div`
-  grid-area: menu;
-  background:${Color.black[0]};
-  @media (max-width: 480px){
-    grid-area: null;
-    position:fixed;
-    z-index:101;
-    top:0;
-    right:${props => props.expand ? '0' : '-300px'};
-    transition:0.4s;
-    opacity:0.9;
-    width:300px;
-    min-height:100%;
-  }
-`;
-const UserImg = styled.img`
-  content:url(${GithubLogo});
-  height:34px;
-  width:34px;
-  margin:13px auto auto 36px;
-  cursor: pointer;
-  filter: invert(1);
-`
-const MobileHeader = styled.div`
-  display:none;
-  @media (max-width: 480px){
-    display:block;
-    width:100%;
-    height:60px;
-    position:relative;
-  }
-`;
 
-const Text = styled.div`
-  box-sizing: border-box;
-  width:100%;
-  height:65px;
-  line-height:65px;
-  padding-left:10%;
-  font-size:17px;
-  color:${Color.text[0]};
-  cursor: pointer;
-  transition: 0.3s;
-  background:${props => props.picked ? Color.redActive : Color.black[0]};
-  &:hover{
-    background:${props => props.picked ? Color.redActive : Color.redHover};
-  }
-`;
-const TextInput = styled.div`
-  transition:0.4s;
-  height:${props => props.expand === '' || props.expand === 'closeDiv' ? '0' : '65px'};
-  width:100%;
-  line-height:65px;
-  padding-left:9%;
-  box-sizing: border-box;
-  overflow: hidden;
-  color:${Color.inputBg};
-`;
-const Input = styled.input`
-  padding: 5px 7px;
-  background: ${Color.inputBg};
-  border: 0 none;
-  border-radius:0;
-  border-right:1px solid black;
-  width:${props => props.single ? '75%' : '37.5%'};
-  height:35px;
-  box-sizing: border-box;
-  display:inline-block;
-  vertical-align: middle;
-`;
-const Button = styled.div`
-  height:35px;
-  line-height:35px;
-  border: 0 none;
-  border-radius:0;
-  background: #EEE;
-  font-size:13px;
-  color:Black;
-  padding-left:5px;
-  padding-right:5px;
-  cursor: pointer;
-  box-sizing: border-box;
-  vertical-align: middle;
-  display:inline-block;
-`;
-const MenuImg = styled.img`
-  content:url(${menuIcon});
-  transition: 0.3s;
-  height:60px;
-  width:60px;
-  padding:27px 95px 27px 95px;
-  margin-bottom:15px;
-  filter:invert(0.8);
-  cursor:pointer;
-  &:hover{
-    filter:invert(1);
-  }
-  @media (max-width: 480px){
-    display:none;
-  }
-`;
-const IconDiv = styled.div`
-  display:inline-block;
-  width:15px;
-  height:15px;
-  margin-right:20px;
-  position: relative;
-  top:1px;
-  background-image: url(${props => props.icon});
-  background-size: cover;  
-  filter: invert(1);
-`;
-
-const arrayUnique = (a) => {
-  for (var i = 0; i < a.length; i++) {
-    for (var j = i + 1; j < a.length; j++) {
-      a[i] === a[j] && a.splice(j--, 1)
-    }
-  }
-  return a
-}
-const handleInputString = str => {
-  const result = []
-  const reg = /[\u4e00-\u9fa5]/
-  for (let i = 0; i < str.length; i++) {
-    reg.test(str[i]) && result.push(str[i])
-  }
-  return result
-}
-const checkFileFormat = obj => {
-  if (Object.keys(obj).length === 2) {
-    if (Object.keys(obj).includes('character') && Object.keys(obj).includes('pickedComb')) {
-      return true;
-    }
-  }
-  return false;
-}
+const inputList = MenuActions.inputList
 
 class Menu extends PureComponent {
   constructor() {
@@ -175,103 +17,7 @@ class Menu extends PureComponent {
     for (let i = 0; i < 4; i++)
       this.inputFocus[i] = React.createRef();
   }
-  downloadTxtFile = (content = '', filename = 'log') => {
-    const element = document.createElement("a");
-    const file = new Blob([content], { type: 'text/plain' });
-    element.href = URL.createObjectURL(file);
-    element.download = filename + ".txt";
-    document.body.appendChild(element); // Required for this to work in FireFox
-    element.click();
-  }
-  loadFile = () => {
-    if (window.File && window.FileReader && window.FileList && window.Blob) {
-      let file = document.querySelector('input[type=file]').files[0];
-      let reader = new FileReader()
-      let textFile = /text.*/;
-      if (file.type.match(textFile)) {
-        reader.onload = (event) => {
-          try {
-            const data = msgpack.decode(event.target.result.split(','))
-            this.props.loadData(data['character'], data['pickedComb'])
-            this.props.changeView('INDEX')
-            if (checkFileFormat(data)) {
-              toastr.success('載入成功', '成功載入檔案')
-            } else {
-              toastr.error('讀取失敗', '請檢察檔案是否被修改')
-            }
-          } catch (error) {
-            toastr.error('讀取失敗', '請重新檢查')
-          }
-        }
-      } else {
-        toastr.error('讀取失敗', '檔案格式錯誤')
-      }
-      reader.readAsText(file);
-    } else {
-      toastr.error('讀取失敗', '瀏覽器不支援此功能')
-    }
-  }
-  menuActions = (e, index) => {
-    if (!e || e.key === 'Enter') {
-      switch (index) {
-        case 0:
-          this.props.searchStrokes(this.props.menuInput[0]);
-          break;
-        case 1:
-          this.props.addCharacter(this.props.menuInput[1]);
-          this.props.changeView('INDEX')
-          const newCharCount = arrayUnique(handleInputString(this.props.menuInput[1])).reduce((acc, value) =>
-            Object.keys(this.props.character).includes(value) ? acc : ++acc, 0)
-          newCharCount !== 0
-            ? toastr.success('新增成功', `成功新增了 ${newCharCount} 個中文單字`)
-            : toastr.info('沒有新增任何單字', `請查詢是否單字已存在或者輸入為中文`)
-          break;
-        case 2:
-          Number(this.props.menuInput[2]) > 0 && this.props.combinationSearch(this.props.menuInput[2], this.props.menuInput[4]);
-          break;
-        case 3:
-          this.props.deleteCharacter(this.props.menuInput[3]);
-          this.props.changeView('INDEX')
-          const deleteCharCount = arrayUnique(handleInputString(this.props.menuInput[3])).reduce((acc, value) =>
-            Object.keys(this.props.character).includes(value) ? ++acc : acc, 0)
-          deleteCharCount !== 0
-            ? toastr.success('刪除成功', `成功刪除了 ${deleteCharCount} 個中文單字及其所有組合`)
-            : toastr.info('沒有刪除任何單字', `請查詢是否單字不存在或者輸入為中文`)
-          break;
-        case 4:
-          this.props.changeView('OVERVIEW')
-          break;
-        case 5:
-          this.props.changeView('OVERVIEW_PICKED')
-          break;
-        case 6: //download & save
-          const saveCharacters = Object.keys(this.props.character).join('')
-          const savePickedComb = this.props.pickedComb
-          this.downloadTxtFile(
-            Array.from(msgpack.encode({ character: saveCharacters, pickedComb: savePickedComb }))
-            , 'log_' + dateFormat(Date.now(), "yyyyMMdd_hhmmss"))
-          break;
-        case 7: //load 觸發input(file) click
-          this.fileInput.click()
-          break;
-        case 9:
-          this.props.loadData(demoData.character, demoData.pickedComb)
-          this.props.changeView('INDEX')
-          const demoCharCount = arrayUnique(handleInputString(demoData.character)).reduce((acc, value) =>
-            Object.keys(this.props.character).includes(value) ? acc : ++acc, 0)
-          demoCharCount !== 0 && setTimeout(() => {
-            toastr.success('新增成功', `成功新增了 ${demoCharCount} 個中文單字`)
-          }, 650)
-          toastr.success('載入成功', '成功載入範本')
-          break;
-        default:
-          break;
-      }
-      (this.props.menuInput[index] !== '' && e !== null) && this.blur(index)
-      this.props.cleanAllInput()
-      this.props.triggerMenu(false)
-    }
-  }
+  
   focus(index) {
     setTimeout(() => { this.inputFocus[index].focus() }, 400);
   }
@@ -299,7 +45,7 @@ class Menu extends PureComponent {
                   this.props.inputTextChange(index);
                   index <= 3 ? this.focus(index) : this.menuActions(null, index);
                 }
-                }><IconDiv icon={getImgSrc(value['icon'])} />{value['option']}</Text>
+                }><IconDiv icon={value['icon']} />{value['option']}</Text>
               {index < 4 &&
                 <TextInput expand={this.props.menuClassName[index]}>
                   <Input type="text"

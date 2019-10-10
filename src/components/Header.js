@@ -6,6 +6,7 @@ import Color from '../styles/ThemeColor'
 import Cross from '../image/cross.png'
 import Icon from '../image/menuIcon.png'
 import { connect } from 'react-redux'
+import GoogleLogin from 'react-google-login';
 import { triggerMenu, changeView, inputTextChange } from '../actions'
 
 const HeaderDiv = styled.div`
@@ -47,13 +48,14 @@ const InfoSave = styled(InfoCount)`
     justify-content: start;
   }
 `
-// const InfoUser = styled(InfoCount)`
-//   grid-area:infoUser;
-//   @media (max-width: 1200px){
-//     justify-content: end;
-//     margin-right:10px;
-//   }
-// `
+const InfoUser = styled(InfoCount)`
+  grid-area:infoUser;
+  @media (max-width: 1200px){
+    justify-content: end;
+    margin-right:10px;
+  }
+`
+
 const InfoUserPic = styled(InfoCount)`
   grid-area:infoUserPic;
 `
@@ -135,8 +137,16 @@ const Title = styled.div`
     -webkit-touch-callout: none;
   }
 `
+const responseGoogle = (response) => {
+  console.log(response);
+}
 
 class Header extends PureComponent {
+  getGoogleResponse = (response) => {
+    const { googleId, imageUrl: UserPic, email: userEmail, name: userName } = response.profileObj
+    console.log(response)
+    console.log(googleId, UserPic, userEmail, userName);
+  }
   render() {
     return (
       <HeaderDiv>
@@ -153,6 +163,18 @@ class Header extends PureComponent {
           </InfoSave>
           {/* <InfoSave>尚未有任何變更</InfoSave> */}
           {/* <InfoUser>galadiya41@gmail.com</InfoUser> */}
+          <InfoUser>
+            <GoogleLogin
+              // clientId="682853208442-p63ob4um199o0mdm8tr37uregams30f4.apps.googleusercontent.com"
+              clientId="682853208442-tl3uos3lgc3sddc99gj857gartvacbuo.apps.googleusercontent.com"
+              buttonText="G"
+              onSuccess={(response) => this.getGoogleResponse(response)}
+              onFailure={(response) => this.getGoogleResponse(response)}
+              // onSuccess={responseGoogle}
+              // onFailure={responseGoogle}
+              cookiePolicy={'single_host_origin'}
+            />
+          </InfoUser>
           <InfoUserPic>
             <a target="_blank" rel="noopener noreferrer" href="https://github.com/shinenic/strokes-operation-react">
               <UserImg />

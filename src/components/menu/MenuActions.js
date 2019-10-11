@@ -76,7 +76,7 @@ export const inputList = [
   { option: '查看已選組合', icon: 'checklist', isRender: true },
   { option: '儲存', icon: 'download', isRender: true },
   { option: '讀取', icon: 'import', isRender: true },
-  { option: '匯出', icon: 'excel', isRender: false },
+  { option: '匯出', icon: 'excel', isRender: true },
   { option: '載入範本', icon: 'demo', isRender: true },
   { option: '軟體介紹', icon: 'search', isRender: false },
 ];

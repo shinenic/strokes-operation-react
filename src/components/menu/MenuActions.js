@@ -124,6 +124,47 @@ export const menuActions = (e, index, props, inputRef, fileInputRef) => {
       case 7: //load 觸發input(file) click
         fileInputRef.click()
         break;
+      case 8: // 匯出 excel
+        const jsonExport = {
+          date: dateFormat(Date.now(), "yyyy/MM/dd hh:mm:ss"),
+          totalName: Object.keys(props.pickedComb).reduce((acc, index) => acc + props.pickedComb[index].length, 0),
+          totalCharacter: Object.keys(props.character).length,
+          pickedComb: props.pickedComb,
+          groupChar: props.groupChar
+        };
+          (async () => {
+            const rawResponse = await fetch('http://localhost:3000/getExcel', {
+              method: 'POST',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ a: 1, b: 'Textual content' })
+            });
+            const content = await rawResponse.json();
+
+            console.log(content);
+          })();
+        // let url = 'https://hexschool-tutorial.herokuapp.com/api/signup';
+        // fetch(url, {
+        //   method: 'POST',
+        //   // headers 加入 json 格式
+        //   headers: {
+        //     'Content-Type': 'application/json'
+        //   },
+        //   // body 將 json 轉字串送出
+        //   body: JSON.stringify({
+        //     email: 'lovef1232e@hexschool.com',
+        //     password: '12345678'
+        //   })
+        // }).then((response) => {
+        //   return response.json();
+        // }).then((jsonData) => {
+        //   console.log(jsonData);
+        // }).catch((err) => {
+        //   console.log('錯誤:', err);
+        // })
+        break;
       case 9:
         props.loadData(demoData.character, demoData.pickedComb)
         props.changeView('INDEX')

@@ -79,7 +79,8 @@ const mapStateToProps = state => {
     menuInput: state.defaultReducer.menuInput,
     menuExpand: state.defaultReducer.menuExpand,
     character: state.defaultReducer.character,
-    pickedComb: state.defaultReducer.pickedComb
+    pickedComb: state.defaultReducer.pickedComb,
+    groupChar: state.defaultReducer.groupChar,
   }
 }
 const mapDispatchToProps = dispatch => {

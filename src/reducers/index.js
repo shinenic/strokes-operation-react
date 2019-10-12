@@ -34,9 +34,6 @@ const initState = {
   // 畫面控制
   view: '',
   menuExpand: false,
-
-  // test
-  test: true
 }
 
 const getStrokes = (str) => {
@@ -175,7 +172,6 @@ const defaultReducer = (state = initState, action) => {
       })
     case 'COMBINATION_SEARCH':
       const result = getCombination(action.num, state.groupChar, handleInputString(action.str))
-      // const pageDataCount = Math.floor((state.windowHeight - (state.windowWidth < 480 ? 180 : 290)) / 36) * (state.windowWidth < 480 ? 6 : 14)
       const pageDataCount = state.windowWidth < 480 ? 11 * 5 : Math.floor((state.windowHeight - 290) / 36) * 14
       const partOfResult = result.slice(0, pageDataCount)
       return Object.assign({}, state, {
@@ -237,18 +233,14 @@ const defaultReducer = (state = initState, action) => {
         windowHeight: action.height,
         windowWidth: action.width
       })
-    case 'TEST_TRIGGER':
-      return Object.assign({}, state, {
-        test: action.tf
-      })
     default:
       return state
   }
 }
 
 const reducers = {
-  defaultReducer, // ... other reducers ...
-  toastr: toastrReducer // <- Mounted at toastr.
+  defaultReducer, 
+  toastr: toastrReducer
 }
 const reducer = combineReducers(reducers)
 

@@ -86,17 +86,3 @@ export const loadData = (character, pickedComb) => {
     pickedComb
   }
 }
-
-export const testTrigger = (tf) => {
-  return {
-    type: 'TEST_TRIGGER',
-    tf
-  }
-}
-
-// export const cleanClassName = num => {
-//     return {
-//         type: 'CLEAN_CLASS_NAME',
-//         num
-//     }
-// }

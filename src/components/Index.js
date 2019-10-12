@@ -98,7 +98,7 @@ class Index extends PureComponent {
         </Main>
         {this.props.menuExpand && <MenuMask />}
         <ReduxToastr
-          timeOut={2800}
+          timeOut={1500}
           newestOnTop={false}
           position={this.props.windowWidth < 500 ? "bottom-center" : "bottom-right"}
           transitionIn="fadeIn"

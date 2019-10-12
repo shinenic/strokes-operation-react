@@ -19,6 +19,9 @@ const MainDiv = styled.div`
     justify-content:center;
     align-items:center;
     padding:10px 10px 70px 10px;
+    @media (max-height: 600px){
+      align-items:start;
+    }
   }
 `
 // 目前顯示個數14*15
@@ -43,6 +46,10 @@ const Button = styled.div`
     width:20%;
     padding-top:7px;
     padding-bottom:7px;
+    @media (max-height: 600px){
+      padding-top:3.5px;
+      padding-bottom:3.5px;
+    }
   }
 `
 
@@ -55,6 +62,7 @@ class Combination extends PureComponent {
           {this.props.currentPageResult.map((value, index) => {
             return (
               <Button
+                height={this.props.windowHeight}
                 width={this.props.windowWidth}
                 onClick={() => this.props.pickName(value)}
                 key={index}

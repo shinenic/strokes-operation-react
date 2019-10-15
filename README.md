@@ -42,6 +42,7 @@
 * Redux
 * Styled-Component
 * RWD
+* Pagination
 
 
 

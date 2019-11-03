@@ -15,16 +15,6 @@ class App extends Component {
     return (
       <Provider store={store}>
         <Index />
-        {/* <ReduxToastr
-          timeOut={4000}
-          newestOnTop={false}
-          // preventDuplicates
-          position="bottom-right"
-          transitionIn="fadeIn"
-          transitionOut="fadeOut"
-          style={{fontweight:'bold'}}
-          progressBar
-          closeOnToastrClick /> */}
       </Provider>
     );
   }

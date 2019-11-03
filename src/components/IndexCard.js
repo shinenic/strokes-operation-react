@@ -18,12 +18,16 @@ const IndexCardDiv = styled.div`
   color:${Color.black[0]};
 
   display:grid;
-  grid-template-columns:80px 0.33fr 0.33fr 0.33fr 130px;
+  grid-template-columns:150px 0.33fr 0.33fr 0.33fr 200px;
   grid-template-rows:0.3fr 400px 0.7fr;
   grid-template-areas:
     ". . . . ."
     ". card0 card1 card2 ."
-    ". . . . .";
+    ". . . . .";  
+  @media (max-width: 1200px) {
+    grid-template-columns:80px 0.33fr 0.33fr 0.33fr 130px;
+    grid-template-rows:0.3fr 400px 0.7fr;
+  }
   @media (max-width: 768px) {
     grid-template-columns:40px 0.33fr 0.33fr 0.33fr 90px;
     grid-template-rows:0.1fr 400px 0.9fr;
@@ -41,7 +45,7 @@ const IndexCardDiv = styled.div`
     display: grid;
     justify-content: center;
     align-items: center;
-  }
+  }  
 `
 
 const Image = styled.img`

@@ -18,7 +18,8 @@ class Menu extends PureComponent {
   }
 
   focus(index) {
-    setTimeout(() => { this.inputRef[index].focus() }, 400);
+    if(this.props.menuClassName[index] !== 'openDiv')
+      setTimeout(() => { this.inputRef[index].focus() }, 400);
   }
 
   render() {

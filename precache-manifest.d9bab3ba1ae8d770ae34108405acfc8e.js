@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "9b047590d463e09aa7cdebe543df6bbd",
+    "revision": "cb149f6871b8e44d74701b500adb3b14",
     "url": "/strokes-operation-react/index.html"
   },
   {
